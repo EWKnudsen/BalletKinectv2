@@ -172,8 +172,7 @@ public class CubemanController : MonoBehaviour
 		Vector3 relPosUser = (posPointMan - initialPosOffset);
 		relPosUser.z =!mirroredMovement ? -relPosUser.z : relPosUser.z;
 
-		transform.position = initialPosOffset + 
-			(verticalMovement ? relPosUser * moveRate : new Vector3(relPosUser.x, 0, relPosUser.z) * moveRate);
+		transform.position = initialPosOffset + (verticalMovement ? relPosUser * moveRate : new Vector3(relPosUser.x, 0, relPosUser.z) * moveRate);
 		
 		// update the local positions of the bones
 		for(int i = 0; i < bones.Length; i++) 

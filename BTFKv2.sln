@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTFKv2.CSharp.Plugins", "BTFKv2.CSharp.Plugins.csproj", "{EBC77F8F-B70D-ACBE-C7F0-CA9B09C74727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTFKv2.CSharp", "BTFKv2.CSharp.csproj", "{C39B6561-1085-9AF9-F743-F66349B981FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTFKv2.CSharp.Editor.Plugins", "BTFKv2.CSharp.Editor.Plugins.csproj", "{27C9391A-28C4-C7DA-5823-3D97B7D6F5E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBC77F8F-B70D-ACBE-C7F0-CA9B09C74727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC77F8F-B70D-ACBE-C7F0-CA9B09C74727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC77F8F-B70D-ACBE-C7F0-CA9B09C74727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC77F8F-B70D-ACBE-C7F0-CA9B09C74727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39B6561-1085-9AF9-F743-F66349B981FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39B6561-1085-9AF9-F743-F66349B981FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39B6561-1085-9AF9-F743-F66349B981FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C39B6561-1085-9AF9-F743-F66349B981FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C9391A-28C4-C7DA-5823-3D97B7D6F5E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C9391A-28C4-C7DA-5823-3D97B7D6F5E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C9391A-28C4-C7DA-5823-3D97B7D6F5E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C9391A-28C4-C7DA-5823-3D97B7D6F5E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
