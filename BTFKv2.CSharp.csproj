@@ -178,7 +178,8 @@
     <Compile Include="Assets\KinectScripts\SpeechErrorHandler.cs" />
     <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
-    <Compile Include="Assets\MED7 folder\CMCxyPlaneHipShoulderDist.cs" />
+    <Compile Include="Assets\MED7 folder\CMCxyPlaneHipShoulderDistHP.cs" />
+    <Compile Include="Assets\MED7 folder\CMCxyPlaneHipShoulderDistPitch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\KinectDemos\BackgroundRemovalDemo\Resources\ForegroundBlendShader.shader" />

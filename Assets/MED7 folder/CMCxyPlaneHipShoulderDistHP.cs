@@ -1,11 +1,19 @@
-﻿using UnityEngine;
+﻿//-----------------------------------------------------
+//Controls a high pass filter, by calculating the
+//distance of the center hip and center shoulder
+//in zx-plane  
+//
+//Sound if your spine is NOT vertical
+//-----------------------------------------------------
+
+using UnityEngine;
 //using Windows.Kinect;
 using System;
 using System.Collections;
 using UnityEngine.Audio;
 using System.Collections.Generic;
 
-public class CMCxyPlaneHipShoulderDist : MonoBehaviour
+public class CMCxyPlaneHipShoulderDistHP : MonoBehaviour
 {
     [Tooltip("Index of the player, tracked by this component. 0 means the 1st player, 1 - the 2nd one, 2 - the 3rd one, etc.")]
     public int playerIndex = 0;
@@ -288,5 +296,4 @@ public class CMCxyPlaneHipShoulderDist : MonoBehaviour
         return (float)dist;
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 }
