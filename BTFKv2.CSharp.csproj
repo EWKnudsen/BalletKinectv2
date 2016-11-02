@@ -180,6 +180,8 @@
     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
     <Compile Include="Assets\MED7 folder\CMCxyPlaneHipShoulderDistHP.cs" />
     <Compile Include="Assets\MED7 folder\CMCxyPlaneHipShoulderDistPitch.cs" />
+    <Compile Include="Assets\MED7 folder\GUI 1\Button\buttonManager.cs" />
+    <Compile Include="Assets\MED7 folder\GUI 1\rotatingItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\KinectDemos\BackgroundRemovalDemo\Resources\ForegroundBlendShader.shader" />
