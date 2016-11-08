@@ -178,10 +178,12 @@
     <Compile Include="Assets\KinectScripts\SpeechErrorHandler.cs" />
     <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
-    <Compile Include="Assets\MED7 folder\CMCxyPlaneHipShoulderDistHP.cs" />
-    <Compile Include="Assets\MED7 folder\CMCxyPlaneHipShoulderDistPitch.cs" />
     <Compile Include="Assets\MED7 folder\GUI 1\Button\buttonManager.cs" />
     <Compile Include="Assets\MED7 folder\GUI 1\rotatingItem.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\CMCfilterRESETTER.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\CMCxyPlaneHipShoulderDistHP.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\CMCxyPlaneHipShoulderDistPitch.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\CMCyAxisHipAlignmentDistLP.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\KinectDemos\BackgroundRemovalDemo\Resources\ForegroundBlendShader.shader" />
