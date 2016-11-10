@@ -250,14 +250,10 @@ public class CMCxyPlaneHipShoulderDistHP : MonoBehaviour
                     }
                     
                     ///MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                    /// <summary>
-                    /// Version: Controlling a LOWPASS filter relative to the hip center and the center shoulder
-                    /// calculates the distance of the two in XZ plane
-                    /// </summary>
                     if (i == 6)
                     {
                         Vector3 HipCenterPos = bones[0].transform.localPosition;
-                        Vector3 shoulderCenterPos = bones[2].transform.localPosition;
+                        Vector3 shoulderCenterPos = bones[1].transform.localPosition;
 
                         dist = CalXZdist(HipCenterPos, shoulderCenterPos);
 

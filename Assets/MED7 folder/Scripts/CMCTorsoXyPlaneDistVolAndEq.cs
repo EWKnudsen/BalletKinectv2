@@ -1,9 +1,10 @@
 ﻿//-----------------------------------------------------
-//Controls a low pass filter, by calculating the
-//distance/disalignment of the left and right hip
-//in the y-axis
+//Controls Volume and 4 equalizers, by calculating the
+//distance of the center hip, shoulder and neck
+//in zx-plane.
 //
-//Sound if your hip is NOT horizontal
+//Sound if your posture is NOT vertical.
+//Different sound for each axis.
 //-----------------------------------------------------
 
 using UnityEngine;
@@ -13,9 +14,8 @@ using System.Collections;
 using UnityEngine.Audio;
 using System.Collections.Generic;
 
-public class CMCyAxisHipAlignmentDistLP : MonoBehaviour
+public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
 {
-
     [Tooltip("Index of the player, tracked by this component. 0 means the 1st player, 1 - the 2nd one, 2 - the 3rd one, etc.")]
     public int playerIndex = 0;
 
@@ -75,16 +75,22 @@ public class CMCyAxisHipAlignmentDistLP : MonoBehaviour
 
     //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public AudioMixer theMixer;
-    double lowPassFilterVal;
-    //double highPassFilterVal;
-    float dist = 0;
+    float distHipShoulder = 0;
+    float distShoulderNeck = 0;
+    float totalDist = 0;
+    float totalAttenuation = -80;
+    float minAtten = -80;
+    float maxAtten = 0;
 
-    //range has been obtained by trail and error, you can change values to tune it
-    static float minDist = 0.0005f; //0f
-    static float maxDist = 0.012f; //0.125f
-    double interval = (maxDist - minDist); //max and min dist of hip to hand
-    double minFreq = 700;
-    double maxFreq = 22000;
+    float NegaScaledAxisZ = 0, PosiScaledAxisZ = 0, NegaScaledAxisX = 0, PosiScaledAxisX = 0;
+
+    //Change these values to calibrate the sound sensitivity. Be carefull, remember the old values please
+    float correctionVal = 50;
+    static float minDist = 0.02f;
+    static float maxDist = 0.30f;
+
+    static float minAxis = 0.02f;
+    static float maxAxis = 0.30f;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -253,23 +259,52 @@ public class CMCyAxisHipAlignmentDistLP : MonoBehaviour
                     ///MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     if (i == 6)
                     {
-                        Vector3 HipLeftPos = bones[12].transform.localPosition;
-                        Vector3 HipRightPos = bones[16].transform.localPosition;
+                        Vector3 posHipCenter = bones[0].transform.localPosition;
+                        Vector3 posShoulderCenter = bones[1].transform.localPosition;
+                        Vector3 posNeck = bones[2].transform.localPosition;
 
-                        dist = Math.Abs(HipLeftPos.y - HipRightPos.y);
+                        distHipShoulder  = CalXZdist(posShoulderCenter, posHipCenter);
+                        distShoulderNeck = CalXZdist(posShoulderCenter, posNeck);
 
-                        //if (dist > maxDist)
-                        //{
-                        //    dist = maxDist;
-                        //}
+                        totalDist = distHipShoulder + distShoulderNeck;
+                        totalAttenuation = correctionVal + ScalingBetween(totalDist, minAtten, maxAtten, minDist, maxDist);
 
-                        //highPassFilterVal = minFreq * Math.Pow((Math.Pow((maxFreq / minFreq), (1 / interval))), (maxDist - dist));
-                        lowPassFilterVal = minFreq * Math.Pow((Math.Pow((maxFreq / minFreq), (1 / interval))), (dist));
+                        if (totalAttenuation > maxAtten){    totalAttenuation = maxAtten;    }
+
+                        theMixer.SetFloat("ISAttenuation", totalAttenuation);        
+
+                        //Debug.Log("totalDist: " + totalDist + "   totalAttenuation: " + totalAttenuation);
 
 
-                        theMixer.SetFloat("CutOffFreqLP", (float)lowPassFilterVal);
+                        //---------------------------------------------------------------------------
+                        //current problem: only 2 points... 
+                        float AxisZ = posHipCenter.z - posShoulderCenter.z;
+                        float AxisX = posHipCenter.x - posShoulderCenter.x;
 
-                        Debug.Log("dist: " + dist + "        lowPassFilterVal: " + lowPassFilterVal);
+                        if (AxisZ < 0)
+                        {
+                            NegaScaledAxisZ = ScalingBetween(-AxisZ, 0.3f, 1f, minAxis, maxAxis);
+                            theMixer.SetFloat("EqFreqGain_0", NegaScaledAxisZ);
+                        }
+                        else if (AxisZ >= 0)
+                        {
+                            PosiScaledAxisZ = ScalingBetween(AxisZ, 0.3f, 1f, minAxis, maxAxis);
+                            theMixer.SetFloat("EqFreqGain_1", PosiScaledAxisZ);
+                        }
+
+                        if (AxisX < 0)
+                        {
+                            NegaScaledAxisX = ScalingBetween(-AxisX, 0.3f, 1f, minAxis, maxAxis);
+                            theMixer.SetFloat("EqFreqGain_2", NegaScaledAxisX);
+                        }
+                        else if (AxisX >= 0)
+                        {
+                            PosiScaledAxisX = ScalingBetween(AxisX, 0.3f, 1f, minAxis, maxAxis);
+                            theMixer.SetFloat("EqFreqGain_3", PosiScaledAxisX);
+                        }
+
+                        Debug.Log("negZ: " + NegaScaledAxisZ + "    posZ: " + PosiScaledAxisZ + "    negX: " + NegaScaledAxisX + "    posX: " + PosiScaledAxisX);
+
                     }
                     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -287,4 +322,16 @@ public class CMCyAxisHipAlignmentDistLP : MonoBehaviour
         }
     }
 
+    ///MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    protected float CalXZdist(Vector3 vecA, Vector3 vecB)
+    {
+        return (float) Math.Sqrt( Math.Pow(vecB.x - vecA.x, 2) + Math.Pow(vecB.z - vecA.z, 2) ) ;
+    }
+
+
+    protected float ScalingBetween(float unscaledVal, float minNew, float maxNew, float minOld, float maxOld)
+    {
+        return (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
+    }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }
