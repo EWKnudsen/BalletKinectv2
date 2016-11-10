@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{13DC35BE-A7ED-A337-0C41-816FB4EBD037}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\KinectDemos\AvatarsDemo\Scripts\CameraPitchCorrector.cs" />
+     <Compile Include="Assets\KinectDemos\AvatarsDemo\Scripts\OffsetNodeMover.cs" />
+     <Compile Include="Assets\KinectDemos\BackgroundRemovalDemo\Scripts\ForegroundBlender.cs" />
+     <Compile Include="Assets\KinectDemos\BackgroundRemovalDemo\Scripts\ForegroundToImage.cs" />
+     <Compile Include="Assets\KinectDemos\BackgroundRemovalDemo\Scripts\WebcamSource.cs" />
+     <Compile Include="Assets\KinectDemos\ColliderDemo\Scripts\DepthImageViewer.cs" />
+     <Compile Include="Assets\KinectDemos\ColliderDemo\Scripts\EggMover.cs" />
+     <Compile Include="Assets\KinectDemos\ColliderDemo\Scripts\EggSpawner.cs" />
+     <Compile Include="Assets\KinectDemos\ColliderDemo\Scripts\HandColorOverlayer.cs" />
+     <Compile Include="Assets\KinectDemos\ColliderDemo\Scripts\JumpTrigger.cs" />
+     <Compile Include="Assets\KinectDemos\FaceTrackingDemo\Scripts\ModelFaceController.cs" />
+     <Compile Include="Assets\KinectDemos\FaceTrackingDemo\Scripts\ModelHatController.cs" />
+     <Compile Include="Assets\KinectDemos\FaceTrackingDemo\Scripts\SetBackgroundImage.cs" />
+     <Compile Include="Assets\KinectDemos\FaceTrackingDemo\Scripts\SetBackgroundRemovalImage.cs" />
+     <Compile Include="Assets\KinectDemos\FaceTrackingDemo\Scripts\SetFaceTexture.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CategorySelector.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\CloudFaceDetector.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\CloudFaceManager.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\CloudWebTools.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\ClientError.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\Face.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\FaceAttributes.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\FaceLandmarks.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\FaceRectangle.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\FacialHair.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\FeatureCoordinate.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\CloudFaceScripts\FaceObjs\HeadPose.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\ModelSelector.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\OverlayController.cs" />
+     <Compile Include="Assets\KinectDemos\FittingRoomDemo\Scripts\UserBodyBlender.cs" />
+     <Compile Include="Assets\KinectDemos\GesturesDemo\Scripts\CubeGestureListener.cs" />
+     <Compile Include="Assets\KinectDemos\GesturesDemo\Scripts\CubePresentationScript.cs" />
+     <Compile Include="Assets\KinectDemos\GesturesDemo\Scripts\ModelGestureListener.cs" />
+     <Compile Include="Assets\KinectDemos\GesturesDemo\Scripts\ModelPresentationScript.cs" />
+     <Compile Include="Assets\KinectDemos\InteractionDemo\Scripts\GrabDropScript.cs" />
+     <Compile Include="Assets\KinectDemos\InteractionDemo\Scripts\GrabRotateScript.cs" />
+     <Compile Include="Assets\KinectDemos\InteractionDemo\Scripts\GuiWindowScript.cs" />
+     <Compile Include="Assets\KinectDemos\OverlayDemo\Scripts\HandOverlayer.cs" />
+     <Compile Include="Assets\KinectDemos\OverlayDemo\Scripts\JointOverlayer.cs" />
+     <Compile Include="Assets\KinectDemos\OverlayDemo\Scripts\LinePainter.cs" />
+     <Compile Include="Assets\KinectDemos\OverlayDemo\Scripts\PhotoBoothController.cs" />
+     <Compile Include="Assets\KinectDemos\OverlayDemo\Scripts\SkeletonOverlayer.cs" />
+     <Compile Include="Assets\KinectDemos\PhysicsDemo\Scripts\BallController.cs" />
+     <Compile Include="Assets\KinectDemos\PhysicsDemo\Scripts\BarrelTrigger.cs" />
+     <Compile Include="Assets\KinectDemos\RecorderDemo\Scripts\KinectPlayerController.cs" />
+     <Compile Include="Assets\KinectDemos\SpeechRecognitionDemo\Scripts\BotControlScript.cs" />
+     <Compile Include="Assets\KinectDemos\SpeechRecognitionDemo\Scripts\GameControlScript.cs" />
+     <Compile Include="Assets\KinectDemos\SpeechRecognitionDemo\Scripts\ThirdPersonCamera.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\BallMover.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\BallSpawner.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\HeightEstimator.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\PoseDetectorScript.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\PoseModelHelper.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\SceneMeshVisualizer.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\SimpleHolographicCamera.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\UserHeadCamera.cs" />
+     <Compile Include="Assets\KinectDemos\VariousDemos\Scripts\UserMeshVisualizer.cs" />
+     <Compile Include="Assets\KinectScripts\AvatarController.cs" />
+     <Compile Include="Assets\KinectScripts\AvatarControllerClassic.cs" />
+     <Compile Include="Assets\KinectScripts\AvatarScaler.cs" />
+     <Compile Include="Assets\KinectScripts\BackgroundRemovalManager.cs" />
+     <Compile Include="Assets\KinectScripts\BodySlicer.cs" />
+     <Compile Include="Assets\KinectScripts\Cubeman\CubemanController.cs" />
+     <Compile Include="Assets\KinectScripts\Cubeman\PointmanController.cs" />
+     <Compile Include="Assets\KinectScripts\FacetrackingManager.cs" />
+     <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsConstraint.cs" />
+     <Compile Include="Assets\KinectScripts\Filters\JointPositionsFilter.cs" />
+     <Compile Include="Assets\KinectScripts\InteractionInputModule.cs" />
+     <Compile Include="Assets\KinectScripts\InteractionManager.cs" />
+     <Compile Include="Assets\KinectScripts\Interfaces\DepthSensorInterface.cs" />
+     <Compile Include="Assets\KinectScripts\Interfaces\DummyK2Interface.cs" />
+     <Compile Include="Assets\KinectScripts\Interfaces\Kinect1Interface.cs" />
+     <Compile Include="Assets\KinectScripts\Interfaces\Kinect2Interface.cs" />
+     <Compile Include="Assets\KinectScripts\Interfaces\OpenNI2Interface.cs" />
+     <Compile Include="Assets\KinectScripts\KinectDataServer.cs" />
+     <Compile Include="Assets\KinectScripts\KinectGestures.cs" />
+     <Compile Include="Assets\KinectScripts\KinectInterop.cs" />
+     <Compile Include="Assets\KinectScripts\KinectManager.cs" />
+     <Compile Include="Assets\KinectScripts\KinectRecorderPlayer.cs" />
+     <Compile Include="Assets\KinectScripts\MultiScene\LoadFirstLevel.cs" />
+     <Compile Include="Assets\KinectScripts\MultiScene\LoadLevelWhenNoUser.cs" />
+     <Compile Include="Assets\KinectScripts\MultiScene\LoadLevelWhenUserDetected.cs" />
+     <Compile Include="Assets\KinectScripts\MultiScene\LoadLevelWithDelay.cs" />
+     <Compile Include="Assets\KinectScripts\MultiScene\LocateAvatarsAndGestureListeners.cs" />
+     <Compile Include="Assets\KinectScripts\PortraitBackground.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\FollowUserRotation.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\GetFacePointsDemo.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\GetFaceSmileStatus.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\GetJointPositionDemo.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\JointOrientationView.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\JointPositionView.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\K2SensorChecker.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\MouseControl.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\PointCloudView.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\RaiseHandListener.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\SimpleBackgroundRemoval.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\SimpleGestureListener.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\SimpleInteractionListener.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\SimpleUserMovie.cs" />
+     <Compile Include="Assets\KinectScripts\Samples\SimpleVisualGestureListener.cs" />
+     <Compile Include="Assets\KinectScripts\SpeechErrorHandler.cs" />
+     <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
+     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
+     <Compile Include="Assets\MED7 folder\GUI 1\Button\buttonManager.cs" />
+     <Compile Include="Assets\MED7 folder\GUI 1\rotatingItem.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoXyPlaneDistVolAndEq.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\CMCfilterRESETTER.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\CMCxyPlaneHipShoulderDistHP.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\CMCxyPlaneHipShoulderDistPitch.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\CMCyAxisHipAlignmentDistLP.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\CurveManager.cs" />
+     <None Include="Assets\Resources\BlurShader.shader" />
+     <None Include="Assets\Resources\DepthShader.shader" />
+     <None Include="Assets\Resources\SpeechGrammar.grxml.txt" />
+     <None Include="Assets\Resources\BlurShader3.shader" />
+     <None Include="Assets\Resources\Color2DepthShader.shader" />
+     <None Include="Assets\Resources\BlurShader2.shader" />
+     <None Include="Assets\KinectDemos\BackgroundRemovalDemo\Resources\ForegroundBlendShader.shader" />
+     <None Include="Assets\KinectDemos\RecorderDemo\Resources\PlayerGrammar.grxml.txt" />
+     <None Include="Assets\Resources\Depth2ColorShader.shader" />
+     <None Include="Assets\Resources\Erode.shader" />
+     <None Include="Assets\Resources\BodyShader.shader" />
+     <None Include="Assets\Resources\Dilate.shader" />
+     <None Include="Assets\Resources\BlurShader5.shader" />
+     <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
+     <None Include="Assets\Resources\Color2BodyShader.shader" />
+     <None Include="Assets\Resources\BlurShader4.shader" />
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="LZ4Sharp">
+ <HintPath>/Users/malteholledig/Documents/MED7/BalletKinectv2/Assets/KinectScripts/LZ4Sharp/LZ4Sharp.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.SharpZipLib">
+ <HintPath>/Users/malteholledig/Documents/MED7/BalletKinectv2/Assets/KinectScripts/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{B93C8E7F-A298-2ABC-6D65-7B32896950C8}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

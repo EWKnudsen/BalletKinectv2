@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{77F8AE23-8356-5988-1F39-8611B500CA9E}") = "BalletKinectv2", "Assembly-CSharp-firstpass.csproj", "{B93C8E7F-A298-2ABC-6D65-7B32896950C8}"
+EndProject
+Project("{77F8AE23-8356-5988-1F39-8611B500CA9E}") = "BalletKinectv2", "Assembly-CSharp.csproj", "{13DC35BE-A7ED-A337-0C41-816FB4EBD037}"
+EndProject
+Project("{77F8AE23-8356-5988-1F39-8611B500CA9E}") = "BalletKinectv2", "Assembly-CSharp-Editor-firstpass.csproj", "{AD67C2F2-6849-9B8E-0F92-AEF69E17F9FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B93C8E7F-A298-2ABC-6D65-7B32896950C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93C8E7F-A298-2ABC-6D65-7B32896950C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93C8E7F-A298-2ABC-6D65-7B32896950C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B93C8E7F-A298-2ABC-6D65-7B32896950C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13DC35BE-A7ED-A337-0C41-816FB4EBD037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13DC35BE-A7ED-A337-0C41-816FB4EBD037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13DC35BE-A7ED-A337-0C41-816FB4EBD037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13DC35BE-A7ED-A337-0C41-816FB4EBD037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD67C2F2-6849-9B8E-0F92-AEF69E17F9FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD67C2F2-6849-9B8E-0F92-AEF69E17F9FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD67C2F2-6849-9B8E-0F92-AEF69E17F9FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD67C2F2-6849-9B8E-0F92-AEF69E17F9FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
