@@ -2,7 +2,7 @@
 //Controls a low pass filter, by calculating the
 //distance/disalignment of the left and right hip
 //in the y-axis
-//
+//(Now also take rotation/angle in consideration)
 //Sound if your hip is NOT horizontal
 //-----------------------------------------------------
 
@@ -15,7 +15,6 @@ using System.Collections.Generic;
 
 public class CMCyAxisHipAlignmentDistLP : MonoBehaviour
 {
-
     [Tooltip("Index of the player, tracked by this component. 0 means the 1st player, 1 - the 2nd one, 2 - the 3rd one, etc.")]
     public int playerIndex = 0;
 
@@ -258,18 +257,19 @@ public class CMCyAxisHipAlignmentDistLP : MonoBehaviour
 
                         dist = Math.Abs(HipLeftPos.y - HipRightPos.y);
 
-                        //if (dist > maxDist)
-                        //{
-                        //    dist = maxDist;
-                        //}
-
-                        //highPassFilterVal = minFreq * Math.Pow((Math.Pow((maxFreq / minFreq), (1 / interval))), (maxDist - dist));
                         lowPassFilterVal = minFreq * Math.Pow((Math.Pow((maxFreq / minFreq), (1 / interval))), (dist));
-
-
+                        
                         theMixer.SetFloat("CutOffFreqLP", (float)lowPassFilterVal);
 
-                        Debug.Log("dist: " + dist + "        lowPassFilterVal: " + lowPassFilterVal);
+                        //Debug.Log("dist: " + dist + "        lowPassFilterVal: " + lowPassFilterVal);
+
+                        //---------------------------------------------------------------------------
+
+                        Quaternion HipCenterRota = bones[0].transform.rotation;
+                        
+                        Debug.Log("Rotation CHip: " + HipCenterRota.w +"   " + HipCenterRota.x + "   " + HipCenterRota.y + "   " + HipCenterRota.z);
+
+
                     }
                     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
