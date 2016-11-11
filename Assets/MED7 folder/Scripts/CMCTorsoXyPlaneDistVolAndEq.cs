@@ -81,7 +81,7 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
     float totalAttenuation = -80;
     float minAtten = -80;
     float maxAtten = 0;
-    float score;
+    public float score;
 
     float NegaScaledAxisZ = 0, PosiScaledAxisZ = 0, NegaScaledAxisX = 0, PosiScaledAxisX = 0;
 

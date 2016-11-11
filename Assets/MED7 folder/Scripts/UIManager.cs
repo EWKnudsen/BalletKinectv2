@@ -6,16 +6,17 @@ public class UIManager : MonoBehaviour {
 
 	public Text uiText;
 	public float score;
+	public CMCTorsoXyPlaneDistVolAndEq script;
 
 	// Use this for initialization
 	void Start () {
 		uiText = FindObjectOfType<Text>();
-		score = 100f;
+		script = GameObject.Find ("Cubeman").GetComponent<CMCTorsoXyPlaneDistVolAndEq> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		uiText.text = "SCORE: " + score;
+		uiText.text = "SCORE: " + script.score;
 	}
 
 
