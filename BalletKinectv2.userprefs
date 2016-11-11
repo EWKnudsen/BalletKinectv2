@@ -1,8 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MED7 folder/Scripts/CurveManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MED7 folder/Scripts/CMCTorsoXyPlaneDistVolAndEq.cs">
     <Files>
-      <File FileName="Assets/MED7 folder/Scripts/CurveManager.cs" Line="53" Column="3" />
+      <File FileName="Assets/MED7 folder/Scripts/UIManager.cs" Line="18" Column="35" />
+      <File FileName="Assets/MED7 folder/Scripts/CurveManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/MED7 folder/Scripts/CMCTorsoXyPlaneDistVolAndEq.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
