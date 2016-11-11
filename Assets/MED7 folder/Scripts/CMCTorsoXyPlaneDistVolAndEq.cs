@@ -81,6 +81,7 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
     float totalAttenuation = -80;
     float minAtten = -80;
     float maxAtten = 0;
+    float score;
 
     float NegaScaledAxisZ = 0, PosiScaledAxisZ = 0, NegaScaledAxisX = 0, PosiScaledAxisX = 0;
 
@@ -303,8 +304,13 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
                             theMixer.SetFloat("EqFreqGain_3", PosiScaledAxisX);
                         }
 
-                        Debug.Log("negZ: " + NegaScaledAxisZ + "    posZ: " + PosiScaledAxisZ + "    negX: " + NegaScaledAxisX + "    posX: " + PosiScaledAxisX);
+                        //Debug.Log("negZ: " + NegaScaledAxisZ + "    posZ: " + PosiScaledAxisZ + "    negX: " + NegaScaledAxisX + "    posX: " + PosiScaledAxisX);
 
+
+                        //-------------------------------------------------------------------------------
+                        //Score
+                        score = 100 - ScalingBetween(totalDist, 0, 100, minDist, maxDist);
+                        Debug.Log("score: " + score);
                     }
                     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
