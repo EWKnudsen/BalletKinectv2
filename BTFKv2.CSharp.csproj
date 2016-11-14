@@ -186,6 +186,8 @@
     <Compile Include="Assets\MED7 folder\Scripts\CMCxyPlaneHipShoulderDistPitch.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CMCyAxisHipAlignmentDistLP.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CurveManager.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\PlayVideo.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -58,6 +58,6 @@ public class ScoreManager : MonoBehaviour {
 		counter++;
 		yield return new WaitForSeconds(2);
 		StartCoroutine("CalculateAverage");
-		Debug.Log(scoreTemp + ", " + counter);
+		//Debug.Log(scoreTemp + ", " + counter);
 	}
 }

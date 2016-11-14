@@ -87,12 +87,12 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
     float NegaScaledAxisZ = 0, PosiScaledAxisZ = 0, NegaScaledAxisX = 0, PosiScaledAxisX = 0;
 
     //Change these values to calibrate the sound sensitivity. Be carefull, remember the old values please
-    float correctionVal = 50;
-    static float minDist = 0.02f;
-    static float maxDist = 0.30f;
+    float correctionVal = 40;
+    static float minDist = 0.01f;
+    static float maxDist = 0.25f;
 
     static float minAxis = 0.02f;
-    static float maxAxis = 0.30f;
+    static float maxAxis = 0.20f;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -153,7 +153,6 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
 
     void Update()
     {
-
         //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if (!isAttReset)
         {
@@ -279,9 +278,25 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
                         distShoulderNeck = CalXZdist(posShoulderCenter, posNeck);
 
                         totalDist = distHipShoulder + distShoulderNeck;
-                        totalAttenuation = correctionVal + ScalingBetween(totalDist, minAtten, maxAtten, minDist, maxDist);
+                        totalAttenuation = ScalingBetween(totalDist, minAtten, maxAtten, minDist, maxDist);
 
-                        if (totalAttenuation > maxAtten){    totalAttenuation = maxAtten;    }
+
+
+                        //testing this...
+                        float linear = totalAttenuation;
+
+                        double hepson = (70 * Math.Log10(((double)totalAttenuation / 2) + 42)) - 80;
+                        totalAttenuation = (float)hepson + 20;
+                        
+                        Debug.Log("OFF linear: " + linear + "    ON log: " + hepson);
+
+
+
+                        if (totalAttenuation > maxAtten) {
+                            totalAttenuation = maxAtten;
+                        } else if (totalAttenuation < minAtten) {
+                            totalAttenuation = minAtten;
+                        }
 
                         theMixer.SetFloat("ISAttenuation", totalAttenuation);        
 
@@ -321,7 +336,7 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
                         //-------------------------------------------------------------------------------
                         //Score
                         score = 100 - ScalingBetween(totalDist, 0, 100, minDist, maxDist);
-                        Debug.Log("score: " + score);
+                        //Debug.Log("score: " + score);
                     }
                     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
