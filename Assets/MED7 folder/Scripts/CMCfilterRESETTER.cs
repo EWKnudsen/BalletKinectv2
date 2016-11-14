@@ -32,7 +32,7 @@ public class CMCfilterRESETTER : MonoBehaviour
         theMixer.SetFloat("PitchShift", 1);
         theMixer.SetFloat("CutOffFreqHP", 10);
         theMixer.SetFloat("CutOffFreqLP", 22000);
-    //    theMixer.SetFloat("ISAttenuation", -80);
+        theMixer.SetFloat("ISAttenuation", 00);
 
         int[] CenterFreqs = CalCenterFreqs(numberOfEqs, minFrequence, maxFrequence);
         for (int i = 0; i < CenterFreqs.Length; i++)

@@ -72,7 +72,6 @@ public class CMCxyPlaneHipShoulderDistPitch : MonoBehaviour
     private Int64 initialPosUserID = 0;
 
     //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //Version: PITCH  Velocity
     private Vector3 lastPos;
     int FilterCounter = 0;
 

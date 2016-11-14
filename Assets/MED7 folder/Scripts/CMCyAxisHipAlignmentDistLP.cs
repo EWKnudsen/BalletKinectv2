@@ -75,7 +75,6 @@ public class CMCyAxisHipAlignmentDistLP : MonoBehaviour
     //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public AudioMixer theMixer;
     double lowPassFilterVal;
-    //double highPassFilterVal;
     float dist = 0;
 
     //range has been obtained by trail and error, you can change values to tune it

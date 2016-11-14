@@ -82,6 +82,7 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
     float minAtten = -80;
     float maxAtten = 0;
     public float score;
+    bool isAttReset = false;
 
     float NegaScaledAxisZ = 0, PosiScaledAxisZ = 0, NegaScaledAxisX = 0, PosiScaledAxisX = 0;
 
@@ -152,6 +153,16 @@ public class CMCTorsoXyPlaneDistVolAndEq : MonoBehaviour
 
     void Update()
     {
+
+        //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        if (!isAttReset)
+        {
+            theMixer.SetFloat("ISAttenuation", -50);
+            isAttReset = true;
+        }
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
         KinectManager manager = KinectManager.Instance;
 
         // get 1st player
