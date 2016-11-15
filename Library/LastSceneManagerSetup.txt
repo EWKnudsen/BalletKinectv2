@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/KinectDemos/AvatarsDemo/KinectAvatarsDemo1.unity
+- path: Assets/MED7 folder/Scenes/Menu.unity
   isLoaded: 1
   isActive: 1
