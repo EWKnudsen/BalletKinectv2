@@ -6,7 +6,6 @@ using System.Collections;
 public class Mute : MonoBehaviour {
 
 	public Toggle tgl;
-	private Scene scene;
 
 	bool muted = false;
 	bool sceneChanged = false;
@@ -16,19 +15,18 @@ public class Mute : MonoBehaviour {
 	}
 
 	void Start () {
-		scene = SceneManager.GetSceneByName("KinectAvatarsDemo1");
 		tgl = GameObject.Find("MuteButton").GetComponent<Toggle>();
 	}
 
 	void Update () {
 
 		if (tgl != null) {
+			sceneChanged = false;
 			muted = tgl.isOn;
-			Debug.Log(muted);
 		}
 
-		if (SceneManager.GetActiveScene() == scene) {
-			Debug.Log("Changed scene");
+
+		if (SceneManager.GetActiveScene().name == "KinectAvatarsDemo1" && !sceneChanged) {
 			MuteMusic();
 		}
 	}
