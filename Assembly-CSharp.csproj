@@ -148,15 +148,16 @@
      <Compile Include="Assets\KinectScripts\SpeechErrorHandler.cs" />
      <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
-     <Compile Include="Assets\MED7 folder\GUI 1\Button\buttonManager.cs" />
-     <Compile Include="Assets\MED7 folder\GUI 1\rotatingItem.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\ButtonManager.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoXyPlaneDistVolAndEq.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCfilterRESETTER.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCxyPlaneHipShoulderDistHP.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCxyPlaneHipShoulderDistPitch.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCyAxisHipAlignmentDistLP.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CurveManager.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\Mute.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\PlayVideo.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\RotatingItem.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\ScoreManager.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\UIManager.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />
@@ -175,11 +176,11 @@
      <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
      <None Include="Assets\Resources\Color2BodyShader.shader" />
      <None Include="Assets\Resources\BlurShader4.shader" />
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="LZ4Sharp">
  <HintPath>/Users/malteholledig/Documents/MED7/BalletKinectv2/Assets/KinectScripts/LZ4Sharp/LZ4Sharp.dll</HintPath>

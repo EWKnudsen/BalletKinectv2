@@ -21,6 +21,5 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
-
-
 }
+
