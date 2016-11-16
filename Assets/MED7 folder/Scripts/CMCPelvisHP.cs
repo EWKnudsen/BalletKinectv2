@@ -18,8 +18,8 @@ public class CMCPelvisHP : MonoBehaviour
     double dist;
 
     //range has been obtained by trail and error, you can change values to tune it. REMEMBER OLD VALUES
-    static double minDist = 0.04; //0f
-    static double maxDist = 0.18; //0.125f
+    static double minDist = 0.006;
+    static double maxDist = 0.03; 
     double interval = (maxDist - minDist);
     double minFreq = 20;
     double maxFreq = 22000;
@@ -40,9 +40,13 @@ public class CMCPelvisHP : MonoBehaviour
 
                 if (dist > maxDist)
                     dist = maxDist;
-
+                else if (dist < minDist)
+                    dist = minDist;
+                
                 double HPfilterVal = highPassFilterVal(dist, maxDist, interval, minFreq, maxFreq);
                 theMixer.SetFloat("Pelvis_CutOffFreqHP", (float)HPfilterVal);
+
+                Debug.Log("dist. " + dist);
 
                 score = 100 - (float)ScalingBetween(dist, 0, 100, minDist, maxDist);
                 if (score < 0)

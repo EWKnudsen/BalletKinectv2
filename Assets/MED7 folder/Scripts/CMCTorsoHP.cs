@@ -18,8 +18,8 @@ public class CMCTorsoHP : MonoBehaviour
     double dist;
     
     //range has been obtained by trail and error, you can change values to tune it. REMEMBER OLD VALUES
-    static double minDist = 0.04; //0f
-    static double maxDist = 0.18; //0.125f
+    static double minDist = 0.006; //0f
+    static double maxDist = 0.11; //0.125f
     double interval = (maxDist - minDist);
     double minFreq = 20;
     double maxFreq = 22000;

@@ -104,8 +104,12 @@ public class CMCPelvisNotchAtten : MonoBehaviour
     private double LogScaling(double unscaledVal)
     {
         double hepson = (70 * Math.Log10((unscaledVal / 2) + 42)) - 80;
-        return hepson + 20;
+        return hepson + 50; //20
     }
 
 
 }
+
+
+
+
