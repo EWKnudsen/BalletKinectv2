@@ -186,6 +186,7 @@
     <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoNotchAtten.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CMCfilterRESETTER.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CurveManager.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\FocusManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\Mute.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCTorsoXyPlaneDistVolAndEq.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCxyPlaneHipShoulderDistHP.cs" />
