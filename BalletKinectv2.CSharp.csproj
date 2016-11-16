@@ -179,6 +179,7 @@
     <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\ButtonManager.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\CMCCombinedTorAndPelHP.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisHP.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisNotchAtten.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoHP.cs" />

@@ -29,7 +29,7 @@ public class CMCTorsoNotchAtten : MonoBehaviour
 
     //Change these values to calibrate the sound sensitivity. Be careful, REMEMBER THE OLD VALUES
     static double minDist = 0.01; //0.01;
-    static double maxDist = 0.30; //0.25;
+    static double maxDist = 0.25; //0.25;
 
     static double minAxis = 0.02;
     static double maxAxis = 0.20;
