@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CurveManager : MonoBehaviour {
 
-	public CMCTorsoXyPlaneDistVolAndEq script;
+	public CMCTorsoNotchAtten script;
 	public float score;
 	private ParticleSystem ps;
 	private Vector3 pos;
@@ -12,7 +12,7 @@ public class CurveManager : MonoBehaviour {
 	private float amount;
 
 	void Start () {
-		script = GameObject.Find ("Cubeman").GetComponent<CMCTorsoXyPlaneDistVolAndEq> ();
+		script = GameObject.Find ("FilterController").GetComponent<CMCTorsoNotchAtten> ();
 		ps = transform.gameObject.GetComponent<ParticleSystem> ();
 		pos = transform.position;
 	}

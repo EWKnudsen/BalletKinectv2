@@ -5,7 +5,7 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour {
 
-	public CMCTorsoXyPlaneDistVolAndEq cubemanScript;
+	public CMCTorsoNotchAtten cubemanScript;
 	public float score;
 	public float scoreTemp;
 	private int counter;
@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour {
 	void Start () {
 		sceneChanged = false;
 		scene = SceneManager.GetActiveScene();
-		cubemanScript = GameObject.Find ("Cubeman").GetComponent<CMCTorsoXyPlaneDistVolAndEq> ();
+		cubemanScript = GameObject.Find ("FilterController").GetComponent<CMCTorsoNotchAtten> ();
 		if (cubemanScript != null) {
 			StartCoroutine("CalculateAverage");
 		}

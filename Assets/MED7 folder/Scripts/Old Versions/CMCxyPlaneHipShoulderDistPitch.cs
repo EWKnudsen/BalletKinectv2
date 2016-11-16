@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------
-//Controls a high pass filter, by calculating the
+//Controls the pitch of a sound, by calculating the
 //distance of the center hip and center shoulder
 //in zx-plane  
 //
-//Sound if your spine is NOT vertical
+//Low pitch if your spine is NOT vertical
 //-----------------------------------------------------
 
 using UnityEngine;
@@ -13,7 +13,7 @@ using System.Collections;
 using UnityEngine.Audio;
 using System.Collections.Generic;
 
-public class CMCxyPlaneHipShoulderDistHP : MonoBehaviour
+public class CMCxyPlaneHipShoulderDistPitch : MonoBehaviour
 {
     [Tooltip("Index of the player, tracked by this component. 0 means the 1st player, 1 - the 2nd one, 2 - the 3rd one, etc.")]
     public int playerIndex = 0;
@@ -71,19 +71,22 @@ public class CMCxyPlaneHipShoulderDistHP : MonoBehaviour
     private Vector3 initialPosOffset = Vector3.zero;
     private Int64 initialPosUserID = 0;
 
-
     //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public AudioMixer theMixer;
-    //double lowPassFilterVal;
-    double highPassFilterVal;
-    float dist = 0;
+    private Vector3 lastPos;
+    int FilterCounter = 0;
 
+    public AudioMixer theMixer;
+    float pitch;
+    float velSum;
+
+    //Version: PITCH  Dist
     //range has been obtained by trail and error, you can change values to tune it
-    static float minDist = 0.04f; //0f
-    static float maxDist = 0.18f; //0.125f
-    double interval = (maxDist - minDist); //max and min dist of hip to hand
-    double minFreq = 20;
-    double maxFreq = 22000;
+    /*
+    static float oldMin = 0.3f;
+    static float newMin = 0.5f;
+    float oldRange = (2f - oldMin);
+    float newRange = (1.5f - newMin);
+    */
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -135,6 +138,11 @@ public class CMCxyPlaneHipShoulderDistHP : MonoBehaviour
         //				lines[i].transform.parent = transform;
         //			}
         //		}
+
+        //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        lastPos = transform.position;
+        theMixer.GetFloat("PitchShift", out pitch);
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -248,28 +256,66 @@ public class CMCxyPlaneHipShoulderDistHP : MonoBehaviour
                         lines[i].SetPosition(0, posParent);
                         lines[i].SetPosition(1, posJoint2);
                     }
-                    
+
+
                     ///MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    /// <summary>
+                    /// Version: Controlling PITCH with velocity of left hand joint
+                    /// </summary>
+                    if (i == 6) //left hand on cube man. remember he is mirrored (your right hand)
+                    {
+                        float velocity = Vector3.Distance(lastPos, posJoint) / Time.deltaTime;
+
+                        print("current: " + posJoint.magnitude + "     last: " + lastPos.magnitude);
+                        //print("Distance to other: " + vectorDist + "   pos: " + posJoint.x + " , " + posJoint.y + " , " + posJoint.z);
+
+                        lastPos = posJoint;
+
+                        velSum += velocity;
+                        FilterCounter++;
+
+                        if (FilterCounter % 3 == 0)
+                        {
+                            if (velSum > 0.3f) //move, and pitch increases
+                            {
+                                if (pitch < 1.5f)
+                                {
+                                    pitch += 0.001f * velSum;
+                                    theMixer.SetFloat("1_PitchShift", pitch);
+                                }
+                            }
+                            else if (pitch > 0.4f) //if you dont move, pitch decreases
+                            {
+                                pitch -= 0.03f;
+                                theMixer.SetFloat("1_PitchShift", pitch);
+                            }
+                            FilterCounter = 0;
+                            velSum = 0;
+                        }
+                    }
+                
+
+                    //MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    
+                    // OLD Testing Version: Controls PITCH relative to the distance of hip center and both hands
+                    // REMEMBER to outcomment the other version if you use this
+                    /*
                     if (i == 6)
                     {
+                        Vector3 leftHandPos = bones[7].transform.localPosition;
+                        Vector3 RightHandPos = bones[11].transform.localPosition;
                         Vector3 HipCenterPos = bones[0].transform.localPosition;
-                        Vector3 shoulderCenterPos = bones[1].transform.localPosition;
 
-                        dist = CalXZdist(HipCenterPos, shoulderCenterPos);
+                        float dist = Vector3.Distance(leftHandPos, HipCenterPos) + Vector3.Distance(RightHandPos, HipCenterPos);
+                  
+                        float RangeConvertedPitchValue = (((dist - oldMin) * newRange) / oldRange) + newMin;
+                        //print("dist: " + RangeConvertedPitchValue);
 
-                        if (dist > maxDist)
-                        {
-                            dist = maxDist;
-                        }
-
-                        highPassFilterVal = minFreq * Math.Pow((Math.Pow((maxFreq / minFreq), (1 / interval))), (maxDist - dist));
-
-                        theMixer.SetFloat("CutOffFreqHP", (float)highPassFilterVal);
-
-                        Debug.Log("dist: " + dist + "        highPassFilterVal: " + highPassFilterVal);
+                        theMixer.SetFloat("1_PitchShift", RangeConvertedPitchValue);
                     }
+                    */
                     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                    
+
                 }
                 else
                 {
@@ -283,13 +329,4 @@ public class CMCxyPlaneHipShoulderDistHP : MonoBehaviour
             }
         }
     }
-
-    ///MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    protected float CalXZdist(Vector3 vecA, Vector3 vecB)
-    {
-        double dist = Math.Sqrt(Math.Pow(vecB.x - vecA.x, 2) + Math.Pow(vecB.z - vecA.z, 2));
-
-        return (float)dist;
-    }
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }

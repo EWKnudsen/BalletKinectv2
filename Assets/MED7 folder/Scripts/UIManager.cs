@@ -6,12 +6,12 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
 	public Text uiText;
-	public CMCTorsoXyPlaneDistVolAndEq script;
+	public CMCTorsoNotchAtten script;
 
 	// Use this for initialization
 	void Start () {
 		uiText = FindObjectOfType<Text>();
-		script = GameObject.Find ("Cubeman").GetComponent<CMCTorsoXyPlaneDistVolAndEq> ();
+		script = GameObject.Find ("FilterController").GetComponent<CMCTorsoNotchAtten> ();
 	}
 	
 	// Update is called once per frame
