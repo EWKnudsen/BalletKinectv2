@@ -14,13 +14,13 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     double maxFreq = 22000;
 
     //range has been obtained by trail and error, you can change values to tune it. REMEMBER OLD VALUES
-    static double torso_minDist = 0.04; //0f
-    static double torso_maxDist = 0.18; //0.125f
+    static double torso_minDist = 0.006; //0f
+    static double torso_maxDist = 0.11; //0.125f
     double torso_interval = (torso_maxDist - torso_minDist);
 
     //range has been obtained by trail and error, you can change values to tune it. REMEMBER OLD VALUES
-    static double pelvis_minDist = 0.04; //0f
-    static double pelvis_maxDist = 0.18; //0.125f
+    static double pelvis_minDist = 0.006; //0f
+    static double pelvis_maxDist = 0.03;  //0.125f
     double pelvis_interval = (pelvis_maxDist - pelvis_minDist);
     
     void Start()
