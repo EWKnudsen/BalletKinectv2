@@ -149,6 +149,7 @@
      <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\ButtonManager.cs" />
+     <Compile Include="Assets\MED7 folder\Scripts\CMCCombinedTorAndPelHP.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisHP.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisNotchAtten.cs" />
      <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoHP.cs" />
@@ -181,11 +182,11 @@
      <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
      <None Include="Assets\Resources\Color2BodyShader.shader" />
      <None Include="Assets\Resources\BlurShader4.shader" />
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="LZ4Sharp">
  <HintPath>/Users/malteholledig/Documents/MED7/BalletKinectv2/Assets/KinectScripts/LZ4Sharp/LZ4Sharp.dll</HintPath>

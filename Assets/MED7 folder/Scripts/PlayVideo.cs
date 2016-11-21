@@ -6,8 +6,13 @@ using System.Collections;
 public class PlayVideo : MonoBehaviour {
 
 	public MovieTexture movie;
+	public float videoDuration;
 
 	// Use this for initialization
+	void Awake() {
+		videoDuration = movie.duration;
+	}
+
 	void Start () {
 		movie.Play();
 	}
