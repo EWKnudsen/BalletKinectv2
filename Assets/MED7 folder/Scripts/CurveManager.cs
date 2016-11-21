@@ -29,7 +29,7 @@ public class CurveManager : MonoBehaviour {
 	}
 
 	void CalculatePosition() {
-		float yMin = 0.55f;
+		float yMin = 0.6f;
 		if (pelvisHp.enabled) {
 			score = pelvisHp.score;
 		} else if (pelvisNotch.enabled) {
