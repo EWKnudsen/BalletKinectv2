@@ -9,6 +9,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     public CubemanController CMCScript;
     public float torso_score, pelvis_score, score;
     double torso_dist, pelvis_dist, Combined_dist;
+    double HPfilterVal;
 
     double minFreq = 20;
     double maxFreq = 22000;
@@ -21,7 +22,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     //range has been obtained by trail and error, you can change values to tune it. REMEMBER OLD VALUES
     static double pelvis_minDist = 0.006; //0f
     static double pelvis_maxDist = 0.03;  //0.125f
-    double pelvis_interval = (pelvis_maxDist - pelvis_minDist);
+    //double pelvis_interval = (pelvis_maxDist - pelvis_minDist);
     
     void Start()
     {
@@ -36,41 +37,20 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
             if (CMCScript.hasValues)
             {
                 torso_dist = CalXZdist(CMCScript.hipCenterPos, CMCScript.shoulderCenterPos);
-
-                if (torso_dist > torso_maxDist)
-                    torso_dist = torso_maxDist;
-                if (torso_dist < torso_minDist)
-                    torso_dist = torso_minDist;
                 
                 pelvis_dist = Math.Abs(CMCScript.hipLeftPos.y - CMCScript.hipRightPos.y);
-
-                if (pelvis_dist > pelvis_maxDist)
-                    pelvis_dist = pelvis_maxDist;
-                if (pelvis_dist < pelvis_minDist)
-                    pelvis_dist = pelvis_minDist;
                 
                 Combined_dist = (torso_dist + pelvis_dist) / 2;
-
                 
 
-                double HPfilterVal = highPassFilterVal(Combined_dist, torso_maxDist, torso_interval, minFreq, maxFreq);
-                
+                HPfilterVal = highPassFilterVal(Combined_dist, torso_maxDist, torso_interval, minFreq, maxFreq);
                 theMixer.SetFloat("Torso_CutOffFreqHP", (float)HPfilterVal);
                 
 
                 torso_score = 100 - (float)ScalingBetween(torso_dist, 0, 100, torso_minDist, torso_maxDist);
-                if (torso_score < 0)
-                    torso_score = 0;
-                else if (torso_score > 100)
-                    torso_score = 100;
-
                 pelvis_score = 100 - (float)ScalingBetween(pelvis_dist, 0, 100, pelvis_minDist, pelvis_maxDist);
-                if (pelvis_score < 0)
-                    pelvis_score = 0;
-                else if (pelvis_score > 100)
-                    pelvis_score = 100;
-
                 score = (torso_score + pelvis_score) / 2;
+               
             }
         }
     }
@@ -87,7 +67,14 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 
     protected double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
     {
-        return (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
+        double val = (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
+
+        if (val < minNew)
+            val = minNew;
+        else if (val > maxNew)
+            val = maxNew;
+
+        return val;
     }
 
 
