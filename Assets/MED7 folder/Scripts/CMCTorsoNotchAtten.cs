@@ -68,7 +68,7 @@ public class CMCTorsoNotchAtten : MonoBehaviour
                 
                 theMixer.SetFloat("Torso_Attenuation", (float)totalAttenLogScaled);
                 //theMixer.SetFloat("Torso_Attenuation", (float)totalAtten);
-                Debug.Log("lin: " + totalAtten + "      log: " + totalAttenLogScaled + "     hep: " + (float)ScalingBetween(totalAttenLogScaled, 0, 100, minAtten, maxAtten));
+                //Debug.Log("lin: " + totalAtten + "      log: " + totalAttenLogScaled + "     hep: " + (float)ScalingBetween(totalAttenLogScaled, 0, 100, minAtten, maxAtten));
 
                 score = 100 - (float)ScalingBetween(totalAtten, 0, 100, minAtten, maxAtten);
                 if (score < 0)
