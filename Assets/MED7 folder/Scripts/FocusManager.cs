@@ -6,6 +6,7 @@ using System.Collections;
 public class FocusManager : MonoBehaviour {
 
 	bool sceneChanged = false;
+	public GameObject prefab;
 	public int focusIndex;
 
 	void Awake() {
@@ -18,27 +19,36 @@ public class FocusManager : MonoBehaviour {
 
 	void Update () {
 		if (SceneManager.GetActiveScene().name == "MainScene" && !sceneChanged) {
-			
-			//CMCPelvisHP pelvisHp = GameObject.Find ("FilterController").GetComponent<CMCPelvisHP>();
-			//CMCPelvisNotchAtten pelvisNotch = GameObject.Find ("FilterController").GetComponent<CMCPelvisNotchAtten>();
-			//CMCTorsoHP torsoHp = GameObject.Find ("FilterController").GetComponent<CMCTorsoHP>();
-			//CMCTorsoNotchAtten torsoNotch = GameObject.Find ("FilterController").GetComponent<CMCTorsoNotchAtten>(); 
 
-			//pelvisHp.enabled = false;
-			//pelvisNotch.enabled = false;
-			//torsoHp.enabled = false;
-			//torsoNotch.enabled = false;
+			GameObject controller = GameObject.Find("KinectControllerCursor");
 
-			/*Component[] scripts = GameObject.Find ("FilterController").GetComponents(typeof(Component));
+			if (controller != null) {
+				Destroy(controller);
+			}
+				
+			CMCCombinedTorAndPelHP postureScript = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
 
-			for (int i = 2; i < scripts.Length; i++) {
+			// CHANGE THIS FOR HANDS SCRIPT:
+			CMCTorsoHP symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCTorsoHP>();
 
-				scripts [i].enabled = false;
+			postureScript.enabled = false;
+			symmetryScript.enabled = false;
 
-				if (i = focusIndex) {
-					scripts [i].enabled = true;
-				}
-			}*/
+			if (focusIndex == 0) {
+				postureScript.enabled = true;	
+			}
+			if (focusIndex == 1) {
+				symmetryScript.enabled = true;	
+			}
+
+			sceneChanged = true;
+		}
+
+		if (SceneManager.GetActiveScene().name == "GameOver" && sceneChanged) {
+
+			Instantiate(prefab);
+
+			sceneChanged = false;
 
 		}
 	}
