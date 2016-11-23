@@ -26,8 +26,8 @@ public class CMCCombPostureNF : MonoBehaviour
     static double T_minAxis = 0.02;
     static double T_maxAxis = 0.20;
     //------------------------------------------------------------------------
-    static double P_minDist = 0.006;
-    static double P_maxDist = 0.03;
+    // static double P_minRot = 0.002;
+    // static double P_maxRot = 0.08;
 
     double P_axisZ;
 
@@ -57,8 +57,8 @@ public class CMCCombPostureNF : MonoBehaviour
                 T_totalAttenLogScaled = LogScaling(T_totalAtten);
 
 
-                 T_axisZ = CMCScript.hipCenterPos.z - CMCScript.shoulderCenterPos.z;
-                 T_axisX = CMCScript.hipCenterPos.x - CMCScript.shoulderCenterPos.x;
+                T_axisZ = CMCScript.hipCenterPos.z - CMCScript.shoulderCenterPos.z;
+                T_axisX = CMCScript.hipCenterPos.x - CMCScript.shoulderCenterPos.x;
 
                 if (T_axisZ < 0)
                 {
@@ -85,18 +85,22 @@ public class CMCCombPostureNF : MonoBehaviour
                 //--------------------------------------------------------------
 
 
-                //P_axisY
-
-
-
+                //P_axisX   
+                //P_axisZ
+                
+                Debug.Log("w: " + CMCScript.hipCenterRot.w + "     x: " + CMCScript.hipCenterRot.x + "     y: " + CMCScript.hipCenterRot.y + "     z: " + CMCScript.hipCenterRot.z);
+                
 
                 //---------------------------------------------------------------
 
-                //same log?
-                //P_totalAttenLogScaled = Math.Abs(CMCScript.hipLeftPos.y - CMCScript.hipRightPos.y);
-                //C_totalAtten = T_totalAttenLogScaled + P_rotation + P_PosiScaledAxisY + P_NegaScaledAxisY
 
-                //theMixer.SetFloat("Torso_Attenuation", (float)CombinedtotalAtten);
+                //P_totalAtten = Math.Abs(CMCScript.hipLeftPos.y - CMCScript.hipRightPos.y) + P_;
+                //P_totalAttenLogScaled = LogScaling(P_totalAtten); //same log?
+
+                //C_totalAttenLogScaled = T_totalAttenLogScaled + P_totalAttenLogScaled
+
+                //theMixer.SetFloat("Torso_Attenuation", (float)C_totalAtten);
+                theMixer.SetFloat("Torso_Attenuation", (float)T_totalAttenLogScaled);
 
                 score = maxScore - (float)ScalingBetween(T_totalAtten, minScore, maxScore, minAtten, maxAtten);
             }
@@ -107,6 +111,11 @@ public class CMCCombPostureNF : MonoBehaviour
     private double CalXZdist(Vector3 vecA, Vector3 vecB)
     {
         return Math.Sqrt(Math.Pow((double)vecB.x - vecA.x, 2) + Math.Pow((double)vecB.z - vecA.z, 2));
+    }
+
+    private double CalRotDisalignment(Quaternion pointA)
+    {
+        return 2; //figure out how to
     }
 
     private double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
