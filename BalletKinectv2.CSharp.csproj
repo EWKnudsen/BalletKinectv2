@@ -179,23 +179,23 @@
     <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\ButtonManager.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\CMCCombPostureNF.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\CMCCombinedTorAndPelHP.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisHP.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisNotchAtten.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoHP.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoNotchAtten.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\CMCfilterRESETTER.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CurveManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\FocusManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\Mute.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCTorsoXyPlaneDistVolAndEq.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCxyPlaneHipShoulderDistHP.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCxyPlaneHipShoulderDistPitch.cs" />
-    <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCyAxisHipAlignmentDistLP.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\PlayVideo.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\RotatingItem.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\ScoreManager.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\CMCCombPostureNF.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\CMCCombinedTorAndPelHP.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\CMCPelvisHP.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\CMCPelvisNotchAtten.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\CMCTorsoHP.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\CMCTorsoNotchAtten.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\CMCfilterRESETTER.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\Old Versions\CMCTorsoXyPlaneDistVolAndEq.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\Old Versions\CMCxyPlaneHipShoulderDistHP.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\Old Versions\CMCxyPlaneHipShoulderDistPitch.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\Sound Scripts\Old Versions\CMCyAxisHipAlignmentDistLP.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
