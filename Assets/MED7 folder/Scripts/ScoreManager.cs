@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour {
 		if (cubemanScript != null) {
 			score = cubemanScript.score;
 		}
-		if (scene.name != "KinectAvatarsDemo1" && sceneChanged == false) {
+		if (scene.name != "MainScene" && sceneChanged == false) {
 			StopCoroutine("CalculateAverage");
 			score = scoreTemp/counter;
 			AssignScore ();
