@@ -17,7 +17,7 @@ public class FocusManager : MonoBehaviour {
 	}
 
 	void Update () {
-		if (SceneManager.GetActiveScene().name == "KinectAvatarsDemo1" && !sceneChanged) {
+		if (SceneManager.GetActiveScene().name == "MainScene" && !sceneChanged) {
 			
 			//CMCPelvisHP pelvisHp = GameObject.Find ("FilterController").GetComponent<CMCPelvisHP>();
 			//CMCPelvisNotchAtten pelvisNotch = GameObject.Find ("FilterController").GetComponent<CMCPelvisNotchAtten>();
