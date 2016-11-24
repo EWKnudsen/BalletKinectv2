@@ -148,27 +148,27 @@
      <Compile Include="Assets\KinectScripts\SpeechErrorHandler.cs" />
      <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\ButtonManager.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CMCCombPostureNF.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CMCCombinedTorAndPelHP.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisHP.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CMCPelvisNotchAtten.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoHP.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CMCTorsoNotchAtten.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CMCfilterRESETTER.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\CurveManager.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\FocusManager.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\KinectInputModule.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\KinectUIWaitOverButton.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\Mute.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCTorsoXyPlaneDistVolAndEq.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCxyPlaneHipShoulderDistHP.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCxyPlaneHipShoulderDistPitch.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\Old Versions\CMCyAxisHipAlignmentDistLP.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\PlayVideo.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\RotatingItem.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\ScoreManager.cs" />
-     <Compile Include="Assets\MED7 folder\Scripts\UIManager.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\ButtonManager.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\CurveManager.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\FocusManager.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\KinectInputModule.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\KinectUIWaitOverButton.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\Mute.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\PlayVideo.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\RotatingItem.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\ScoreManager.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCCombPostureNF.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCCombinedTorAndPelHP.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCPelvisHP.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCPelvisNotchAtten.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCTorsoHP.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCTorsoNotchAtten.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCfilterRESETTER.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCTorsoXyPlaneDistVolAndEq.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCxyPlaneHipShoulderDistHP.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCxyPlaneHipShoulderDistPitch.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCyAxisHipAlignmentDistLP.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\UIManager.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />
      <None Include="Assets\Resources\DepthShader.shader" />
      <None Include="Assets\Resources\SpeechGrammar.grxml.txt" />
@@ -185,11 +185,11 @@
      <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
      <None Include="Assets\Resources\Color2BodyShader.shader" />
      <None Include="Assets\Resources\BlurShader4.shader" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="LZ4Sharp">
  <HintPath>/Users/malteholledig/Documents/MED7/BalletKinectv2/Assets/KinectScripts/LZ4Sharp/LZ4Sharp.dll</HintPath>
