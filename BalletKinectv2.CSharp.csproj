@@ -181,6 +181,8 @@
     <Compile Include="Assets\MED7 folder\Scripts\ButtonManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\CurveManager.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\FocusManager.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\KinectInputModule.cs" />
+    <Compile Include="Assets\MED7 folder\Scripts\KinectUIWaitOverButton.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\Mute.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\PlayVideo.cs" />
     <Compile Include="Assets\MED7 folder\Scripts\RotatingItem.cs" />
