@@ -57,12 +57,14 @@ public class CMCCombPostureNF : MonoBehaviour
                 T_totalAtten = ScalingBetween(T_totalDist, minAtten, maxAtten, T_minDist, T_maxDist);
                 T_totalAttenLogScaled = LogScaling(T_totalAtten);
                 
+
                 P_totalRot = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x);
                 P_totalAtten = ScalingBetween(P_totalRot, minAtten, maxAtten, P_minRot, P_maxRot);
                 P_totalAttenLogScaled = LogScaling(P_totalAtten);
                 
-                C_totalAttenLogScaled = (T_totalAttenLogScaled + P_totalAttenLogScaled) / 2;
+                C_totalAttenLogScaled = (T_totalAttenLogScaled + P_totalAtten) / 2; //!
                 theMixer.SetFloat("Torso_Attenuation", (float)C_totalAttenLogScaled);
+
 
 
                 T_axisZ = CMCScript.hipCenterPos.z - CMCScript.shoulderCenterPos.z;
@@ -74,8 +76,13 @@ public class CMCCombPostureNF : MonoBehaviour
                 C_axisX = T_axisX + P_axisX;
 
                 SettingEqFilterVals(C_axisZ, (P_minRot + T_minAxis), (P_maxRot + T_maxAxis), "Torso_EqFreqGain_00", "Torso_EqFreqGain_01");
-                SettingEqFilterVals(C_axisX, (P_minRot + T_minAxis), (P_maxRot + T_maxAxis), "Torso_EqFreqGain_02", "Torso_EqFreqGain_04");
-             
+                SettingEqFilterVals(C_axisX, (P_minRot + T_minAxis), (P_maxRot + T_maxAxis), "Torso_EqFreqGain_02", "Torso_EqFreqGain_03");
+
+
+                Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAtten + "        CLog: " + C_totalAttenLogScaled);
+
+                //Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAttenLogScaled + "        C: " + C_totalAttenLogScaled);
+
                 //Debug.Log("w: " + CMCScript.hipCenterRot.w + "     x: " + CMCScript.hipCenterRot.x + "     y: " + CMCScript.hipCenterRot.y + "     z: " + CMCScript.hipCenterRot.z);
 
 
