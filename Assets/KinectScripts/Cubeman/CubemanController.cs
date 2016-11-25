@@ -217,6 +217,8 @@ public class CubemanController : MonoBehaviour
                     if (lines[i] == null && skeletonLine != null)
                     {
                         lines[i] = Instantiate((i == 22 || i == 24) && debugLine ? debugLine : skeletonLine) as LineRenderer;
+                        lines[i].gameObject.name = "Line" + i;
+                        //lines[1].SetColors(Color.red, Color.red);
                         lines[i].transform.parent = transform;
                     }
 
