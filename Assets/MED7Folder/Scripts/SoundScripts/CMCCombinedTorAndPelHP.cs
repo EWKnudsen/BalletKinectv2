@@ -41,7 +41,11 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
                 pelvis_dist = Math.Abs(CMCScript.hipLeftPos.y - CMCScript.hipRightPos.y);
                 
                 Combined_dist = (torso_dist + pelvis_dist) / 2;
-                
+
+                //trying to scale 20 : 9750 Hz,  but hard cus its log jo. 
+
+                torso_score = 100 - (float)ScalingBetween(torso_dist, 0, 100, torso_minDist, torso_maxDist);
+
 
                 HPfilterVal = highPassFilterVal(Combined_dist, torso_maxDist, torso_interval, minFreq, maxFreq);
                 theMixer.SetFloat("Torso_CutOffFreqHP", (float)HPfilterVal);
