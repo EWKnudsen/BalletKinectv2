@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/MED7 folder/Scenes/MainScene.unity
+=======
+- path: Assets/MED7Folder/Scenes/MainScene.unity
+>>>>>>> 47ddb5293239d53dfe48a7e36068a1e902b614c3
   isLoaded: 1
   isActive: 1
