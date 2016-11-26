@@ -44,7 +44,6 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 
                 //trying to scale 20 : 9750 Hz,  but hard cus its log jo. 
 
-                torso_score = 100 - (float)ScalingBetween(torso_dist, 0, 100, torso_minDist, torso_maxDist);
 
 
                 HPfilterVal = highPassFilterVal(Combined_dist, torso_maxDist, torso_interval, minFreq, maxFreq);
@@ -66,7 +65,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 
     private double highPassFilterVal(double val, double maxVal, double _interval, double _minFreq, double _maxFreq)
     {
-        return minFreq * Math.Pow((Math.Pow((_maxFreq / _minFreq), (1 / _interval))), (maxVal - val));
+        return _minFreq * Math.Pow((Math.Pow((_maxFreq / _minFreq), (1 / _interval))), (maxVal - val));
     }
 
     protected double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)

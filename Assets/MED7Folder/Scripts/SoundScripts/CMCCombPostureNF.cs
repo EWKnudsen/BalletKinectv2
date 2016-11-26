@@ -60,13 +60,12 @@ public class CMCCombPostureNF : MonoBehaviour
 
                 P_totalRot = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x);
                 P_totalAtten = ScalingBetween(P_totalRot, minAtten, maxAtten, P_minRot, P_maxRot);
-                P_totalAttenLogScaled = LogScaling(P_totalAtten);
+                //P_totalAttenLogScaled = LogScaling(P_totalAtten);
                 
                 C_totalAttenLogScaled = (T_totalAttenLogScaled + P_totalAtten) / 2; //!
                 theMixer.SetFloat("Torso_Attenuation", (float)C_totalAttenLogScaled);
 
-
-
+                
                 T_axisZ = CMCScript.hipCenterPos.z - CMCScript.shoulderCenterPos.z;
                 T_axisX = CMCScript.hipCenterPos.x - CMCScript.shoulderCenterPos.x;
                 P_axisZ = CMCScript.hipCenterRot.z;

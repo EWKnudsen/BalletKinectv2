@@ -69,6 +69,10 @@ public class CubemanController : MonoBehaviour
     public Vector3 hipRightPos;
     public Vector3 shoulderCenterPos;
     public Vector3 neckPos;
+    public Vector3 wristLeftPos;
+    public Vector3 wristRightPos;
+    public Vector3 elbowLeftPos;
+    public Vector3 elbowRightPos;
     public bool hasValues = false;
     ///+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -241,9 +245,14 @@ public class CubemanController : MonoBehaviour
                         hipCenterPos = bones[0].transform.localPosition;
                         hipLeftPos = bones[12].transform.localPosition;
                         hipRightPos = bones[16].transform.localPosition;
-                        shoulderCenterPos = bones[1].transform.localPosition;
                         neckPos = bones[2].transform.localPosition;
-                        
+
+                        shoulderCenterPos = bones[1].transform.localPosition;
+
+                        wristLeftPos = bones[6].transform.localPosition;
+                        wristRightPos = bones[10].transform.localPosition;
+                        elbowLeftPos = bones[5].transform.localPosition;
+                        elbowRightPos = bones[9].transform.localPosition;
 
                         if (!hasValues)
                         {
