@@ -58,10 +58,11 @@ public class CMCCombPostureNF : MonoBehaviour
                 T_totalAttenLogScaled = LogScaling(T_totalAtten);
                 
 
-                P_totalRot = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x);
+                P_totalRot = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x) + Math.Abs(CMCScript.hipCenterRot.x);
                 P_totalAtten = ScalingBetween(P_totalRot, minAtten, maxAtten, P_minRot, P_maxRot);
+                P_totalAttenLogScaled = LogScaling(P_totalAtten);
                 //P_totalAttenLogScaled = LogScaling(P_totalAtten);
-                
+
                 C_totalAttenLogScaled = (T_totalAttenLogScaled + P_totalAtten) / 2; //!
                 theMixer.SetFloat("Torso_Attenuation", (float)C_totalAttenLogScaled);
 
@@ -83,7 +84,7 @@ public class CMCCombPostureNF : MonoBehaviour
                 //Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAttenLogScaled + "        C: " + C_totalAttenLogScaled);
 
                 //Debug.Log("w: " + CMCScript.hipCenterRot.w + "     x: " + CMCScript.hipCenterRot.x + "     y: " + CMCScript.hipCenterRot.y + "     z: " + CMCScript.hipCenterRot.z);
-
+                
 
                 score = maxScore - (float)ScalingBetween((T_totalAtten + P_totalAtten), minScore, maxScore, minAtten, maxAtten);
             }
@@ -129,7 +130,7 @@ public class CMCCombPostureNF : MonoBehaviour
     private double LogScaling(double unscaledVal)
     {
         double hepson = (70 * Math.Log10((unscaledVal / 2) + 42)) - 80;
-        return hepson + 15;
+        return hepson; //+ 15
     }
 
 

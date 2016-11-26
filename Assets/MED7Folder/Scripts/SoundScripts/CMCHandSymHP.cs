@@ -7,11 +7,11 @@ public class CMCHandSymHP : MonoBehaviour
     public AudioMixer theMixer;
     public CubemanController CMCScript;
     public float score, wristScore, elbowScore;
-    float minScore = 0, maxScore = 100;
+    //float minScore = 0, maxScore = 100;
     double HPfilterVal;
 
-    double minAtten = -80;
-    double maxAtten = 0;
+    //double minAtten = -80;
+    //double maxAtten = 0;
     bool isAttenReset = false;
 
     double minFreq = 20;
@@ -92,17 +92,19 @@ public class CMCHandSymHP : MonoBehaviour
                 W_axisYVar_HPfilterVal = highPassFilterVal(W_axisYVar, maxDist, interval, minFreq, maxFreq);
                 E_axisYVar_HPfilterVal = highPassFilterVal(E_axisYVar, maxDist, interval, minFreq, maxFreq);
 
-                Combined_HPfilterVal = (W_DistVar_HPfilterVal + E_DistVar_HPfilterVal + W_axisZVar_HPfilterVal + W_axisYVar_HPfilterVal + E_axisYVar_HPfilterVal) / 6;
+                double W_Comb = (W_DistVar + W_axisZVar + W_axisYVar) / 3;
+                double E_Comb = (E_DistVar + E_axisZVar + E_axisYVar) / 3;
+
+                Combined_HPfilterVal = (W_DistVar_HPfilterVal + E_DistVar_HPfilterVal + W_axisZVar_HPfilterVal + W_axisYVar_HPfilterVal + E_axisZVar_HPfilterVal + E_axisYVar_HPfilterVal) / 6;
                 
                 Debug.Log("Combined_HPfilterVal: " + Combined_HPfilterVal);
 
                 theMixer.SetFloat("Torso_CutOffFreqHP", (float)Combined_HPfilterVal);
 
-                //wristScore = 100 - ScalingBetween(!!!!hep, 0, 100, !!!!!minOld, !!!!!maxOld);
 
-                //elbowScore = 100 - ScalingBetween(!!!!hep, 0, 100, !!!!!minOld, !!!!!maxOld);
-
-                //score = (wristScore + elbowScore) / 2;
+                wristScore = (float) ScalingBetween(W_Comb, 0, 100, minDist, maxDist);
+                elbowScore = (float)ScalingBetween(E_Comb, 0, 100, minDist, maxDist);
+                score = (wristScore + elbowScore) / 2;
             }
         }
     }

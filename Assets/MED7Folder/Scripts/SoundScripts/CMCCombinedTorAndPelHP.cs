@@ -39,19 +39,18 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
                 torso_dist = CalXZdist(CMCScript.hipCenterPos, CMCScript.shoulderCenterPos);
                 
                 pelvis_dist = Math.Abs(CMCScript.hipLeftPos.y - CMCScript.hipRightPos.y);
+
+                double P_total = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x) + pelvis_dist;
+
+                Combined_dist = (torso_dist + P_total) / 3;
                 
-                Combined_dist = (torso_dist + pelvis_dist) / 2;
-
-                //trying to scale 20 : 9750 Hz,  but hard cus its log jo. 
-
-
-
                 HPfilterVal = highPassFilterVal(Combined_dist, torso_maxDist, torso_interval, minFreq, maxFreq);
+                
                 theMixer.SetFloat("Torso_CutOffFreqHP", (float)HPfilterVal);
                 
 
                 torso_score = 100 - (float)ScalingBetween(torso_dist, 0, 100, torso_minDist, torso_maxDist);
-                pelvis_score = 100 - (float)ScalingBetween(pelvis_dist, 0, 100, pelvis_minDist, pelvis_maxDist);
+                pelvis_score = 100 - (float)ScalingBetween(P_total, 0, 100, pelvis_minDist, pelvis_maxDist);
                 score = (torso_score + pelvis_score) / 2;
                
             }
@@ -66,6 +65,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     private double highPassFilterVal(double val, double maxVal, double _interval, double _minFreq, double _maxFreq)
     {
         return _minFreq * Math.Pow((Math.Pow((_maxFreq / _minFreq), (1 / _interval))), (maxVal - val));
+        //max min remember
     }
 
     protected double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
