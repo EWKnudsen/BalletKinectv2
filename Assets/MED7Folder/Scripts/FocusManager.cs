@@ -44,10 +44,9 @@ public class FocusManager : MonoBehaviour {
 
 		if (SceneManager.GetActiveScene().name == "GameOver" && sceneChanged) {
 
-			Instantiate(prefab);
+			prefab = (GameObject) Instantiate(Resources.Load ("KinectControllerCursor"));
 
 			sceneChanged = false;
-
 		}
 	}
 
