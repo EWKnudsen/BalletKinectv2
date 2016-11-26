@@ -27,9 +27,7 @@ public class FocusManager : MonoBehaviour {
 			}
 				
 			CMCCombinedTorAndPelHP postureScript = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
-
-			// CHANGE THIS FOR HANDS SCRIPT:
-			CMCTorsoHP symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCTorsoHP>();
+			CMCHandSymHP symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
 
 			postureScript.enabled = false;
 			symmetryScript.enabled = false;

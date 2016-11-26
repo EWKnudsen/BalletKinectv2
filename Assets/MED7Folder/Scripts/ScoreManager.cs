@@ -5,7 +5,9 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour {
 
-	public CMCTorsoNotchAtten cubemanScript;
+	public CMCCombinedTorAndPelHP postureScriptHP;
+	public CMCCombPostureNF postureScriptNF;
+	public CMCHandSymHP symmetryScript;
 	public float score;
 	public float scoreTemp;
 	private int counter;
@@ -20,15 +22,23 @@ public class ScoreManager : MonoBehaviour {
 	void Start () {
 		sceneChanged = false;
 		scene = SceneManager.GetActiveScene();
-		cubemanScript = GameObject.Find ("FilterController").GetComponent<CMCTorsoNotchAtten> ();
-		if (cubemanScript != null) {
+		postureScriptHP = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
+		postureScriptNF = GameObject.Find ("FilterController").GetComponent<CMCCombPostureNF>();
+		symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
+		if (GameObject.Find("FilterController") != null) {
 			StartCoroutine("CalculateAverage");
 		}
 	}
 
 	void Update () {
-		if (cubemanScript != null) {
-			score = cubemanScript.score;
+		if (GameObject.Find("FilterController") != null) {
+			if (postureScriptHP.enabled) {
+				score = postureScriptHP.score;
+			} else if (postureScriptNF.enabled) {
+				score = postureScriptNF.score;
+			} else if (symmetryScript.enabled) {
+				score = symmetryScript.score;
+			}
 		}
 		if (scene.name != "MainScene" && sceneChanged == false) {
 			StopCoroutine("CalculateAverage");
