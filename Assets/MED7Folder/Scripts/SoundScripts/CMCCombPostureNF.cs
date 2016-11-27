@@ -6,7 +6,7 @@ public class CMCCombPostureNF : MonoBehaviour
 {
     public AudioMixer theMixer;
     public CubemanController CMCScript;
-    public float score; 
+    public float score, torso_score, pelvis_score; 
     float minScore = 0, maxScore = 100;
 
     double T_distHipShoulder, T_distShoulderNeck;
@@ -27,8 +27,9 @@ public class CMCCombPostureNF : MonoBehaviour
     static double T_minAxis = 0.02;
     static double T_maxAxis = 0.20;
 
-    static double P_minRot = 0.002;
-    static double P_maxRot = 0.08;
+
+    static double P_minRot = 0.004;
+    static double P_maxRot = 0.10;
 
 
 
@@ -78,13 +79,15 @@ public class CMCCombPostureNF : MonoBehaviour
                 SettingEqFilterVals(C_axisZ, (P_minRot + T_minAxis), (P_maxRot + T_maxAxis), "Torso_EqFreqGain_00", "Torso_EqFreqGain_01");
                 SettingEqFilterVals(C_axisX, (P_minRot + T_minAxis), (P_maxRot + T_maxAxis), "Torso_EqFreqGain_02", "Torso_EqFreqGain_03");
 
-
-                Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAtten + "        CLog: " + C_totalAttenLogScaled);
+                
+                //Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAtten + "        CLog: " + C_totalAttenLogScaled);
 
                 //Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAttenLogScaled + "        C: " + C_totalAttenLogScaled);
 
                 //Debug.Log("w: " + CMCScript.hipCenterRot.w + "     x: " + CMCScript.hipCenterRot.x + "     y: " + CMCScript.hipCenterRot.y + "     z: " + CMCScript.hipCenterRot.z);
-                
+
+                torso_score = 100 - (float)ScalingBetween(T_totalDist, 0, 100, T_minDist, T_maxDist);
+                pelvis_score = 100 - (float)ScalingBetween(P_totalRot, 0, 100, P_minRot, P_maxRot);
 
                 score = maxScore - (float)ScalingBetween((T_totalAtten + P_totalAtten), minScore, maxScore, minAtten, maxAtten);
             }
