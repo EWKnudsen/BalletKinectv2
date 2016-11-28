@@ -73,6 +73,7 @@ public class CubemanController : MonoBehaviour
     public Vector3 wristRightPos;
     public Vector3 elbowLeftPos;
     public Vector3 elbowRightPos;
+
     public bool hasValues = false;
     ///+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -132,7 +133,7 @@ public class CubemanController : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         KinectManager manager = KinectManager.Instance;
 
@@ -241,20 +242,20 @@ public class CubemanController : MonoBehaviour
                     }
 
                     ///MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                    if (i == 0)
+                    if (i == bones.Length-1)
                     {
                         hipCenterRot = bones[0].transform.rotation;
-                        hipCenterPos = bones[0].transform.localPosition;
-                        hipLeftPos = bones[12].transform.localPosition;
-                        hipRightPos = bones[16].transform.localPosition;
-                        neckPos = bones[2].transform.localPosition;
+                        hipCenterPos = bones[0].transform.position;
+                        hipLeftPos = bones[12].transform.position;
+                        hipRightPos = bones[16].transform.position;
+                        neckPos = bones[2].transform.position;
 
-                        shoulderCenterPos = bones[1].transform.localPosition;
+                        shoulderCenterPos = bones[1].transform.position;
 
-                        wristLeftPos = bones[6].transform.localPosition;
-                        wristRightPos = bones[10].transform.localPosition;
-                        elbowLeftPos = bones[5].transform.localPosition;
-                        elbowRightPos = bones[9].transform.localPosition;
+                        wristLeftPos = bones[6].transform.position;
+                        wristRightPos = bones[10].transform.position;
+                        elbowLeftPos = bones[5].transform.position;
+                        elbowRightPos = bones[9].transform.position;
 
                         if (!hasValues)
                         {
@@ -262,8 +263,6 @@ public class CubemanController : MonoBehaviour
                         }
                     }
                     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
                 }
                 else
                 {

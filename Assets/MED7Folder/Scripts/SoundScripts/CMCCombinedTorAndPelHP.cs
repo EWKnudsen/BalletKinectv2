@@ -78,6 +78,5 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 
         return val;
     }
-
-
+    
 }
