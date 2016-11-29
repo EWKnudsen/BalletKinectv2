@@ -113,11 +113,6 @@ public class CMCCombPostureNF : MonoBehaviour
         return Math.Sqrt(Math.Pow((double)vecB.x - vecA.x, 2) + Math.Pow((double)vecB.z - vecA.z, 2));
     }
 
-    private double CalRotDisalignment(Quaternion pointA)
-    {
-        return 2; //figure out how to
-    }
-
     private double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
     {
         double val = (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;

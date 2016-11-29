@@ -35,13 +35,13 @@ public class CMCRythm : MonoBehaviour
                 currentHipPos = CMCScript.hipCenterPos;
                 hipVelAxisY = (currentHipPos.y - last_HipPos.y);
                 
-
                 if (hipVelAxisY > 0 || hipVelAxisY < 0)
                 {
                     if (hipVelAxisY > 0)
                         hipVelAxisY_Scaled = (float)ScalingBetween(hipVelAxisY, 0, 100, 0.0007, 0.04);
                     else if (hipVelAxisY < 0)
                         hipVelAxisY_Scaled = -(float)ScalingBetween(-hipVelAxisY, 0, 100, 0.0007, 0.04);
+                    
 
                     //Debug.Log("vel: " + hipVelAxisY_Scaled);
 
