@@ -7,13 +7,14 @@ public class PlayVideo : MonoBehaviour {
 
 	public MovieTexture movie;
 	public float videoDuration;
+	public float videoStartTime;
 	private bool moviePlayed;
-	public float warmUpTime = 3.2f;
+	public float delay = 0.8f;
 	private int i;
 
 	// Use this for initialization
 	void Awake() {
-		videoDuration = movie.duration;
+		videoDuration = movie.duration+delay;
 	}
 
 	void Start () {
@@ -37,12 +38,14 @@ public class PlayVideo : MonoBehaviour {
 	}
 
 	private IEnumerator WarmUpSession() {
-		yield return new WaitForSeconds(warmUpTime);
+		yield return new WaitForSeconds(delay);
 		movie.Play();
+		videoStartTime = Time.timeSinceLevelLoad;
+		Debug.Log (videoStartTime);
 	}
 
 	private IEnumerator MovieEnded() {
-		yield return new WaitForSeconds(videoDuration+warmUpTime);
+		yield return new WaitForSeconds(videoDuration);
 		SceneManager.LoadScene ("GameOver");
 	}
 }
