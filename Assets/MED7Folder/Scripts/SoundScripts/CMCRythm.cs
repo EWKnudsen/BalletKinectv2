@@ -34,21 +34,21 @@ public class CMCRythm : MonoBehaviour
                 hipVelAxisY = (currentHipPos.y - last_HipPos.y);
                 
 
-                if (hipVelAxisY > 0)
+                if (hipVelAxisY > 0 || hipVelAxisY < 0)
                 {
-                    hipVelAxisY_Scaled = (float) ScalingBetween(hipVelAxisY, 0, 100, 0.0007, 0.04);
+                    if (hipVelAxisY > 0)
+                        hipVelAxisY_Scaled = (float)ScalingBetween(hipVelAxisY, 0, 100, 0.0007, 0.04);
+                    else if (hipVelAxisY < 0)
+                        hipVelAxisY_Scaled = -(float)ScalingBetween(-hipVelAxisY, 0, 100, 0.0007, 0.04);
 
-                    Debug.Log("score: " + score + "      vel: " + hipVelAxisY_Scaled + "     curr: " + currentHipPos + "       last: " + last_HipPos);
+                    Debug.Log("vel: " + hipVelAxisY_Scaled);
+                    //Debug.Log("score: " + score + "      vel: " + hipVelAxisY_Scaled + "     curr: " + currentHipPos + "       last: " + last_HipPos);
 
                     //To Malte: make code in here
                     //...
                     //...
 
                 }
-                //Debug.Log("vel: " + hip_Velocity + "        axisY: " + axisY + "     curr: " + currentHipPos + "       last: " + last_HipPos + "       lastX: " + CMCScript.wristLeftPos.x);
-
-
-
                 last_HipPos = currentHipPos;
 
                 /* test

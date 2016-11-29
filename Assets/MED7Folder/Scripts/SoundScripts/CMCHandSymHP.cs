@@ -97,7 +97,7 @@ public class CMCHandSymHP : MonoBehaviour
 
                 Combined_HPfilterVal = (W_DistVar_HPfilterVal + E_DistVar_HPfilterVal + W_axisZVar_HPfilterVal + W_axisYVar_HPfilterVal + E_axisZVar_HPfilterVal + E_axisYVar_HPfilterVal) / 6;
                 
-                Debug.Log("Combined_HPfilterVal: " + Combined_HPfilterVal);
+                //Debug.Log("Combined_HPfilterVal: " + Combined_HPfilterVal);
 
                 theMixer.SetFloat("Torso_CutOffFreqHP", (float)Combined_HPfilterVal);
 

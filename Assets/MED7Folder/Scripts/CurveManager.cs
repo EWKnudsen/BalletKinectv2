@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class CurveManager : MonoBehaviour {
 
 	public CMCCombinedTorAndPelHP postureScriptHP;
-	public CMCCombPostureNF postureScriptNF;
 	public CMCHandSymHP symmetryScript;
 	public float score;
 	private ParticleSystem ps;
@@ -15,7 +14,6 @@ public class CurveManager : MonoBehaviour {
 
 	void Start () {
 		postureScriptHP = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
-		postureScriptNF = GameObject.Find ("FilterController").GetComponent<CMCCombPostureNF>();
 		symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
 		ps = transform.gameObject.GetComponent<ParticleSystem> ();
 		pos = transform.position;
@@ -30,9 +28,7 @@ public class CurveManager : MonoBehaviour {
 		float yMin = 0.6f;
 		if (postureScriptHP.enabled) {
 			score = postureScriptHP.score;
-		} else if (postureScriptNF.enabled) {
-			score = postureScriptNF.score;
-		} else if (symmetryScript.enabled) {
+		}  else if (symmetryScript.enabled) {
 			score = symmetryScript.score;
 		}
 		ratio = score/100;

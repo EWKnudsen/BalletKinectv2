@@ -7,7 +7,6 @@ using System.IO;
 public class ScoreManager : MonoBehaviour {
 
 	public CMCCombinedTorAndPelHP postureScriptHP;
-	public CMCCombPostureNF postureScriptNF;
 	public CMCHandSymHP symmetryScript;
 	public float score;
 	public float scoreTemp;
@@ -28,7 +27,6 @@ public class ScoreManager : MonoBehaviour {
 		sceneChanged = false;
 		scene = SceneManager.GetActiveScene();
 		postureScriptHP = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
-		postureScriptNF = GameObject.Find ("FilterController").GetComponent<CMCCombPostureNF>();
 		symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
 		if (GameObject.Find("FilterController") != null) {
 			StartCoroutine("CalculateAverage");
@@ -36,12 +34,10 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void Update () {
-		if (GameObject.Find("FilterController") != null) {
+        if (GameObject.Find("FilterController") != null) {
 			if (postureScriptHP.enabled) {
 				score = postureScriptHP.score;
-			} else if (postureScriptNF.enabled) {
-				score = postureScriptNF.score;
-			} else if (symmetryScript.enabled) {
+			}  else if (symmetryScript.enabled) {
 				score = symmetryScript.score;
 			}
 		}

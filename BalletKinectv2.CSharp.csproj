@@ -185,6 +185,7 @@
     <Compile Include="Assets\MED7Folder\Scripts\KinectUIWaitOverButton.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\LineChanger.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\Metronome.cs" />
+    <Compile Include="Assets\MED7Folder\Scripts\Music.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\Mute.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\PlayVideo.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\RotatingItem.cs" />
@@ -208,6 +209,7 @@
     <None Include="Assets\KinectDemos\BackgroundRemovalDemo\Resources\ForegroundBlendShader.shader" />
     <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
     <None Include="Assets\KinectDemos\RecorderDemo\Resources\PlayerGrammar.grxml.txt" />
+    <None Include="Assets\MED7Folder\Txtfiles\StreamWriterTest.txt" />
     <None Include="Assets\Resources\BlurShader.shader" />
     <None Include="Assets\Resources\BlurShader2.shader" />
     <None Include="Assets\Resources\BlurShader3.shader" />
