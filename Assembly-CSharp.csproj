@@ -155,6 +155,7 @@
      <Compile Include="Assets\MED7Folder\Scripts\KinectUIWaitOverButton.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\LineChanger.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\Metronome.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\Music.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\Mute.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\PlayVideo.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\RotatingItem.cs" />
@@ -173,6 +174,7 @@
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCyAxisHipAlignmentDistLP.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\UIManager.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />
+     <None Include="Assets\MED7Folder\Txtfiles\StreamWriterTest.txt" />
      <None Include="Assets\Resources\DepthShader.shader" />
      <None Include="Assets\Resources\SpeechGrammar.grxml.txt" />
      <None Include="Assets\Resources\BlurShader3.shader" />
@@ -188,11 +190,11 @@
      <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
      <None Include="Assets\Resources\Color2BodyShader.shader" />
      <None Include="Assets\Resources\BlurShader4.shader" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="LZ4Sharp">
  <HintPath>/Users/malteholledig/Documents/MED7/BalletKinectv2/Assets/KinectScripts/LZ4Sharp/LZ4Sharp.dll</HintPath>

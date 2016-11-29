@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/MED7Folder/Scenes/MainScene.unity
+- path: Assets/MainSceneMalte.unity
   isLoaded: 1
   isActive: 1
