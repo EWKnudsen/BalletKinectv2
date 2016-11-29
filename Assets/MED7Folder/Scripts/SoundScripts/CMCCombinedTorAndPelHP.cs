@@ -74,7 +74,6 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     private double highPassFilterVal(double val, double _maxVal, double _interval, double _minFreq, double _maxFreq)
     {
         return _minFreq * Math.Pow((Math.Pow((_maxFreq / _minFreq), (1 / _interval))), (_maxVal - val));
-        //max min remember
     }
 
     protected double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
@@ -83,7 +82,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 
         if (val < minNew)
             val = minNew;
-        else if (val > maxNew)
+        if (val > maxNew)
             val = maxNew;
 
         return val;

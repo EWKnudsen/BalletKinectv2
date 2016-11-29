@@ -16,7 +16,11 @@ public class CMCRythm : MonoBehaviour
 
     double lasthep;
     double hepfirst, hepafstand;
-    
+
+    int counter = 0;
+    double hep;
+
+    float TimeT;
 
     void Start()
     {
@@ -41,13 +45,44 @@ public class CMCRythm : MonoBehaviour
                         hipVelAxisY_Scaled = (float)ScalingBetween(hipVelAxisY, 0, 100, 0.0007, 0.04);
                     else if (hipVelAxisY < 0)
                         hipVelAxisY_Scaled = -(float)ScalingBetween(-hipVelAxisY, 0, 100, 0.0007, 0.04);
+
+
+                    hep += hipVelAxisY_Scaled;
+
+                    //if delta.time % 6 ==  0  
+
+                    if (counter % 4 == 0)
+                    {
+                        hep /= 4;
+
+                        if (hep < 1 && hep > -1 && metronomeScript.beat == 6)
+                        {
+                            //Debug.Log("PLAY NICE SOUND");
+                        }
+
+                        //Debug.Log("Counter: " + counter + "        hep: " + hep);
+
+                        hep = 0;
+                    }
+                    counter++;
+
+
+                    ///*
+                    TimeT += Time.deltaTime * 100;
+
                     
+                    if (Math.Abs(TimeT) % 100 == 0)
+                    {
+                        Debug.Log("tick yo!");
+                    }
+                    //*/
+
+
+
 
                     //Debug.Log("vel: " + hipVelAxisY_Scaled);
 
-					if (hipVelAxisY < 3 && hipVelAxisY > -3 && metronomeScript.beat == 6) {
-						Debug.Log ("PLAY NICE SOUND");
-					}  
+
 
                     //Debug.Log("score: " + score + "      vel: " + hipVelAxisY_Scaled + "     curr: " + currentHipPos + "       last: " + last_HipPos);
 
@@ -75,7 +110,7 @@ public class CMCRythm : MonoBehaviour
 
         if (val < minNew)
             val = minNew;
-        else if (val > maxNew)
+        if (val > maxNew)
             val = maxNew;
 
         return val;
