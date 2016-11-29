@@ -15,14 +15,16 @@ public class CMCTorsoHP : MonoBehaviour
     public AudioMixer theMixer;
     public CubemanController CMCScript;
     public float score;
-    double dist;
-    
+    double dist, distForTracking;
+
     //range has been obtained by trail and error, you can change values to tune it. REMEMBER OLD VALUES
     static double minDist = 0.006; //0f
     static double maxDist = 0.11; //0.125f
     double interval = (maxDist - minDist);
     double minFreq = 20;
     double maxFreq = 22000;
+
+
 
     void Start()
     {
@@ -37,6 +39,9 @@ public class CMCTorsoHP : MonoBehaviour
             if (CMCScript.hasValues)
             {
                 dist = CalXZdist(CMCScript.hipCenterPos, CMCScript.shoulderCenterPos);
+
+                distForTracking = dist; //To Malte: use this for file value. 
+
                 
                 if (dist > maxDist)
                     dist = maxDist;
