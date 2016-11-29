@@ -184,6 +184,7 @@
     <Compile Include="Assets\MED7Folder\Scripts\KinectInputModule.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\KinectUIWaitOverButton.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\LineChanger.cs" />
+    <Compile Include="Assets\MED7Folder\Scripts\Metronome.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\Mute.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\PlayVideo.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\RotatingItem.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCHandSymHP.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCPelvisHP.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCPelvisNotchAtten.cs" />
+    <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCRythm.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCTorsoHP.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCTorsoNotchAtten.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCfilterRESETTER.cs" />
