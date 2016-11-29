@@ -165,6 +165,7 @@
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCHandSymHP.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCPelvisHP.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCPelvisNotchAtten.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCRythm.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCTorsoHP.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCTorsoNotchAtten.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\CMCfilterRESETTER.cs" />
