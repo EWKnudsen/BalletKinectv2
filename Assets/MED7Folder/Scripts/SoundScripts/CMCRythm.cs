@@ -6,6 +6,7 @@ public class CMCRythm : MonoBehaviour
 {
     public AudioMixer theMixer;
     public CubemanController CMCScript;
+	public Metronome metronomeScript;
     public float score;
     float minScore = 0, maxScore = 100;
 
@@ -20,6 +21,7 @@ public class CMCRythm : MonoBehaviour
     void Start()
     {
         CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
+		metronomeScript =  GameObject.Find("Metronome").GetComponent<Metronome>();
     }
 
 
@@ -41,7 +43,12 @@ public class CMCRythm : MonoBehaviour
                         hipVelAxisY_Scaled = -(float)ScalingBetween(-hipVelAxisY, 0, 100, 0.0007, 0.04);
                     
 
-                    Debug.Log("vel: " + hipVelAxisY_Scaled);
+                    //Debug.Log("vel: " + hipVelAxisY_Scaled);
+
+					if (hipVelAxisY < 3 && hipVelAxisY > -3 && metronomeScript.beat == 6) {
+						Debug.Log ("PLAY NICE SOUND");
+					}  
+
                     //Debug.Log("score: " + score + "      vel: " + hipVelAxisY_Scaled + "     curr: " + currentHipPos + "       last: " + last_HipPos);
 
                     //To Malte: make code in here
