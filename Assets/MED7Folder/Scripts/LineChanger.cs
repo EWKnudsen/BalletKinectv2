@@ -9,7 +9,7 @@ public class LineChanger : MonoBehaviour {
 
     public CubemanController cubeman;
 
-	public float colorChangeThreshold = 80;
+	float colorChangeThreshold = 60;
 
     private bool foundPlayer = false;
 
@@ -72,4 +72,18 @@ public class LineChanger : MonoBehaviour {
 			}
         }
 	}
+
+
+    private double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
+    {
+        double val = (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
+
+        if (val < minNew)
+            val = minNew;
+        if (val > maxNew)
+            val = maxNew;
+
+        return val;
+    }
+
 }

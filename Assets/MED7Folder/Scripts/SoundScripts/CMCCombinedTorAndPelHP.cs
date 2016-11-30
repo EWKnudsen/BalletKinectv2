@@ -17,17 +17,15 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     double minFreq = 20;
     double maxFreq = 22000;
 
-    static double T_minDist = 0.006; //0f
-    static double T_maxDist = 0.11; //0.125f
+    static double T_minDist = 0.0085; //0.008f
+    static double T_maxDist = 0.125; //0.125f
     double interval = (T_maxDist - T_minDist);
 
-    //missing: 
-    static double P_minRot = 0;
-    static double P_maxRot = 0;
-    //static double pelvis_minDist = 0.006; //0f
-    //static double pelvis_maxDist = 0.03;  //0.125f
+    static double P_minRot = 0.063;
+    static double P_maxRot = 0.31;
 
-	StreamWriter writer;
+
+    StreamWriter writer;
 	public PlayVideo video;
 
 
@@ -59,7 +57,9 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 				P_totalRot = Math.Abs (CMCScript.hipCenterRot.x) + Math.Abs (CMCScript.hipCenterRot.y) + Math.Abs (CMCScript.hipCenterRot.z);
 				P_totalRotScaled = ScalingBetween (P_totalRot, 0, 100, P_minRot, P_maxRot);
 
-				C_totalComb = (T_totalDist + P_totalRot) / 2;
+                Debug.Log("T: " + T_totalDist + "TS: " + T_totalDistScaled + "R: " + P_totalRot + "RS: " + P_totalRotScaled);
+
+				C_totalComb = (T_totalDistScaled + P_totalRotScaled) / 2;
 				C_HPfilterVal = highPassFilterVal (C_totalComb, (100 * 2), interval, minFreq, maxFreq);
 				theMixer.SetFloat ("Torso_CutOffFreqHP", (float)C_HPfilterVal);
 

@@ -113,6 +113,7 @@
     <None Include="Assets\KinectDemos\BackgroundRemovalDemo\Resources\ForegroundBlendShader.shader" />
     <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
     <None Include="Assets\KinectDemos\RecorderDemo\Resources\PlayerGrammar.grxml.txt" />
+    <None Include="Assets\MED7Folder\Txtfiles\MPCTest.txt" />
     <None Include="Assets\MED7Folder\Txtfiles\StreamWriterTest.txt" />
     <None Include="Assets\Resources\BlurShader.shader" />
     <None Include="Assets\Resources\BlurShader2.shader" />
