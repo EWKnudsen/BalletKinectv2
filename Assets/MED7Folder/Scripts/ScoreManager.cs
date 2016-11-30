@@ -14,16 +14,14 @@ public class ScoreManager : MonoBehaviour {
 	private Scene scene;
 	private bool sceneChanged;
 
-	StreamWriter writer;
-
 
 	void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
 	}
 
 	void Start () {
-		writer = new StreamWriter("Assets/MED7Folder/Txtfiles/StreamWriterTest.txt", true);
-		writer.WriteLine("New score data:");
+		//writer = new StreamWriter("Assets/MED7Folder/Txtfiles/StreamWriterTest.txt", true);
+		//writer.WriteLine("New score data:");
 		sceneChanged = false;
 		scene = SceneManager.GetActiveScene();
 		postureScriptHP = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
@@ -43,7 +41,7 @@ public class ScoreManager : MonoBehaviour {
 		}
 		if (scene.name != "MainScene" && sceneChanged == false) {
 			StopCoroutine("CalculateAverage");
-			writer.Close();
+			//writer.Close();
 			score = scoreTemp/counter;
 			AssignScore ();
 		}
@@ -67,7 +65,7 @@ public class ScoreManager : MonoBehaviour {
 
 	IEnumerator CalculateAverage() {
 		scoreTemp = scoreTemp + score;
-		writer.WriteLine(score);
+		//writer.WriteLine(score);
 		counter++;
 		yield return new WaitForSeconds(1);
 		StartCoroutine("CalculateAverage");

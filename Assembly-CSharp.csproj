@@ -181,6 +181,7 @@
      <None Include="Assets\Resources\BlurShader3.shader" />
      <None Include="Assets\Resources\Color2DepthShader.shader" />
      <None Include="Assets\Resources\BlurShader2.shader" />
+     <None Include="Assets\MED7Folder\Txtfiles\MPCTest.txt" />
      <None Include="Assets\KinectDemos\BackgroundRemovalDemo\Resources\ForegroundBlendShader.shader" />
      <None Include="Assets\KinectDemos\RecorderDemo\Resources\PlayerGrammar.grxml.txt" />
      <None Include="Assets\Resources\Depth2ColorShader.shader" />

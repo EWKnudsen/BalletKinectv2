@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -26,44 +27,56 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     //static double pelvis_minDist = 0.006; //0f
     //static double pelvis_maxDist = 0.03;  //0.125f
 
+	StreamWriter writer;
+	public PlayVideo video;
+
 
     void Start()
     {
         CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
+		video = GameObject.Find("Video").GetComponent<PlayVideo>();
+		writer = new StreamWriter("Assets/MED7Folder/Txtfiles/MPCTest.txt", true);
+		writer.WriteLine("New score data:");
     }
 
 
     void Update()
     {
-        if (CMCScript != null)
-        {
-            if (CMCScript.hasValues)
-            {
-                /*
+		if (CMCScript != null) {
+			if (CMCScript.hasValues) {
+				/*
                 torso_dist = CalXZdist(CMCScript.hipCenterPos, CMCScript.shoulderCenterPos);
                 pelvis_dist = Math.Abs(CMCScript.hipLeftPos.y - CMCScript.hipRightPos.y);
                 double P_total = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x) + pelvis_dist;
                 Combined_dist = (torso_dist + P_total) / 3;
                 */
 
-                T_distHipShoulder = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.hipCenterPos);
-                T_distShoulderNeck = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.neckPos);
-                T_totalDist = T_distHipShoulder + T_distShoulderNeck;
-                T_totalDistScaled = ScalingBetween(T_totalDist, 0, 100, T_minDist, T_maxDist);
+				T_distHipShoulder = CalXZdist (CMCScript.shoulderCenterPos, CMCScript.hipCenterPos);
+				T_distShoulderNeck = CalXZdist (CMCScript.shoulderCenterPos, CMCScript.neckPos);
+				T_totalDist = T_distHipShoulder + T_distShoulderNeck;
+				T_totalDistScaled = ScalingBetween (T_totalDist, 0, 100, T_minDist, T_maxDist);
 
-                P_totalRot = Math.Abs(CMCScript.hipCenterRot.x) + Math.Abs(CMCScript.hipCenterRot.y) + Math.Abs(CMCScript.hipCenterRot.z);
-                P_totalRotScaled = ScalingBetween(P_totalRot, 0, 100, P_minRot, P_maxRot);
+				P_totalRot = Math.Abs (CMCScript.hipCenterRot.x) + Math.Abs (CMCScript.hipCenterRot.y) + Math.Abs (CMCScript.hipCenterRot.z);
+				P_totalRotScaled = ScalingBetween (P_totalRot, 0, 100, P_minRot, P_maxRot);
 
-                C_totalComb = (T_totalDist + P_totalRot) / 2;
-                C_HPfilterVal = highPassFilterVal(C_totalComb, (100*2), interval, minFreq, maxFreq);
-                theMixer.SetFloat("Torso_CutOffFreqHP", (float)C_HPfilterVal);
+				C_totalComb = (T_totalDist + P_totalRot) / 2;
+				C_HPfilterVal = highPassFilterVal (C_totalComb, (100 * 2), interval, minFreq, maxFreq);
+				theMixer.SetFloat ("Torso_CutOffFreqHP", (float)C_HPfilterVal);
 
 
-                torso_score  = 100 - (float)T_totalDistScaled;
-                pelvis_score = 100 - (float)P_totalRotScaled;
-                score = 100 - (float)C_totalComb;
-            }
-        }
+				torso_score = 100 - (float)T_totalDistScaled;
+				pelvis_score = 100 - (float)P_totalRotScaled;
+				score = 100 - (float)C_totalComb;
+
+				if (writer.BaseStream != null) {
+					writer.WriteLine (C_totalComb);
+				}
+
+				if (Time.time > video.movie.duration - 0.5f) {
+					writer.Close();
+				}
+			}
+		} 
     }
 
     private double CalXZdist(Vector3 vecA, Vector3 vecB)

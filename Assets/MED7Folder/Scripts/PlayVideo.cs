@@ -26,7 +26,7 @@ public class PlayVideo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// This is in order to freeze the first frame while warm-up session is ongoing
+		// This is in order to freeze the first frame while delay is ongoing
 		i++;
 		if (i==2) {
 			movie.Pause();

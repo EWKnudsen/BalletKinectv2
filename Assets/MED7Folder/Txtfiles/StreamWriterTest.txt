@@ -146,3 +146,5 @@ New score data:
 100
 100
 100
+New score data:
+0
