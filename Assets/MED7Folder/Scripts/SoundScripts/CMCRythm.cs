@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -13,14 +14,19 @@ public class CMCRythm : MonoBehaviour
     Vector3 last_HipPos, currentHipPos;
     double hipVelAxisY, hipVelAxisY_Scaled;
 
-
-    double lasthep;
-    double hepfirst, hepafstand;
-
     int counter = 0;
-    double hep;
+    float timescaled;
+    //float[] tickTimes = new float[6] { 1380, 1770, 2310, 2960, 3316, 3850 }; //maltes values
+    float[] tickTimes = new float[6] { 1400, 1818, 2370, 3030, 3380, 3890 };
+    float timeInterval = 30;
+    double bendInterval = 0.0007 + 0.0013;
+    float tickDuration = 4f;
 
-    float TimeT;
+    public float LerpingGainMetroVal;
+
+    bool outOfsync = false;
+    float timeStramp;
+
 
     void Start()
     {
@@ -31,11 +37,23 @@ public class CMCRythm : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log("Lerp: " + LerpingGainMetroVal + "    timeStramp: " + timeStramp + "    Time.time: " + Time.time);
+        hipVelAxisY_Scaled = bendInterval * 2; //for testing
+        
+        if (outOfsync)
+        {
+            LerpingGainMetroVal = Mathf.Lerp(0.6f, 0f, (Time.time - timeStramp)/4);
+            metronomeScript.gain = LerpingGainMetroVal;
+
+            if (tickDuration < (Time.time - timeStramp)) //tickDuration must be smaller than our lerp
+                outOfsync = false;
+        }
+        
+
         if (CMCScript != null)
         {
             if (CMCScript.hasValues)
             {
-
                 currentHipPos = CMCScript.hipCenterPos;
                 hipVelAxisY = (currentHipPos.y - last_HipPos.y);
                 
@@ -46,64 +64,22 @@ public class CMCRythm : MonoBehaviour
                     else if (hipVelAxisY < 0)
                         hipVelAxisY_Scaled = -(float)ScalingBetween(-hipVelAxisY, 0, 100, 0.0007, 0.04);
 
-
-                    hep += hipVelAxisY_Scaled;
-
-                    //if delta.time % 6 ==  0  
-
-                    if (counter % 4 == 0)
+                    if (counter < tickTimes.Length && Math.Abs(Time.time * 100) > (tickTimes[counter] - timeInterval) && Math.Abs(Time.time * 100) < (tickTimes[counter] + timeInterval))
                     {
-                        hep /= 4;
-
-                        if (hep < 1 && hep > -1 && metronomeScript.beat == 6)
+                        if (hipVelAxisY_Scaled > bendInterval || hipVelAxisY_Scaled < -bendInterval)
                         {
-                            //Debug.Log("PLAY NICE SOUND");
+                            outOfsync = true;
+                            timeStramp = Time.time;
                         }
-
-                        //Debug.Log("Counter: " + counter + "        hep: " + hep);
-
-                        hep = 0;
+                        counter++;
                     }
-                    counter++;
-
-
-                    ///*
-                    TimeT += Time.deltaTime * 100;
-
-                    
-                    if (Math.Abs(TimeT) % 100 == 0)
-                    {
-                        Debug.Log("tick yo!");
-                    }
-                    //*/
-
-
-
-
-                    //Debug.Log("vel: " + hipVelAxisY_Scaled);
-
-
-
-                    //Debug.Log("score: " + score + "      vel: " + hipVelAxisY_Scaled + "     curr: " + currentHipPos + "       last: " + last_HipPos);
-
-                    //To Malte: make code in here
-                    //...
-                    //...
-
                 }
                 last_HipPos = currentHipPos;
-
-                /* test
-                hepfirst = CMCScript.wristLeftPos.y;
-                hepafstand = Math.Abs(hepfirst - lasthep);
-                Debug.Log("vel: " + hepafstand);
-                lasthep = hepfirst;
-                */
             }
         }
     }
 
-    
+
     private double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
     {
         double val = (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
