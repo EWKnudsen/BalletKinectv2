@@ -38,8 +38,8 @@ public class CMCRythm : MonoBehaviour
     void FixedUpdate()
     {
         Debug.Log("Lerp: " + LerpingGainMetroVal + "    timeStramp: " + timeStramp + "    Time.time: " + Time.time);
-        hipVelAxisY_Scaled = bendInterval * 2; //for testing
-        
+        //hipVelAxisY_Scaled = bendInterval * 2; //for testing, also move "counter < tickTi..." out of if to test
+
         if (outOfsync)
         {
             LerpingGainMetroVal = Mathf.Lerp(0.6f, 0f, (Time.time - timeStramp)/4);
