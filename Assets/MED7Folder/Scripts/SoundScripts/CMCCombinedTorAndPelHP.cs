@@ -17,8 +17,8 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     double minFreq = 20;
     double maxFreq = 22000;
 
-    static double T_minDist = 0.0085; //0.008f
-    static double T_maxDist = 0.125; //0.125f
+    static double T_minDist = 0.011; //0.0085f
+    static double T_maxDist = 0.187; //0.125f
     double interval = (T_maxDist - T_minDist);
 
     static double P_minRot = 0.063;
@@ -35,6 +35,8 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 		video = GameObject.Find("Video").GetComponent<PlayVideo>();
 		writer = new StreamWriter("Assets/MED7Folder/Txtfiles/MPCTest.txt", true);
 		writer.WriteLine("New score data:");
+
+        theMixer.SetFloat("Torso_Attentuation", 0);
     }
 
 
@@ -60,8 +62,13 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
                 Debug.Log("T: " + T_totalDist + "TS: " + T_totalDistScaled + "R: " + P_totalRot + "RS: " + P_totalRotScaled);
 
 				C_totalComb = (T_totalDistScaled + P_totalRotScaled) / 2;
-				C_HPfilterVal = highPassFilterVal (C_totalComb, (100 * 2), interval, minFreq, maxFreq);
-				theMixer.SetFloat ("Torso_CutOffFreqHP", (float)C_HPfilterVal);
+
+                //C_HPfilterVal = highPassFilterVal (C_totalComb, (100 * 2), interval, minFreq, maxFreq);
+                //C_HPfilterVal = highPassFilterVal(T_totalDistScaled, (100 * 2), interval, minFreq, maxFreq);
+
+                double highPassFilterVal = minFreq * Math.Pow((Math.Pow((22000 / 20), (1 / interval))), (T_maxDist - T_totalDist));
+
+                theMixer.SetFloat ("Torso_CutOffFreqHP", (float)highPassFilterVal);
 
 
 				torso_score = 100 - (float)T_totalDistScaled;
@@ -69,7 +76,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 				score = 100 - (float)C_totalComb;
 
 				if (writer.BaseStream != null) {
-					writer.WriteLine (C_totalComb);
+					writer.WriteLine (C_totalComb); //change this value
 				}
 
 				if (Time.time > video.movie.duration - 0.5f) {
@@ -86,7 +93,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 
     private double highPassFilterVal(double val, double _maxVal, double _interval, double _minFreq, double _maxFreq)
     {
-        return _minFreq * Math.Pow((Math.Pow((_maxFreq / _minFreq), (1 / _interval))), (_maxVal - val));
+        return _minFreq * Math.Pow((Math.Pow((_maxFreq / _minFreq), (1 / _interval))), (val)); //_maxVal - 
     }
 
     protected double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
