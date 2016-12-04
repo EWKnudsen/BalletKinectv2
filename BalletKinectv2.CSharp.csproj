@@ -179,6 +179,7 @@
     <Compile Include="Assets\KinectScripts\SpeechManager.cs" />
     <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\ButtonManager.cs" />
+    <Compile Include="Assets\MED7Folder\Scripts\Calibration.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\CurveManager.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\FocusManager.cs" />
     <Compile Include="Assets\MED7Folder\Scripts\KinectInputModule.cs" />
@@ -210,7 +211,6 @@
     <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
     <None Include="Assets\KinectDemos\RecorderDemo\Resources\PlayerGrammar.grxml.txt" />
     <None Include="Assets\MED7Folder\Txtfiles\MPCTest.txt" />
-    <None Include="Assets\MED7Folder\Txtfiles\StreamWriterTest.txt" />
     <None Include="Assets\Resources\BlurShader.shader" />
     <None Include="Assets\Resources\BlurShader2.shader" />
     <None Include="Assets\Resources\BlurShader3.shader" />

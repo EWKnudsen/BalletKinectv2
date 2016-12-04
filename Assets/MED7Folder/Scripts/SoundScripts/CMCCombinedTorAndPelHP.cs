@@ -75,13 +75,12 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 				pelvis_score = 100 - (float)P_totalRotScaled;
 				score = 100 - (float)C_totalComb;
 
-				if (writer.BaseStream != null) {
-					writer.WriteLine (C_totalComb); //change this value
-				}
 
-				if (Time.time > video.movie.duration - 0.5f) {
+				if (writer.BaseStream != null)
+					writer.WriteLine (T_totalDist + ", " + P_totalRot);
+                
+				if (Time.time > video.movie.duration - 0.5f)
 					writer.Close();
-				}
 			}
 		} 
     }
