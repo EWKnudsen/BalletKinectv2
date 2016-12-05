@@ -13,7 +13,7 @@ public class CMCPostureHP : MonoBehaviour
     public float torso_score, pelvis_score, score;
 
     double T_distHipShoulder, T_distShoulderNeck, T_totalDist;
-    double P_totalRot;
+    double P_rotX, P_rotZ, P_totalRot;
     double C_totalComb, C_HPfilterVal;
 
     double minFreq = 20;
@@ -47,23 +47,19 @@ public class CMCPostureHP : MonoBehaviour
                 
                 T_distHipShoulder  = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.hipCenterPos);
                 T_distShoulderNeck = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.neckPos);
-
                 T_totalDist = T_distHipShoulder + T_distShoulderNeck;
-                P_totalRot = Math.Abs(CMCScript.hipCenterRot.x) + Math.Abs(CMCScript.hipCenterRot.y) + Math.Abs(CMCScript.hipCenterRot.z);
 
-                C_totalComb = (T_totalDist + P_totalRot) / 2;
-                
-                HPfilterVal = HighPassScaling(C_totalComb, (T_minDist + P_minRot), (T_maxDist + P_maxRot) , minFreq, maxFreq);
-                theMixer.SetFloat("Torso_CutOffFreqHP", (float)HPfilterVal);
+                P_rotX = Math.Abs(CMCScript.hipCenterRot.x);
+                P_rotZ = Math.Abs(CMCScript.hipCenterRot.z);
+                P_totalRot = P_rotX + P_rotZ; //y is side to side
 
+                SettingHPfilterValue(T_totalDist, P_totalRot);
 
                 UpdateScores(T_totalDist, T_minDist, T_maxDist, P_totalRot, P_minRot, P_maxRot);
-
-
-                StreamWriteValues(T_totalDist, P_totalRot);
-
-
-                //Debug.Log("T: " + T_totalDist + "     R: " + P_totalRot);
+                
+                StreamWriteValues(T_totalDist, P_totalRot); //was used for MPC
+                    
+                Debug.Log("T: " + T_totalDist + "     R: " + P_totalRot);
             }
         }
     }
@@ -93,11 +89,30 @@ public class CMCPostureHP : MonoBehaviour
         return (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
     }
 
+    void SettingHPfilterValue(double Torso, double Pelvis)
+    {
+        double T_HPfilterVal = HighPassScaling(T_totalDist, T_minDist, T_maxDist, minFreq, maxFreq);
+        double P_HPfilterVal = HighPassScaling(P_totalRot, P_minRot, P_maxRot, minFreq, maxFreq);
+
+        double C_HPfilterVal = 0;
+
+        if (T_HPfilterVal < P_HPfilterVal)
+            C_HPfilterVal = P_HPfilterVal;
+        if (T_HPfilterVal > P_HPfilterVal)
+            C_HPfilterVal = T_HPfilterVal;
+        
+        theMixer.SetFloat("Torso_CutOffFreqHP", (float)C_HPfilterVal);
+    }
+
     void UpdateScores(double T_val, double T_min, double T_max, double P_val, double P_min, double P_max)
     {
         torso_score = 100 - (float)LinearScaling(T_val, 0, 100, T_min, T_max);
         pelvis_score = 100 - (float)LinearScaling(P_val, 0, 100, P_min, P_max);
-        score = (torso_score + pelvis_score) / 2;
+
+        if (torso_score < pelvis_score)
+            score = pelvis_score;
+        if (torso_score > pelvis_score)
+            score = torso_score;
     }
 
     void StreamWriteValues(double firstVal, double secondVal)
