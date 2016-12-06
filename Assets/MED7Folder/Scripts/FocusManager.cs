@@ -3,7 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class FocusManager : MonoBehaviour {
+public class FocusManager : MonoBehaviour
+{
+    /* Esben: This Script is diabled since it doesnt work properly, and crashes the game
 
 	bool sceneChanged = false;
 	public GameObject prefab;
@@ -53,4 +55,6 @@ public class FocusManager : MonoBehaviour {
 	public void ChooseFocus (int i) {
 		focusIndex = i;
 	}
+
+    */
 }

@@ -8,6 +8,7 @@ public class CMCPostureHP : MonoBehaviour
 {
     public AudioMixer theMixer;
     public CubemanController CMCScript;
+    public Calibration CalibraScript;
     public PlayVideo video;
     StreamWriter writer;
     public float torso_score, pelvis_score, score;
@@ -15,6 +16,8 @@ public class CMCPostureHP : MonoBehaviour
     double T_distHipShoulder, T_distShoulderNeck, T_totalDist;
     double P_rotX, P_rotZ, P_totalRot;
     double C_totalComb, C_HPfilterVal;
+
+    double T_axisZ, T_axisX, P_axisZ, P_axisX, C_axisZ, C_axisX;
 
     double minFreq = 20;
     double maxFreq = 22000;
@@ -30,6 +33,8 @@ public class CMCPostureHP : MonoBehaviour
     void Start()
     {
         CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
+        CalibraScript = GameObject.Find("CalibrationData").GetComponent<Calibration>();
+
         video = GameObject.Find("Video").GetComponent<PlayVideo>();
         writer = new StreamWriter("Assets/MED7Folder/Txtfiles/MPCTest.txt", true);
         writer.WriteLine("New score data:");

@@ -15,9 +15,9 @@ public class UIManager : MonoBehaviour {
 	[HideInInspector]
 	public Text instructions;
 	public bool calibrationTimer;
-	public bool calibrating;
+	public bool isCalibratingJoints;
 	[HideInInspector]
-	public bool finished;
+	public bool finishedCalibrating;
 	float duration;
 	float timeLeft;
 	float elapsedTime;
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour {
 
 		// For checking when a key is down - only used in calibration scene
 		if (calibrationTimer && Input.anyKeyDown) {
-			calibrating = true;
+			isCalibratingJoints = true;
 			elapsedTime = 0f;
 			background.gameObject.SetActive(true);
 			GameObject.Find ("Instructions").transform.GetChild(1).gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour {
 		}
 
 		// When calibrating fill up the timer image. When it is filled change text and change scene
-		if (calibrating) {
+		if (isCalibratingJoints) {
 			timeLeft = elapsedTime / duration;
 			timer.fillAmount = timeLeft;
 
@@ -70,8 +70,8 @@ public class UIManager : MonoBehaviour {
 	IEnumerator Finished() {
 		instructions.text = "FINISHED CALIBRATING";
 		yield return new WaitForSeconds(1.5f);
-		calibrating = false;
-		finished = true;
+		isCalibratingJoints = false;
+		finishedCalibrating = true;
 		SceneManager.LoadScene("PlieDetails");
 	}
 
