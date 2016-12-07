@@ -25,7 +25,7 @@ public class CalibrationTimer : MonoBehaviour {
 
 	void Awake()
 	{
-		DontDestroyOnLoad(transform.gameObject);
+		//DontDestroyOnLoad(transform.gameObject);
 	}
 
 	// Use this for initialization
@@ -65,8 +65,8 @@ public class CalibrationTimer : MonoBehaviour {
 		instructions.text = "FINISHED CALIBRATING";
 		yield return new WaitForSeconds(1.5f);
 		isCalibratingJoints = false;
-		finishedCalibrating = true;
 		isGettingReady = false;
+		finishedCalibrating = true;
 		SceneManager.LoadScene("PlieDetails");
 	}
 

@@ -18,6 +18,8 @@ public class Calibration : MonoBehaviour
 	public CalibrationTimer caliTimer;
     [HideInInspector]
     public CubemanController cubeman;
+	[HideInInspector]
+	public bool finishedCali;
 
     ArrayList ArrListShoulder, ArrListNeck, ArrListHip;
     Vector3[] ArrShoulder, ArrNeck, ArrHip;
@@ -42,59 +44,60 @@ public class Calibration : MonoBehaviour
 
     void Update()
     {
-		if (caliTimer.isCalibratingJoints)
-        {
-            ArrListShoulder.Add(cubeman.shoulderCenVec);
-            ArrListNeck.Add(cubeman.neckVec);
-            ArrListHip.Add(cubeman.hipCenVec);
+		if (caliTimer != null) {
+			
+			if (caliTimer.isCalibratingJoints) {
+				ArrListShoulder.Add (cubeman.shoulderCenVec);
+				ArrListNeck.Add (cubeman.neckVec);
+				ArrListHip.Add (cubeman.hipCenVec);
 
-            //Debug.Log("in CalculateAverage, time: " + Time.time);
-        }
-        
+				//Debug.Log("in CalculateAverage, time: " + Time.time);
+			}  
 
-		if (caliTimer.finishedCalibrating)
-        {
-            ArrShoulder = ConvertToArray(ArrListShoulder);
-            ArrNeck = ConvertToArray(ArrListNeck);
-            ArrHip = ConvertToArray(ArrListHip);
+			finishedCali = caliTimer.finishedCalibrating;
+		}      
 
-            ArrShoulder = SortByDist(ArrShoulder);
-            ArrNeck = SortByDist(ArrNeck);
-            ArrHip = SortByDist(ArrHip);
+		if (finishedCali) {
+			ArrShoulder = ConvertToArray (ArrListShoulder);
+			ArrNeck = ConvertToArray (ArrListNeck);
+			ArrHip = ConvertToArray (ArrListHip);
 
-            //-----------------can be deleted after the values has been discussed------------
-            int hep1 = ArrShoulder.Length;
-            int hep2 = ArrNeck.Length;
-            int hep3 = ArrHip.Length;
-            Debug.Log("LENGTH:    S: " + hep1 + "    N: " + hep2 + "    H: " + hep3);
+			ArrShoulder = SortByDist (ArrShoulder);
+			ArrNeck = SortByDist (ArrNeck);
+			ArrHip = SortByDist (ArrHip);
 
-
-            Vector3 hup1 = CalAverage(ArrShoulder);
-            Vector3 hup2 = CalAverage(ArrNeck);
-            Vector3 hup3 = CalAverage(ArrHip);
-            Debug.Log("S MEAN:    X: " + hup1.x + "    Y: " + hup1.y + "    Z: " + hup1.z);
+			//-----------------can be deleted after the values has been discussed------------
+			int hep1 = ArrShoulder.Length;
+			int hep2 = ArrNeck.Length;
+			int hep3 = ArrHip.Length;
+			Debug.Log ("LENGTH:    S: " + hep1 + "    N: " + hep2 + "    H: " + hep3);
 
 
-            Vector3 hyp1 = CalMedian(ArrShoulder);
-            Vector3 hyp2 = CalMedian(ArrNeck);
-            Vector3 hyp3 = CalMedian(ArrHip);
-            Debug.Log("S MEDIAN:    X: " + hyp1.x + "    Y: " + hyp1.y + "    Z: " + hyp1.z);
+			Vector3 hup1 = CalAverage (ArrShoulder);
+			Vector3 hup2 = CalAverage (ArrNeck);
+			Vector3 hup3 = CalAverage (ArrHip);
+			Debug.Log ("S MEAN:    X: " + hup1.x + "    Y: " + hup1.y + "    Z: " + hup1.z);
 
 
-            Vector3 hop1 = CalCustomAverage(ArrShoulder);
-            //Vector3 hop2 = CalCustomAverage(ArrNeck);
-            //Vector3 hop3 = CalCustomAverage(ArrHip);
-            Debug.Log("S customMEAN:    X: " + hop1.x + "    Y: " + hop1.y + "    Z: " + hop1.z);
-            //-------------------------------------------------------------------------------
+			Vector3 hyp1 = CalMedian (ArrShoulder);
+			Vector3 hyp2 = CalMedian (ArrNeck);
+			Vector3 hyp3 = CalMedian (ArrHip);
+			Debug.Log ("S MEDIAN:    X: " + hyp1.x + "    Y: " + hyp1.y + "    Z: " + hyp1.z);
 
 
+			Vector3 hop1 = CalCustomAverage (ArrShoulder);
+			//Vector3 hop2 = CalCustomAverage(ArrNeck);
+			//Vector3 hop3 = CalCustomAverage(ArrHip);
+			Debug.Log ("S customMEAN:    X: " + hop1.x + "    Y: " + hop1.y + "    Z: " + hop1.z);
+			//-------------------------------------------------------------------------------
 
-            calibraShoulderCenVec = CalCustomAverage(ArrShoulder);
-            calibraNeckVec = CalCustomAverage(ArrNeck);
-            calibraHipVec = CalCustomAverage(ArrHip);
-			caliTimer.finishedCalibrating = false;
-        }
-    }
+			calibraShoulderCenVec = CalCustomAverage (ArrShoulder);
+			calibraNeckVec = CalCustomAverage (ArrNeck);
+			calibraHipVec = CalCustomAverage (ArrHip);
+			finishedCali = false;
+		}
+		
+	}
 
 
     //Converts an ArrayList of vector3's to an Array 
