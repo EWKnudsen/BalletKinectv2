@@ -25,7 +25,7 @@ public class CalibrationTimer : MonoBehaviour {
 
 	void Awake()
 	{
-		DontDestroyOnLoad(transform.gameObject);
+		//DontDestroyOnLoad(transform.gameObject);
 	}
 
 	// Use this for initialization
@@ -34,7 +34,7 @@ public class CalibrationTimer : MonoBehaviour {
 		background = GameObject.Find ("Background");
 
 		background.gameObject.SetActive(false);
-		instructions = GameObject.Find ("Instructions").transform.GetChild(0).GetComponent<Text>();
+		instructions = GameObject.Find("Instructions").transform.GetChild(0).GetComponent<Text>();
 		duration = 10f;
 	}
 	
