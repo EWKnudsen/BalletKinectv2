@@ -21,7 +21,7 @@ public class Calibration : MonoBehaviour
 
     ArrayList ArrListShoulder, ArrListNeck, ArrListHip;
     Vector3[] ArrShoulder, ArrNeck, ArrHip;
-    public Vector3 CalibratedShoulderVec, CalibratedNeckVec, CalibratedHipVec;
+    public Vector3 calibraShoulderCenVec, calibraNeckVec, calibraHipVec;
 
 
     void Awake()
@@ -44,9 +44,9 @@ public class Calibration : MonoBehaviour
     {
         if (uiManager.isCalibratingJoints)
         {
-            ArrListShoulder.Add(cubeman.shoulderCenterPos);
-            ArrListNeck.Add(cubeman.neckPos);
-            ArrListHip.Add(cubeman.hipCenterPos);
+            ArrListShoulder.Add(cubeman.shoulderCenVec);
+            ArrListNeck.Add(cubeman.neckVec);
+            ArrListHip.Add(cubeman.hipCenVec);
 
             //Debug.Log("in CalculateAverage, time: " + Time.time);
         }
@@ -89,9 +89,9 @@ public class Calibration : MonoBehaviour
 
 
 
-            CalibratedShoulderVec = CalCustomAverage(ArrShoulder);
-            CalibratedNeckVec = CalCustomAverage(ArrNeck);
-            CalibratedHipVec = CalCustomAverage(ArrHip);
+            calibraShoulderCenVec = CalCustomAverage(ArrShoulder);
+            calibraNeckVec = CalCustomAverage(ArrNeck);
+            calibraHipVec = CalCustomAverage(ArrHip);
             uiManager.finishedCalibrating = false;
         }
     }

@@ -52,8 +52,8 @@ public class CMCCombPostureNF : MonoBehaviour
         {
             if (CMCScript.hasValues)
             {
-                T_distHipShoulder = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.hipCenterPos);
-                T_distShoulderNeck = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.neckPos);
+                T_distHipShoulder = CalXZdist(CMCScript.shoulderCenVec, CMCScript.hipCenVec);
+                T_distShoulderNeck = CalXZdist(CMCScript.shoulderCenVec, CMCScript.neckVec);
                 T_totalDist = T_distHipShoulder + T_distShoulderNeck;
                 T_totalAtten = ScalingBetween(T_totalDist, minAtten, maxAtten, T_minDist, T_maxDist);
                 T_totalAttenLogScaled = LogScaling(T_totalAtten);
@@ -68,8 +68,8 @@ public class CMCCombPostureNF : MonoBehaviour
                 theMixer.SetFloat("Torso_Attenuation", (float)C_totalAttenLogScaled);
 
                 
-                T_axisZ = CMCScript.hipCenterPos.z - CMCScript.shoulderCenterPos.z;
-                T_axisX = CMCScript.hipCenterPos.x - CMCScript.shoulderCenterPos.x;
+                T_axisZ = CMCScript.hipCenVec.z - CMCScript.shoulderCenVec.z;
+                T_axisX = CMCScript.hipCenVec.x - CMCScript.shoulderCenVec.x;
                 P_axisZ = CMCScript.hipCenterRot.z;
                 P_axisX = CMCScript.hipCenterRot.x;
 

@@ -64,11 +64,11 @@ public class CubemanController : MonoBehaviour
 
     ///MED7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public Quaternion hipCenterRot;
-    public Vector3 hipCenterPos;
+    public Vector3 hipCenVec;
     public Vector3 hipLeftPos;
     public Vector3 hipRightPos;
-    public Vector3 shoulderCenterPos;
-    public Vector3 neckPos;
+    public Vector3 shoulderCenVec;
+    public Vector3 neckVec;
     public Vector3 wristLeftPos;
     public Vector3 wristRightPos;
     public Vector3 elbowLeftPos;
@@ -245,12 +245,12 @@ public class CubemanController : MonoBehaviour
                     if (i == bones.Length-1)
                     {
                         hipCenterRot = bones[0].transform.rotation;
-                        hipCenterPos = bones[0].transform.position;
+                        hipCenVec = bones[0].transform.position;
                         hipLeftPos = bones[12].transform.position;
                         hipRightPos = bones[16].transform.position;
-                        neckPos = bones[2].transform.position;
+                        neckVec = bones[2].transform.position;
 
-                        shoulderCenterPos = bones[1].transform.position;
+                        shoulderCenVec = bones[1].transform.position;
 
                         wristLeftPos = bones[6].transform.position;
                         wristRightPos = bones[10].transform.position;

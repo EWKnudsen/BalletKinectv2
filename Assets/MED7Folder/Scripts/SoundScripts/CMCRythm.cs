@@ -54,7 +54,7 @@ public class CMCRythm : MonoBehaviour
         {
             if (CMCScript.hasValues)
             {
-                currentHipPos = CMCScript.hipCenterPos;
+                currentHipPos = CMCScript.hipCenVec;
                 hipVelAxisY = (currentHipPos.y - last_HipPos.y);
                 
                 if (hipVelAxisY > 0 || hipVelAxisY < 0)

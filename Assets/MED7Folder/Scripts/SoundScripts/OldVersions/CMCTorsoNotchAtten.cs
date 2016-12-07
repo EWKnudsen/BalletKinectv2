@@ -52,8 +52,8 @@ public class CMCTorsoNotchAtten : MonoBehaviour
         {
            if (CMCScript.hasValues)
            {
-                distHipShoulder = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.hipCenterPos);
-                distShoulderNeck = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.neckPos);
+                distHipShoulder = CalXZdist(CMCScript.shoulderCenVec, CMCScript.hipCenVec);
+                distShoulderNeck = CalXZdist(CMCScript.shoulderCenVec, CMCScript.neckVec);
 
                 totalDist = distHipShoulder + distShoulderNeck;
 
@@ -77,8 +77,8 @@ public class CMCTorsoNotchAtten : MonoBehaviour
                     score = 100;
 
 
-                double AxisZ = CMCScript.hipCenterPos.z - CMCScript.shoulderCenterPos.z;
-                double AxisX = CMCScript.hipCenterPos.x - CMCScript.shoulderCenterPos.x;
+                double AxisZ = CMCScript.hipCenVec.z - CMCScript.shoulderCenVec.z;
+                double AxisX = CMCScript.hipCenVec.x - CMCScript.shoulderCenVec.x;
 
                 if (AxisZ < 0) {
                     NegaScaledAxisZ = ScalingBetween(-AxisZ, 0.3, 1, minAxis, maxAxis);

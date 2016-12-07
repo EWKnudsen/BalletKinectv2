@@ -49,11 +49,11 @@ public class CMCHandSymHP : MonoBehaviour
         {
             if (CMCScript.hasValues)
             {
-                WL_Dist = Vector3.Distance(CMCScript.shoulderCenterPos, CMCScript.wristLeftPos);
-                WR_Dist = Vector3.Distance(CMCScript.shoulderCenterPos, CMCScript.wristRightPos);
+                WL_Dist = Vector3.Distance(CMCScript.shoulderCenVec, CMCScript.wristLeftPos);
+                WR_Dist = Vector3.Distance(CMCScript.shoulderCenVec, CMCScript.wristRightPos);
 
-                EL_Dist = Vector3.Distance(CMCScript.shoulderCenterPos, CMCScript.elbowLeftPos);
-                ER_Dist = Vector3.Distance(CMCScript.shoulderCenterPos, CMCScript.elbowRightPos);
+                EL_Dist = Vector3.Distance(CMCScript.shoulderCenVec, CMCScript.elbowLeftPos);
+                ER_Dist = Vector3.Distance(CMCScript.shoulderCenVec, CMCScript.elbowRightPos);
 
                 W_DistVar = Math.Abs(WL_Dist - WR_Dist);
                 E_DistVar = Math.Abs(EL_Dist - ER_Dist);

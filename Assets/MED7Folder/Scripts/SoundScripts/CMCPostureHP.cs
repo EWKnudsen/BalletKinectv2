@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Esben: current problem: it cant find the calibration script, but it can find the two others. ask malte
+
+using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -6,18 +8,19 @@ using UnityEngine.Audio;
 
 public class CMCPostureHP : MonoBehaviour
 {
-    public AudioMixer theMixer;
     public CubemanController CMCScript;
     public Calibration CalibraScript;
+    public UIManager uiManager;
+
+    public AudioMixer theMixer;
     public PlayVideo video;
     StreamWriter writer;
+
     public float torso_score, pelvis_score, score;
 
     double T_distHipShoulder, T_distShoulderNeck, T_totalDist;
     double P_rotX, P_rotZ, P_totalRot;
     double C_totalComb, C_HPfilterVal;
-
-    double T_axisZ, T_axisX, P_axisZ, P_axisX, C_axisZ, C_axisX;
 
     double minFreq = 20;
     double maxFreq = 22000;
@@ -34,12 +37,13 @@ public class CMCPostureHP : MonoBehaviour
     {
         CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
         CalibraScript = GameObject.Find("CalibrationData").GetComponent<Calibration>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         video = GameObject.Find("Video").GetComponent<PlayVideo>();
         writer = new StreamWriter("Assets/MED7Folder/Txtfiles/MPCTest.txt", true);
         writer.WriteLine("New score data:");
 
-        theMixer.SetFloat("Torso_Attentuation", 0);
+        theMixer.SetFloat("Torso_Attenuation", 0);
     }
 
 
@@ -49,31 +53,47 @@ public class CMCPostureHP : MonoBehaviour
         {
             if (CMCScript.hasValues)
             {
-                
-                T_distHipShoulder  = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.hipCenterPos);
-                T_distShoulderNeck = CalXZdist(CMCScript.shoulderCenterPos, CMCScript.neckPos);
-                T_totalDist = T_distHipShoulder + T_distShoulderNeck;
+                if (uiManager.finishedCalibrating)
+                {
+                    T_distHipShoulder = CalXZdist(CalibraScript.calibraShoulderCenVec, CalibraScript.calibraHipVec, CMCScript.shoulderCenVec, CMCScript.hipCenVec);
+                    T_distShoulderNeck = CalXZdist(CalibraScript.calibraShoulderCenVec, CalibraScript.calibraNeckVec, CMCScript.shoulderCenVec, CMCScript.neckVec);
+                    T_totalDist = T_distHipShoulder + T_distShoulderNeck;
 
-                P_rotX = Math.Abs(CMCScript.hipCenterRot.x);
-                P_rotZ = Math.Abs(CMCScript.hipCenterRot.z);
-                P_totalRot = P_rotX + P_rotZ; //y is side to side
+                    P_rotX = Math.Abs(CMCScript.hipCenterRot.x);
+                    P_rotZ = Math.Abs(CMCScript.hipCenterRot.z);
+                    P_totalRot = P_rotX + P_rotZ;
 
-                SettingHPfilterValue(T_totalDist, P_totalRot);
+                    UpdateHPfilterValue(T_totalDist, P_totalRot);
 
-                UpdateScores(T_totalDist, T_minDist, T_maxDist, P_totalRot, P_minRot, P_maxRot);
-                
-                StreamWriteValues(T_totalDist, P_totalRot); //was used for MPC
-                    
-                Debug.Log("T: " + T_totalDist + "     R: " + P_totalRot);
+                    UpdateScores(T_totalDist, T_minDist, T_maxDist, P_totalRot, P_minRot, P_maxRot);
+
+                    StreamWriteValues(T_totalDist, P_totalRot); //was used for MPC
+
+                    Debug.Log("T: " + T_totalDist + "     R: " + P_totalRot);
+                }
+                else
+                {
+                    Debug.Log("The calibration scene has not been run. Run the calibration scene before continuing");
+                }
             }
         }
     }
 
-    private double CalXZdist(Vector3 vecA, Vector3 vecB)
+
+    //Calculates the distance of two points A and B, and corrects the value to two reference points 
+    private double CalXZdist(Vector3 refVecA, Vector3 refVecB, Vector3 vecA, Vector3 vecB)
     {
-        return Math.Sqrt(Math.Pow(vecB.x - vecA.x, 2) + Math.Pow(vecB.z - vecA.z, 2));
+        double xAxisA, zAxisA, xAxisB, zAxisB;
+        xAxisA = vecA.x - refVecA.x;
+        zAxisA = vecA.z - refVecA.z;
+        xAxisB = vecB.x - refVecB.x;
+        zAxisB = vecB.z - refVecB.z;
+
+        return Math.Sqrt(Math.Pow(xAxisB - xAxisA, 2) + Math.Pow(zAxisB - zAxisA, 2));
     }
 
+
+    //Scales a limited linear value into a limited logarithmic value that fits a Highpass filter  
     private double HighPassScaling(double unscaledVal, double minOld, double maxOld, double minNew, double maxNew) 
     {
         if (unscaledVal < minOld)
@@ -84,6 +104,8 @@ public class CMCPostureHP : MonoBehaviour
         return minNew * Math.Pow((Math.Pow((maxNew / minNew), (1 / (maxOld - minOld)))), (maxOld - unscaledVal));
     }
 
+
+    //Scales a limited value into another limited range
     protected double LinearScaling(double unscaledVal, double minOld, double maxOld, double minNew, double maxNew)
     {
         if (unscaledVal < minOld)
@@ -94,7 +116,9 @@ public class CMCPostureHP : MonoBehaviour
         return (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
     }
 
-    void SettingHPfilterValue(double Torso, double Pelvis)
+
+    //Updates the Highpass filter value. Picks either the pelvis or the torso depending on which is highest 
+    void UpdateHPfilterValue(double Torso, double Pelvis)
     {
         double T_HPfilterVal = HighPassScaling(T_totalDist, T_minDist, T_maxDist, minFreq, maxFreq);
         double P_HPfilterVal = HighPassScaling(P_totalRot, P_minRot, P_maxRot, minFreq, maxFreq);
@@ -109,6 +133,8 @@ public class CMCPostureHP : MonoBehaviour
         theMixer.SetFloat("Torso_CutOffFreqHP", (float)C_HPfilterVal);
     }
 
+
+    //Updates each score
     void UpdateScores(double T_val, double T_min, double T_max, double P_val, double P_min, double P_max)
     {
         torso_score = 100 - (float)LinearScaling(T_val, 0, 100, T_min, T_max);
@@ -120,6 +146,8 @@ public class CMCPostureHP : MonoBehaviour
             score = torso_score;
     }
 
+
+    //Stream writes the two values into a txt file 
     void StreamWriteValues(double firstVal, double secondVal)
     {
         if (writer.BaseStream != null)

@@ -36,7 +36,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 		writer = new StreamWriter("Assets/MED7Folder/Txtfiles/MPCTest.txt", true);
 		writer.WriteLine("New score data:");
 
-        theMixer.SetFloat("Torso_Attentuation", 0);
+        theMixer.SetFloat("Torso_Attenuation", 0);
     }
 
 
@@ -51,8 +51,8 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
                 Combined_dist = (torso_dist + P_total) / 3;
                 */
 
-				T_distHipShoulder = CalXZdist (CMCScript.shoulderCenterPos, CMCScript.hipCenterPos);
-				T_distShoulderNeck = CalXZdist (CMCScript.shoulderCenterPos, CMCScript.neckPos);
+				T_distHipShoulder = CalXZdist (CMCScript.shoulderCenVec, CMCScript.hipCenVec);
+				T_distShoulderNeck = CalXZdist (CMCScript.shoulderCenVec, CMCScript.neckVec);
 				T_totalDist = T_distHipShoulder + T_distShoulderNeck;
 				T_totalDistScaled = ScalingBetween (T_totalDist, 0, 100, T_minDist, T_maxDist);
 

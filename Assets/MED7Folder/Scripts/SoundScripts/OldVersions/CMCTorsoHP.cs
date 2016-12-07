@@ -38,7 +38,7 @@ public class CMCTorsoHP : MonoBehaviour
         {
             if (CMCScript.hasValues)
             {
-                dist = CalXZdist(CMCScript.hipCenterPos, CMCScript.shoulderCenterPos);
+                dist = CalXZdist(CMCScript.hipCenVec, CMCScript.shoulderCenVec);
 
                 distForTracking = dist; //To Malte: use this for file value. 
 
