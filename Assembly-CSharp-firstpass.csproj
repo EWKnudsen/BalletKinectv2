@@ -175,7 +175,6 @@
      <Compile Include="Assets\Standard Assets\Windows\Kinect\TrackingState.cs" />
      <Compile Include="Assets\Standard Assets\Windows\Kinect\Vector4.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />
-     <None Include="Assets\MED7Folder\Txtfiles\StreamWriterTest.txt" />
      <None Include="Assets\Resources\DepthShader.shader" />
      <None Include="Assets\Resources\SpeechGrammar.grxml.txt" />
      <None Include="Assets\Resources\BlurShader3.shader" />
