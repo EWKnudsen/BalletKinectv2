@@ -26,7 +26,7 @@ public class Mute : MonoBehaviour {
 		}
 
 
-		if (SceneManager.GetActiveScene().name == "KinectAvatarsDemo1" && !sceneChanged) {
+		if (SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "MainSceneLong" && !sceneChanged) {
 			MuteMusic();
 		}
 	}

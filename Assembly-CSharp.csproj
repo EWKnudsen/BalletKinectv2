@@ -150,6 +150,7 @@
      <Compile Include="Assets\KinectScripts\VisualGestureManager.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\ButtonManager.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\Calibration.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\CalibrationTimer.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\CurveManager.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\DisableObject.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\FocusManager.cs" />
@@ -176,7 +177,7 @@
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCxyPlaneHipShoulderDistHP.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCxyPlaneHipShoulderDistPitch.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\SoundScripts\OldVersions\CMCyAxisHipAlignmentDistLP.cs" />
-     <Compile Include="Assets\MED7Folder\Scripts\UIManager.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\VideoTimer.cs" />
      <None Include="Assets\Resources\BlurShader.shader" />
      <None Include="Assets\Resources\DepthShader.shader" />
      <None Include="Assets\Resources\SpeechGrammar.grxml.txt" />
@@ -194,11 +195,11 @@
      <None Include="Assets\KinectDemos\FittingRoomDemo\Resources\Shaders\UserBlendShader.shader" />
      <None Include="Assets\Resources\Color2BodyShader.shader" />
      <None Include="Assets\Resources\BlurShader4.shader" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="LZ4Sharp">
  <HintPath>/Users/malteholledig/Documents/MED7/BalletKinectv2/Assets/KinectScripts/LZ4Sharp/LZ4Sharp.dll</HintPath>
