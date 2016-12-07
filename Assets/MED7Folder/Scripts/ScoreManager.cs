@@ -39,7 +39,7 @@ public class ScoreManager : MonoBehaviour {
 				score = symmetryScript.score;
 			}
 		}
-		if (scene.name != "MainScene" && sceneChanged == false) {
+		if (scene.name != "MainScene" && scene.name != "MainSceneLong" && sceneChanged == false) {
 			StopCoroutine("CalculateAverage");
 			//writer.Close();
 			score = scoreTemp/counter;

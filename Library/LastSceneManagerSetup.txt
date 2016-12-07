@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/MED7Folder/Scenes/MainScene.unity
+- path: Assets/MED7Folder/Scenes/MainSceneLong.unity
   isLoaded: 1
   isActive: 1
