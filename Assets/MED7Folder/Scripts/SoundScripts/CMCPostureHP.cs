@@ -10,7 +10,7 @@ public class CMCPostureHP : MonoBehaviour
 {
     public CubemanController CMCScript;
     public Calibration CalibraScript;
-    public UIManager uiManager;
+	public CalibrationTimer caliTimer;
 
     public AudioMixer theMixer;
     public PlayVideo video;
@@ -37,7 +37,7 @@ public class CMCPostureHP : MonoBehaviour
     {
         CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
         CalibraScript = GameObject.Find("CalibrationData").GetComponent<Calibration>();
-        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+		caliTimer = GameObject.Find("UIManager").GetComponent<CalibrationTimer>();
 
         video = GameObject.Find("Video").GetComponent<PlayVideo>();
         writer = new StreamWriter("Assets/MED7Folder/Txtfiles/MPCTest.txt", true);
@@ -53,7 +53,7 @@ public class CMCPostureHP : MonoBehaviour
         {
             if (CMCScript.hasValues)
             {
-                if (uiManager.finishedCalibrating)
+				if (caliTimer.finishedCalibrating)
                 {
                     T_distHipShoulder = CalXZdist(CalibraScript.calibraShoulderCenVec, CalibraScript.calibraHipVec, CMCScript.shoulderCenVec, CMCScript.hipCenVec);
                     T_distShoulderNeck = CalXZdist(CalibraScript.calibraShoulderCenVec, CalibraScript.calibraNeckVec, CMCScript.shoulderCenVec, CMCScript.neckVec);

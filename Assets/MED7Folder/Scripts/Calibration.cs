@@ -15,7 +15,7 @@ using System.Linq;
 public class Calibration : MonoBehaviour
 {
     [HideInInspector]
-    public UIManager uiManager;
+	public CalibrationTimer caliTimer;
     [HideInInspector]
     public CubemanController cubeman;
 
@@ -31,7 +31,7 @@ public class Calibration : MonoBehaviour
 
     void Start()
     {
-        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+		caliTimer = GameObject.Find("UIManager").GetComponent<CalibrationTimer>();
         cubeman = GameObject.Find("Cubeman").GetComponent<CubemanController>();
 
         ArrListShoulder = new ArrayList();
@@ -42,7 +42,7 @@ public class Calibration : MonoBehaviour
 
     void Update()
     {
-        if (uiManager.isCalibratingJoints)
+		if (caliTimer.isCalibratingJoints)
         {
             ArrListShoulder.Add(cubeman.shoulderCenVec);
             ArrListNeck.Add(cubeman.neckVec);
@@ -52,7 +52,7 @@ public class Calibration : MonoBehaviour
         }
         
 
-        if (uiManager.finishedCalibrating)
+		if (caliTimer.finishedCalibrating)
         {
             ArrShoulder = ConvertToArray(ArrListShoulder);
             ArrNeck = ConvertToArray(ArrListNeck);
@@ -92,7 +92,7 @@ public class Calibration : MonoBehaviour
             calibraShoulderCenVec = CalCustomAverage(ArrShoulder);
             calibraNeckVec = CalCustomAverage(ArrNeck);
             calibraHipVec = CalCustomAverage(ArrHip);
-            uiManager.finishedCalibrating = false;
+			caliTimer.finishedCalibrating = false;
         }
     }
 

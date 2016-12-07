@@ -1,20 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MED7Folder/Scripts/ScoreManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MED7Folder/Scripts/Mute.cs">
     <Files>
-      <File FileName="Assets/MED7Folder/Scripts/UIManager.cs" Line="51" Column="23" />
-      <File FileName="Assets/MED7Folder/Scripts/Calibration.cs" Line="44" Column="41" />
-      <File FileName="Assets/MED7Folder/Scripts/SoundScripts/CMCRythm.cs" Line="1" Column="1" />
-      <File FileName="Assets/MED7Folder/Scripts/ScoreManager.cs" Line="43" Column="38" />
-      <File FileName="Assets/MED7Folder/Scripts/FocusManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/MED7Folder/Scripts/CurveManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/MED7Folder/Scripts/LineChanger.cs" Line="1" Column="1" />
-      <File FileName="Assets/MED7Folder/Scripts/SoundScripts/CMCCombPostureNF.cs" Line="1" Column="1" />
-      <File FileName="Assets/KinectScripts/InteractionManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/MED7Folder/Scripts/PlayVideo.cs" Line="1" Column="1" />
-      <File FileName="Assets/MED7Folder/Scripts/Music.cs" Line="1" Column="1" />
-      <File FileName="Assets/KinectScripts/Cubeman/CubemanController.cs" Line="1" Column="1" />
-      <File FileName="Assets/MED7Folder/Scripts/DisableObject.cs" Line="1" Column="1" />
+      <File FileName="Assets/MED7Folder/Scripts/CalibrationTimer.cs" Line="80" Column="43" />
+      <File FileName="Assets/MED7Folder/Scripts/Calibration.cs" Line="26" Column="1" />
+      <File FileName="Assets/MED7Folder/Scripts/VideoTimer.cs" Line="6" Column="24" />
+      <File FileName="Assets/MED7Folder/Scripts/SoundScripts/CMCPostureHP.cs" Line="56" Column="18" />
+      <File FileName="Assets/MED7Folder/Scripts/Mute.cs" Line="29" Column="113" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
