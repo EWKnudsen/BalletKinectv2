@@ -6,9 +6,10 @@ using System.IO;
 
 public class ScoreManager : MonoBehaviour {
 
-	public CMCCombinedTorAndPelHP postureScriptHP;
+	public CMCCombinedTorAndPelHP CMCCombinedTorAndPelHPScript;
 	public CMCHandSymHP symmetryScript;
-	public float score;
+    public CMCPostureHP postureHPScript;
+    public float score;
 	public float scoreTemp;
 	private int counter;
 	private Scene scene;
@@ -24,20 +25,24 @@ public class ScoreManager : MonoBehaviour {
 		//writer.WriteLine("New score data:");
 		sceneChanged = false;
 		scene = SceneManager.GetActiveScene();
-		postureScriptHP = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
+		CMCCombinedTorAndPelHPScript = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
 		symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
-		if (GameObject.Find("FilterController") != null) {
+        postureHPScript = GameObject.Find("FilterController").GetComponent<CMCPostureHP>();
+
+        if (GameObject.Find("FilterController") != null) {
 			StartCoroutine("CalculateAverage");
 		}
 	}
 
 	void Update () {
         if (GameObject.Find("FilterController") != null) {
-			if (postureScriptHP.enabled) {
-				score = postureScriptHP.score;
+			if (CMCCombinedTorAndPelHPScript.enabled) {
+				score = CMCCombinedTorAndPelHPScript.score;
 			}  else if (symmetryScript.enabled) {
 				score = symmetryScript.score;
-			}
+			}  else if (postureHPScript.enabled) {
+                score = postureHPScript.score;
+            }
 		}
 		if (scene.name != "MainScene" && scene.name != "MainSceneLong" && sceneChanged == false) {
 			StopCoroutine("CalculateAverage");

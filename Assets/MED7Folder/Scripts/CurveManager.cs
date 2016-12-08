@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class CurveManager : MonoBehaviour {
 
-	public CMCCombinedTorAndPelHP postureScriptHP;
-	public CMCHandSymHP symmetryScript;
+	public CMCCombinedTorAndPelHP CMCCombinedTorAndPelHPScript;
+    public CMCPostureHP postureHPScript;
+    public CMCHandSymHP symmetryScript;
 	public float score;
 	private ParticleSystem ps;
 	private Vector3 pos;
@@ -13,8 +14,9 @@ public class CurveManager : MonoBehaviour {
 	private float amount;
 
 	void Start () {
-		postureScriptHP = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
-		symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
+		CMCCombinedTorAndPelHPScript = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
+        postureHPScript = GameObject.Find("FilterController").GetComponent<CMCPostureHP>();
+        symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
 		ps = transform.gameObject.GetComponent<ParticleSystem> ();
 		pos = transform.position;
 	}
@@ -26,11 +28,13 @@ public class CurveManager : MonoBehaviour {
 
 	void CalculatePosition() {
 		float yMin = 0.6f;
-		if (postureScriptHP.enabled) {
-			score = postureScriptHP.score;
+		if (CMCCombinedTorAndPelHPScript.enabled) {
+			score = CMCCombinedTorAndPelHPScript.score;
 		}  else if (symmetryScript.enabled) {
 			score = symmetryScript.score;
-		}
+		}  else if (postureHPScript.enabled) {
+            score = postureHPScript.score;
+        }
 		ratio = score/100;
 		amount = 0.20f*ratio;
 		pos.y = yMin + pos.y*amount;

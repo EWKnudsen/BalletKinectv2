@@ -59,7 +59,7 @@ public class CMCCombPostureNF : MonoBehaviour
                 T_totalAttenLogScaled = LogScaling(T_totalAtten);
                 
 
-                P_totalRot = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x) + Math.Abs(CMCScript.hipCenterRot.x);
+                P_totalRot = Math.Abs(CMCScript.hipCenRot.z) + Math.Abs(CMCScript.hipCenRot.x) + Math.Abs(CMCScript.hipCenRot.x);
                 P_totalAtten = ScalingBetween(P_totalRot, minAtten, maxAtten, P_minRot, P_maxRot);
                 P_totalAttenLogScaled = LogScaling(P_totalAtten);
                 //P_totalAttenLogScaled = LogScaling(P_totalAtten);
@@ -70,8 +70,8 @@ public class CMCCombPostureNF : MonoBehaviour
                 
                 T_axisZ = CMCScript.hipCenVec.z - CMCScript.shoulderCenVec.z;
                 T_axisX = CMCScript.hipCenVec.x - CMCScript.shoulderCenVec.x;
-                P_axisZ = CMCScript.hipCenterRot.z;
-                P_axisX = CMCScript.hipCenterRot.x;
+                P_axisZ = CMCScript.hipCenRot.z;
+                P_axisX = CMCScript.hipCenRot.x;
 
                 C_axisZ = T_axisZ + P_axisZ;
                 C_axisX = T_axisX + P_axisX;

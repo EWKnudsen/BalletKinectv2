@@ -33,10 +33,37 @@ public class CMCPostureHP : MonoBehaviour
     static double P_maxRot = 0.31;
 
 
+    bool finishedCali;
+    Vector3 calibraShoulderCenVec;
+    Vector3 calibraHipVec;
+    Vector3 calibraNeckVec;
+    Quaternion calibraHipRot;
+
     void Start()
     {
         CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
-        CalibraScript = GameObject.Find("CalibrationData").GetComponent<Calibration>();
+
+        if (GameObject.Find("CalibrationData") != null)
+        {
+            CalibraScript = GameObject.Find("CalibrationData").GetComponent<Calibration>();
+
+            finishedCali = CalibraScript.finishedCali;
+            calibraShoulderCenVec = CalibraScript.Vec_calibraShoulderCen;
+            calibraHipVec = CalibraScript.Vec_calibraHip;
+            calibraNeckVec = CalibraScript.Vec_calibraNeck;
+            calibraHipRot = CalibraScript.Qua_calibraHip;
+        }
+        else
+        {
+            Debug.Log("MED7 Warning: GameObject.Find(CalibrationData) is null");
+            Debug.Log("MED7 Warning: meaining calibration values hasnt been obtained and are set to 0");
+            finishedCali = true;
+            calibraShoulderCenVec = Vector3.zero;
+            calibraHipVec = Vector3.zero;
+            calibraNeckVec = Vector3.zero;
+            calibraHipRot = Quaternion.identity;
+        }
+        
 		//caliTimer = GameObject.Find("UIManager").GetComponent<CalibrationTimer>();
 
         video = GameObject.Find("Video").GetComponent<PlayVideo>();
@@ -53,14 +80,14 @@ public class CMCPostureHP : MonoBehaviour
         {
             if (CMCScript.hasValues)
             {
-				if (CalibraScript.finishedCali)
+				if (finishedCali) //CalibraScript.hasCalibrated
                 {
-                    T_distHipShoulder = CalXZdist(CalibraScript.calibraShoulderCenVec, CalibraScript.calibraHipVec, CMCScript.shoulderCenVec, CMCScript.hipCenVec);
-                    T_distShoulderNeck = CalXZdist(CalibraScript.calibraShoulderCenVec, CalibraScript.calibraNeckVec, CMCScript.shoulderCenVec, CMCScript.neckVec);
+                    T_distHipShoulder = CalXZdist(calibraShoulderCenVec, calibraHipVec, CMCScript.shoulderCenVec, CMCScript.hipCenVec);
+                    T_distShoulderNeck = CalXZdist(calibraShoulderCenVec, calibraNeckVec, CMCScript.shoulderCenVec, CMCScript.neckVec);
                     T_totalDist = T_distHipShoulder + T_distShoulderNeck;
 
-                    P_rotX = Math.Abs(CMCScript.hipCenterRot.x);
-                    P_rotZ = Math.Abs(CMCScript.hipCenterRot.z);
+                    P_rotX = Math.Abs(CMCScript.hipCenRot.x - calibraHipRot.x);
+                    P_rotZ = Math.Abs(CMCScript.hipCenRot.z - calibraHipRot.z);
                     P_totalRot = P_rotX + P_rotZ;
 
                     UpdateHPfilterValue(T_totalDist, P_totalRot);
@@ -69,7 +96,8 @@ public class CMCPostureHP : MonoBehaviour
 
                     StreamWriteValues(T_totalDist, P_totalRot); //was used for MPC
 
-                    Debug.Log("T: " + T_totalDist + "     R: " + P_totalRot);
+                    //Debug.Log("T: " + T_totalDist + "     R: " + P_totalRot);
+                    
                 }
                 else
                 {
@@ -96,7 +124,7 @@ public class CMCPostureHP : MonoBehaviour
     //Scales a limited linear value into a limited logarithmic value that fits a Highpass filter  
     private double HighPassScaling(double unscaledVal, double minOld, double maxOld, double minNew, double maxNew) 
     {
-        if (unscaledVal < minOld)
+        if (unscaledVal <= minOld)
             unscaledVal = minOld;
         if (unscaledVal > maxOld)
             unscaledVal = maxOld;
@@ -108,7 +136,7 @@ public class CMCPostureHP : MonoBehaviour
     //Scales a limited value into another limited range
     protected double LinearScaling(double unscaledVal, double minOld, double maxOld, double minNew, double maxNew)
     {
-        if (unscaledVal < minOld)
+        if (unscaledVal <= minOld)
             unscaledVal = minOld;
         if (unscaledVal > maxOld)
             unscaledVal = maxOld;
@@ -122,14 +150,17 @@ public class CMCPostureHP : MonoBehaviour
     {
         double T_HPfilterVal = HighPassScaling(T_totalDist, T_minDist, T_maxDist, minFreq, maxFreq);
         double P_HPfilterVal = HighPassScaling(P_totalRot, P_minRot, P_maxRot, minFreq, maxFreq);
+        
 
         double C_HPfilterVal = 0;
 
-        if (T_HPfilterVal < P_HPfilterVal)
-            C_HPfilterVal = P_HPfilterVal;
-        if (T_HPfilterVal > P_HPfilterVal)
+        if (T_HPfilterVal <= P_HPfilterVal)
             C_HPfilterVal = T_HPfilterVal;
-        
+        if (T_HPfilterVal > P_HPfilterVal)
+            C_HPfilterVal = P_HPfilterVal;
+
+        Debug.Log("T_HPfilterVal: " + T_HPfilterVal + "    P_HPfilterVal: " + P_HPfilterVal + "    C_HPfilterVal: " + C_HPfilterVal);
+
         theMixer.SetFloat("Torso_CutOffFreqHP", (float)C_HPfilterVal);
     }
 
@@ -137,13 +168,13 @@ public class CMCPostureHP : MonoBehaviour
     //Updates each score
     void UpdateScores(double T_val, double T_min, double T_max, double P_val, double P_min, double P_max)
     {
-        torso_score = 100 - (float)LinearScaling(T_val, 0, 100, T_min, T_max);
-        pelvis_score = 100 - (float)LinearScaling(P_val, 0, 100, P_min, P_max);
+        torso_score = 100 - (float)LinearScaling(T_val, T_min, T_max, 0, 100);
+        pelvis_score = 100 - (float)LinearScaling(P_val, P_min, P_max, 0, 100);
 
-        if (torso_score < pelvis_score)
-            score = pelvis_score;
-        if (torso_score > pelvis_score)
+        if (torso_score <= pelvis_score)
             score = torso_score;
+        if (torso_score > pelvis_score)
+            score = pelvis_score;
     }
 
 

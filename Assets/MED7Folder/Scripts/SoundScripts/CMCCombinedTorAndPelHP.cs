@@ -56,7 +56,7 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 				T_totalDist = T_distHipShoulder + T_distShoulderNeck;
 				T_totalDistScaled = ScalingBetween (T_totalDist, 0, 100, T_minDist, T_maxDist);
 
-				P_totalRot = Math.Abs (CMCScript.hipCenterRot.x) + Math.Abs (CMCScript.hipCenterRot.y) + Math.Abs (CMCScript.hipCenterRot.z);
+				P_totalRot = Math.Abs (CMCScript.hipCenRot.x) + Math.Abs (CMCScript.hipCenRot.y) + Math.Abs (CMCScript.hipCenRot.z);
 				P_totalRotScaled = ScalingBetween (P_totalRot, 0, 100, P_minRot, P_maxRot);
 
                 Debug.Log("T: " + T_totalDist + "TS: " + T_totalDistScaled + "R: " + P_totalRot + "RS: " + P_totalRotScaled);

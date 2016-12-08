@@ -15,15 +15,20 @@ using System.Linq;
 public class Calibration : MonoBehaviour
 {
     [HideInInspector]
-	public CalibrationTimer caliTimer;
+    public CalibrationTimer caliTimer;
     [HideInInspector]
     public CubemanController cubeman;
-	[HideInInspector]
-	public bool finishedCali;
+    [HideInInspector]
+    public bool finishedCali, hasCalibrated;
 
-    ArrayList ArrListShoulder, ArrListNeck, ArrListHip;
-    Vector3[] ArrShoulder, ArrNeck, ArrHip;
-    public Vector3 calibraShoulderCenVec, calibraNeckVec, calibraHipVec;
+
+    ArrayList Vec_ArrListShoulder, Vec_ArrListNeck, Vec_ArrListHip;
+    Vector3[] Vec_ArrShoulder, Vec_ArrNeck, Vec_ArrHip;
+    public Vector3 Vec_calibraShoulderCen, Vec_calibraNeck, Vec_calibraHip;
+
+    ArrayList Qua_ArrListHip;
+    Quaternion[] Qua_ArrHip;
+    public Quaternion Qua_calibraHip;
 
 
     void Awake()
@@ -33,39 +38,76 @@ public class Calibration : MonoBehaviour
 
     void Start()
     {
-		caliTimer = GameObject.Find("UIManager").GetComponent<CalibrationTimer>();
+        caliTimer = GameObject.Find("UIManager").GetComponent<CalibrationTimer>();
         cubeman = GameObject.Find("Cubeman").GetComponent<CubemanController>();
 
-        ArrListShoulder = new ArrayList();
-        ArrListNeck = new ArrayList();
-        ArrListHip = new ArrayList();
+        Vec_ArrListShoulder = new ArrayList();
+        Vec_ArrListNeck = new ArrayList();
+        Vec_ArrListHip = new ArrayList();
+
+        Qua_ArrListHip = new ArrayList();
+
+        hasCalibrated = false;
     }
 
 
     void Update()
     {
-		if (caliTimer != null) {
-			
-			if (caliTimer.isCalibratingJoints) {
-				ArrListShoulder.Add (cubeman.shoulderCenVec);
-				ArrListNeck.Add (cubeman.neckVec);
-				ArrListHip.Add (cubeman.hipCenVec);
+        if (caliTimer != null)
+        {
+            if (caliTimer.isCalibratingJoints)
+            {
+                Vec_ArrListShoulder.Add(cubeman.shoulderCenVec);
+                Vec_ArrListNeck.Add(cubeman.neckVec);
+                Vec_ArrListHip.Add(cubeman.hipCenVec);
 
-				//Debug.Log("in CalculateAverage, time: " + Time.time);
-			}  
+                if (cubeman.hipCenRot.x != 0 && cubeman.hipCenRot.y != 0 && cubeman.hipCenRot.z != 0)
+                    Qua_ArrListHip.Add(cubeman.hipCenRot);
+            }
+            finishedCali = caliTimer.finishedCalibrating;
+        }
 
-			finishedCali = caliTimer.finishedCalibrating;
-		}      
+        if (finishedCali && !hasCalibrated)
+        {
+            Debug.Log("caliTimer.isCalibratingJoints, finishedCali: " + finishedCali);
 
-		if (finishedCali) {
-			ArrShoulder = ConvertToArray (ArrListShoulder);
-			ArrNeck = ConvertToArray (ArrListNeck);
-			ArrHip = ConvertToArray (ArrListHip);
+            Vec_ArrShoulder = Vec_ConvertToArray(Vec_ArrListShoulder);
+            Vec_ArrNeck = Vec_ConvertToArray(Vec_ArrListNeck);
+            Vec_ArrHip = Vec_ConvertToArray(Vec_ArrListHip);
 
-			ArrShoulder = SortByDist (ArrShoulder);
-			ArrNeck = SortByDist (ArrNeck);
-			ArrHip = SortByDist (ArrHip);
+            Vec_ArrShoulder = Vec_SortByDist(Vec_ArrShoulder);
+            Vec_ArrNeck = Vec_SortByDist(Vec_ArrNeck);
+            Vec_ArrHip = Vec_SortByDist(Vec_ArrHip);
 
+            Vec_calibraShoulderCen = Vec_CalCustomAverage(Vec_ArrShoulder);
+            Vec_calibraNeck = Vec_CalCustomAverage(Vec_ArrNeck);
+            Vec_calibraHip = Vec_CalCustomAverage(Vec_ArrHip);
+
+            Qua_ArrHip = Qua_ConvertToArray(Qua_ArrListHip);
+
+            Qua_calibraHip = Qua_CalCustomAverage(Qua_ArrHip);
+
+            
+            finishedCali = false;
+            hasCalibrated = true;
+
+            /* just for testing. showing that we have to use Lerp and just cant take the mean.
+            float meanZ = 0, meanY = 0, meanX = 0;
+
+            for (int index = 0; index < Qua_ArrHip.Length; index++)
+            {
+                Debug.Log("Qua X: " + Qua_ArrHip[index].x + "     Y: " + Qua_ArrHip[index].y + "     Z: " + Qua_ArrHip[index].z + "    W: " + Qua_calibraHip.w);
+
+                meanZ += Qua_ArrHip[index].z;
+                meanY += Qua_ArrHip[index].y;
+                meanX += Qua_ArrHip[index].x;
+                
+            }
+            Debug.Log("Qua the other mean X: " + (meanX / Qua_ArrHip.Length) + "     Y: " + (meanY / Qua_ArrHip.Length) + "     Z: " + (meanZ / Qua_ArrHip.Length));
+            Debug.Log("Qua my MEAN X: " + Qua_calibraHip.x + "     Y: " + Qua_calibraHip.y + "     Z: " + Qua_calibraHip.z + "    W: " + Qua_calibraHip.w);
+            */
+
+            /*
 			//-----------------can be deleted after the values has been discussed------------
 			int hep1 = ArrShoulder.Length;
 			int hep2 = ArrNeck.Length;
@@ -90,25 +132,21 @@ public class Calibration : MonoBehaviour
 			//Vector3 hop3 = CalCustomAverage(ArrHip);
 			Debug.Log ("S customMEAN:    X: " + hop1.x + "    Y: " + hop1.y + "    Z: " + hop1.z);
 			//-------------------------------------------------------------------------------
+            */
+        }
 
-			calibraShoulderCenVec = CalCustomAverage (ArrShoulder);
-			calibraNeckVec = CalCustomAverage (ArrNeck);
-			calibraHipVec = CalCustomAverage (ArrHip);
-			finishedCali = false;
-		}
-		
-	}
+    }
 
 
     //Converts an ArrayList of vector3's to an Array 
-    Vector3[] ConvertToArray(ArrayList theArrayList)
+    Vector3[] Vec_ConvertToArray(ArrayList theArrayList)
     {
         object[] arr = theArrayList.ToArray();
         Vector3[] arrVec = new Vector3[arr.Length];
 
         for (int index = 0; index < arr.Length; index++)
         {
-            arrVec[index] = (Vector3) arr[index];
+            arrVec[index] = (Vector3)arr[index];
         }
 
         return arrVec;
@@ -116,9 +154,9 @@ public class Calibration : MonoBehaviour
 
 
     //Sorts Array of vector3's by magnitude AND removes vector3's with magnitude of 0
-    Vector3[] SortByDist(Vector3[] arr) 
+    Vector3[] Vec_SortByDist(Vector3[] arr)
     {
-        int zeroCounter = 0; 
+        int zeroCounter = 0;
 
         Vector3 temp;
 
@@ -137,7 +175,7 @@ public class Calibration : MonoBehaviour
                 }
             }
         }
-        
+
         Vector3[] arrWithoutZero = new Vector3[arr.Length - zeroCounter];
 
         for (int index = 0; index < arr.Length - zeroCounter; index++)
@@ -148,7 +186,7 @@ public class Calibration : MonoBehaviour
 
 
     //Calculates the average of vector3's
-    Vector3 CalAverage(Vector3[] arr)
+    Vector3 Vec_CalAverage(Vector3[] arr)
     {
         Vector3 average = Vector3.zero;
 
@@ -160,14 +198,14 @@ public class Calibration : MonoBehaviour
 
 
     //Calculates the median of vector3's
-    Vector3 CalMedian(Vector3[] arr)
+    Vector3 Vec_CalMedian(Vector3[] arr)
     {
         return arr[arr.Length / 2];
     }
 
 
     //Calculates a customized Average of vector3's
-    Vector3 CalCustomAverage(Vector3[] arr)
+    Vector3 Vec_CalCustomAverage(Vector3[] arr)
     {
         Vector3 average = Vector3.zero;
 
@@ -179,9 +217,72 @@ public class Calibration : MonoBehaviour
             average += arr[i];
 
         average /= (arr.Length - inLiners);
+
+        return average;
+    }
+    
+
+    //Converts an ArrayList of Quaternion's to an Array 
+    Quaternion[] Qua_ConvertToArray(ArrayList theArrayList)
+    {
+        object[] arr = theArrayList.ToArray();
+        Quaternion[] arrVec = new Quaternion[arr.Length];
+
+        for (int index = 0; index < arr.Length; index++)
+        {
+            arrVec[index] = (Quaternion)arr[index];
+        }
+
+        return arrVec;
+    }
+
+
+    /*
+    //removes zeros from array
+    Quaternion[] Qua_RemoveZeros(Quaternion[] arr) //NOT DONE. AND MAYBE NOT NEEDED
+    {
+        //not done
+
+        int noneZeroCounter = 0;
+
+        for (int index = 0; index < arr.Length; index++)
+        {
+            if (arr[index].x != 0 && arr[index].y != 0 && arr[index].z != 0)
+                noneZeroCounter++;
+        }
+
+        Quaternion[] arrWithoutZero = new Quaternion[noneZeroCounter];
+
+        for (int index = 0; index < arr.Length; index++)
+        {
+            if (arr[index].x != 0 && arr[index].y != 0 && arr[index].z != 0)
+            {
+                arrWithoutZero[index] = 0;
+            }
+
+        }
+
+        return arrWithoutZero;
+    }
+    */  // MAYBE NOT NEEDED
+
+
+    //Calculates the average of an array of Quaternions trough a linear interpolation loop
+    Quaternion Qua_CalCustomAverage(Quaternion[] arr)
+    {
+        Quaternion average = Quaternion.identity;
+        
+        average = Quaternion.Lerp(arr[1], arr[2], 0.5f);
+
+        for (int index = 3; index < arr.Length; index++)
+        {
+            average = Quaternion.Lerp(average, arr[index], (1/index) );
+        }
         
         return average;
     }
+
+
 }
 //*/
 

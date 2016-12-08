@@ -62,11 +62,12 @@ public class CalibrationTimer : MonoBehaviour {
 	}
 
 	IEnumerator Finished() {
-		instructions.text = "FINISHED CALIBRATING";
+        isCalibratingJoints = false;
+        isGettingReady = false;
+        finishedCalibrating = true;
+
+        instructions.text = "FINISHED CALIBRATING";
 		yield return new WaitForSeconds(1.5f);
-		isCalibratingJoints = false;
-		isGettingReady = false;
-		finishedCalibrating = true;
 		SceneManager.LoadScene("PlieDetails");
 	}
 
