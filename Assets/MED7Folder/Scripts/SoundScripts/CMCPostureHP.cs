@@ -1,6 +1,4 @@
-﻿//Esben: current problem: it cant find the calibration script, but it can find the two others. ask malte
-
-using System;
+﻿using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -22,22 +20,21 @@ public class CMCPostureHP : MonoBehaviour
     double P_rotX, P_rotZ, P_totalRot;
     double C_totalComb, C_HPfilterVal;
 
-    double minFreq = 20;
-    double maxFreq = 22000;
-    double HPfilterVal;
-
-    static double T_minDist = 0.011; //0.0085f
-    static double T_maxDist = 0.187; //0.125f
-
-    static double P_minRot = 0.063;
-    static double P_maxRot = 0.31;
-
-
     bool finishedCali;
     Vector3 calibraShoulderCenVec;
     Vector3 calibraHipVec;
     Vector3 calibraNeckVec;
     Quaternion calibraHipRot;
+
+    double minFreq = 20;
+    double maxFreq = 22000;
+    double HPfilterVal;
+
+    static double T_minDist = 0.011; //0.0085f
+    public static double T_maxDist = 0.187; //0.125f
+
+    static double P_minRot = 0.063;
+    public static double P_maxRot = 0.31;
 
     void Start()
     {
@@ -159,7 +156,7 @@ public class CMCPostureHP : MonoBehaviour
         if (T_HPfilterVal > P_HPfilterVal)
             C_HPfilterVal = P_HPfilterVal;
 
-        Debug.Log("T_HPfilterVal: " + T_HPfilterVal + "    P_HPfilterVal: " + P_HPfilterVal + "    C_HPfilterVal: " + C_HPfilterVal);
+        //Debug.Log("T_HPfilterVal: " + T_HPfilterVal + "    P_HPfilterVal: " + P_HPfilterVal + "    C_HPfilterVal: " + C_HPfilterVal);
 
         theMixer.SetFloat("Torso_CutOffFreqHP", (float)C_HPfilterVal);
     }
@@ -184,7 +181,7 @@ public class CMCPostureHP : MonoBehaviour
         if (writer.BaseStream != null)
             writer.WriteLine(firstVal + ", " + secondVal);
 
-        if (Time.time > video.movie.duration - 0.5f)
+        if (Time.timeSinceLevelLoad > video.movie.duration - 0.5f)
             writer.Close();
     }
 

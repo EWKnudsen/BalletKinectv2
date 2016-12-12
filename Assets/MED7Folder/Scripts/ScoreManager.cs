@@ -66,6 +66,7 @@ public class ScoreManager : MonoBehaviour {
 		sceneChanged = true;
 		slider.value = score;
 		sliderPercentage.text = Mathf.RoundToInt(score) + "%";
+        Destroy(this.gameObject);
 	}
 
 	IEnumerator CalculateAverage() {
