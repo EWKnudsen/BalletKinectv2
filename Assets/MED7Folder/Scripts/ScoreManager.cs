@@ -5,53 +5,44 @@ using System.Collections;
 using System.IO;
 
 public class ScoreManager : MonoBehaviour {
-
-	public CMCCombinedTorAndPelHP CMCCombinedTorAndPelHPScript;
-	public CMCHandSymHP symmetryScript;
-    public CMCPostureHP postureHPScript;
-    public float score;
-	public float scoreTemp;
-	private int counter;
-	private Scene scene;
-	private bool sceneChanged;
+	
+    public CMCPostureHP postureHPScript;		// The posture script
+    public float score;							// The score
+	private float scoreTemp;					// A temporary value used for incrementing the score and calculating average
+	private int counter;						// Integer used for calculating 
+	private Scene scene;						// Used for determining which scene is active
+	private bool sceneChanged;					// Has the scene changed?
 
 
 	void Awake() {
-		DontDestroyOnLoad(transform.gameObject);
+		DontDestroyOnLoad(transform.gameObject);	// Makes sure that this object is transferred between scenes
 	}
 
 	void Start () {
-		//writer = new StreamWriter("Assets/MED7Folder/Txtfiles/StreamWriterTest.txt", true);
-		//writer.WriteLine("New score data:");
-		sceneChanged = false;
-		scene = SceneManager.GetActiveScene();
-		CMCCombinedTorAndPelHPScript = GameObject.Find ("FilterController").GetComponent<CMCCombinedTorAndPelHP>();
-		symmetryScript = GameObject.Find ("FilterController").GetComponent<CMCHandSymHP>();
-        postureHPScript = GameObject.Find("FilterController").GetComponent<CMCPostureHP>();
+		sceneChanged = false;			
+		scene = SceneManager.GetActiveScene();		// Sets scene to the active scene (MainScene)
+        postureHPScript = GameObject.Find("FilterController").GetComponent<CMCPostureHP>(); // Finds posture script
 
         if (GameObject.Find("FilterController") != null) {
-			StartCoroutine("CalculateAverage");
+			StartCoroutine("CalculateAverage");		// Only in a scene with the gameobject "FilterController" calculate the score average
 		}
 	}
 
 	void Update () {
         if (GameObject.Find("FilterController") != null) {
-			if (CMCCombinedTorAndPelHPScript.enabled) {
-				score = CMCCombinedTorAndPelHPScript.score;
-			}  else if (symmetryScript.enabled) {
-				score = symmetryScript.score;
-			}  else if (postureHPScript.enabled) {
-                score = postureHPScript.score;
+			if (postureHPScript.enabled) {
+                score = postureHPScript.score;		// Sets the score to the score obtained from posture script
             }
 		}
+		// When scene has changed from either MainScene or MainSceneLong: start calculating the score average and assign it to the elements in the GameOver scene
 		if (scene.name != "MainScene" && scene.name != "MainSceneLong" && sceneChanged == false) {
 			StopCoroutine("CalculateAverage");
-			//writer.Close();
 			score = scoreTemp/counter;
 			AssignScore ();
 		}
 	}
 
+	// Finds objects in the GameOver scene and sets a string value depending on the sore average, as well as a slider value
 	void AssignScore () {
 		Text title = GameObject.Find("Title").GetComponent<Text>();
 		Slider slider = GameObject.Find("Bar").GetComponent<Slider>();
@@ -69,9 +60,9 @@ public class ScoreManager : MonoBehaviour {
         Destroy(this.gameObject);
 	}
 
+	// Increments score and counter. Is looped until "StopCoroutine" is called.
 	IEnumerator CalculateAverage() {
 		scoreTemp = scoreTemp + score;
-		//writer.WriteLine(score);
 		counter++;
 		yield return new WaitForSeconds(1);
 		StartCoroutine("CalculateAverage");
