@@ -5,37 +5,28 @@ using System.Collections;
 
 public class CalibrationTimer : MonoBehaviour {
 
-	//public Text uiText;
 	[HideInInspector]
-	public Image timer;
+	public Image timer;				// The sprite image for the timer
 	[HideInInspector]
-	public GameObject background;
+	public GameObject background;	// The background of the timer (the dark area)
 	[HideInInspector]
-	public Text instructions;
-	//public bool calibrationTimer;
-	public bool isCalibratingJoints;
+	public Text instructions;		// The text instructions
+	public bool isCalibratingJoints;// Is the program calibrating?
 	[HideInInspector]
-	public bool finishedCalibrating;
-	bool isGettingReady = false;
-	int i = 5;
-	float duration;
-	float timeLeft;
-	float elapsedTime;
+	public bool finishedCalibrating;// Is the program finished calibrating?
 
-
-	void Awake()
-	{
-		//DontDestroyOnLoad(transform.gameObject);
-	}
+	private bool isGettingReady = false;	// Calibration preparation
+	private int i = 5;						// Used for calibration preperation
+	private float duration = 10f;					// How long the calibration should take
+	private float timeLeft;					// Used for calculating time left
+	private float elapsedTime;				// Used to see how long time have elapsed from beginning of scene
 
 	// Use this for initialization
 	void Start () {
-		timer = GameObject.Find ("Timer").GetComponent<Image> ();
-		background = GameObject.Find ("Background");
-
-		background.gameObject.SetActive(false);
-		instructions = GameObject.Find("Instructions").transform.GetChild(0).GetComponent<Text>();
-		duration = 10f;
+		timer = GameObject.Find ("Timer").GetComponent<Image> ();	// Finds and initializes the sprite image for timer
+		background = GameObject.Find ("Background");				// Finds and initialises background
+		background.gameObject.SetActive(false);						// Sets background to be inactive
+		instructions = GameObject.Find("Instructions").transform.GetChild(0).GetComponent<Text>();	// Initializes the instructions text
 	}
 	
 	// Update is called once per frame
@@ -46,7 +37,7 @@ public class CalibrationTimer : MonoBehaviour {
 		// For checking when a key is down - only used in calibration scene
 		if (Input.anyKeyDown && isGettingReady == false) {
 			isGettingReady = true;
-			GameObject.Find ("Instructions").transform.GetChild(1).gameObject.SetActive(false);
+			GameObject.Find ("Instructions").transform.GetChild(1).gameObject.SetActive(false); // Deactivates the red text
 			StartCoroutine ("GetReady");
 		}
 
@@ -61,7 +52,8 @@ public class CalibrationTimer : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Finished() {
+	// This is called once the calibration is finished. Then it changes text, waits 1.5 sec and changes scene
+	IEnumerator Finished() {		
         isCalibratingJoints = false;
         isGettingReady = false;
         finishedCalibrating = true;
@@ -71,6 +63,7 @@ public class CalibrationTimer : MonoBehaviour {
 		SceneManager.LoadScene("PlieDetails");
 	}
 
+	// This is called once a key is pressed. Counts down from five and calibrates once i = 0
 	IEnumerator GetReady() {
 		instructions.text = "GET READY \n" + i;
 		yield return new WaitForSeconds(1f);

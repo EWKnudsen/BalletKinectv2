@@ -1,12 +1,4 @@
-﻿//TO MALTE:
-//Missing:
-//it could be nice to have a timer on eg. 5 seconds for the user to
-//find/get in the right posture right after they 'press any key'
-
-
-//ESBENS VERSION
-///*
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;

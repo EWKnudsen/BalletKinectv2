@@ -27,10 +27,6 @@ public class Metronome : MonoBehaviour
 
 	void OnAudioFilterRead(float[] data, int channels)
 	{
-		// She is down on beat 3 and beat 7
-		// Grand plie on 13 (upwards)
-		// Plie on beat 29 (vel=0)
-
 		if (running == true) {
 			double samplesPerTick = sampleRate * 60.0F / bpm * 4.0F / signatureLo;
 			double sample = AudioSettings.dspTime * sampleRate;

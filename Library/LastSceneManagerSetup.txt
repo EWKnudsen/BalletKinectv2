@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/MED7Folder/Scenes/CalibrationScene.unity
+=======
+- path: Assets/MED7Folder/Scenes/MainScene.unity
+>>>>>>> 27576c6f464f07d1ebc84a251041a428e623a7d6
   isLoaded: 1
   isActive: 1

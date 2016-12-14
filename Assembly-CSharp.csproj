@@ -153,12 +153,14 @@
      <Compile Include="Assets\MED7Folder\Scripts\CalibrationTimer.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\CurveManager.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\FocusManager.cs" />
-     <Compile Include="Assets\MED7Folder\Scripts\KinectInputModule.cs" />
-     <Compile Include="Assets\MED7Folder\Scripts\KinectUIWaitOverButton.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\LineChanger.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\Metronome.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\Music.cs" />
-     <Compile Include="Assets\MED7Folder\Scripts\Mute.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\OldScripts\KinectInputModule.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\OldScripts\KinectUIWaitOverButton.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\OldScripts\Mute.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\OldScripts\OldScoreManager.cs" />
+     <Compile Include="Assets\MED7Folder\Scripts\OldScripts\UIManager.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\PlayVideo.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\RotatingItem.cs" />
      <Compile Include="Assets\MED7Folder\Scripts\ScoreManager.cs" />
