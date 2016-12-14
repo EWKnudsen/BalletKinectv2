@@ -37,7 +37,7 @@ public class CMCRythm : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("Lerp: " + LerpingGainMetroVal + "    timeStramp: " + timeStramp + "    Time.time: " + Time.time);
+        //Debug.Log("Lerp: " + LerpingGainMetroVal + "    timeStramp: " + timeStramp + "    Time.time: " + Time.time);
         //hipVelAxisY_Scaled = bendInterval * 2; //for testing, also move "counter < tickTi..." out of if to test
 
         if (outOfsync)
@@ -60,9 +60,9 @@ public class CMCRythm : MonoBehaviour
                 if (hipVelAxisY > 0 || hipVelAxisY < 0)
                 {
                     if (hipVelAxisY > 0)
-                        hipVelAxisY_Scaled = (float)ScalingBetween(hipVelAxisY, 0, 100, 0.0007, 0.04);
+                        hipVelAxisY_Scaled = (float)LinearScaling(hipVelAxisY, 0.0007, 0.04, 0, 100);
                     else if (hipVelAxisY < 0)
-                        hipVelAxisY_Scaled = -(float)ScalingBetween(-hipVelAxisY, 0, 100, 0.0007, 0.04);
+                        hipVelAxisY_Scaled = -(float)LinearScaling(-hipVelAxisY, 0.0007, 0.04, 0, 100);
 
                     if (counter < tickTimes.Length && Math.Abs(Time.time * 100) > (tickTimes[counter] - timeInterval) && Math.Abs(Time.time * 100) < (tickTimes[counter] + timeInterval))
                     {
@@ -80,16 +80,15 @@ public class CMCRythm : MonoBehaviour
     }
 
 
-    private double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
+    //Scales a limited value into another limited range
+    protected double LinearScaling(double unscaledVal, double minOld, double maxOld, double minNew, double maxNew)
     {
-        double val = (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
+        if (unscaledVal <= minOld)
+            unscaledVal = minOld;
+        if (unscaledVal > maxOld)
+            unscaledVal = maxOld;
 
-        if (val < minNew)
-            val = minNew;
-        if (val > maxNew)
-            val = maxNew;
-
-        return val;
+        return (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
     }
 }
 

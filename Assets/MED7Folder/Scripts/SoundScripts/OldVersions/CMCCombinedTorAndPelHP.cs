@@ -44,12 +44,6 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
     {
 		if (CMCScript != null) {
 			if (CMCScript.hasValues) {
-				/*
-                torso_dist = CalXZdist(CMCScript.hipCenterPos, CMCScript.shoulderCenterPos);
-                pelvis_dist = Math.Abs(CMCScript.hipLeftPos.y - CMCScript.hipRightPos.y);
-                double P_total = Math.Abs(CMCScript.hipCenterRot.z) + Math.Abs(CMCScript.hipCenterRot.x) + pelvis_dist;
-                Combined_dist = (torso_dist + P_total) / 3;
-                */
 
 				T_distHipShoulder = CalXZdist (CMCScript.shoulderCenVec, CMCScript.hipCenVec);
 				T_distShoulderNeck = CalXZdist (CMCScript.shoulderCenVec, CMCScript.neckVec);
@@ -59,12 +53,9 @@ public class CMCCombinedTorAndPelHP : MonoBehaviour
 				P_totalRot = Math.Abs (CMCScript.hipCenRot.x) + Math.Abs (CMCScript.hipCenRot.y) + Math.Abs (CMCScript.hipCenRot.z);
 				P_totalRotScaled = ScalingBetween (P_totalRot, 0, 100, P_minRot, P_maxRot);
 
-                Debug.Log("T: " + T_totalDist + "TS: " + T_totalDistScaled + "R: " + P_totalRot + "RS: " + P_totalRotScaled);
+                //Debug.Log("T: " + T_totalDist + "TS: " + T_totalDistScaled + "R: " + P_totalRot + "RS: " + P_totalRotScaled);
 
 				C_totalComb = (T_totalDistScaled + P_totalRotScaled) / 2;
-
-                //C_HPfilterVal = highPassFilterVal (C_totalComb, (100 * 2), interval, minFreq, maxFreq);
-                //C_HPfilterVal = highPassFilterVal(T_totalDistScaled, (100 * 2), interval, minFreq, maxFreq);
 
                 double highPassFilterVal = minFreq * Math.Pow((Math.Pow((22000 / 20), (1 / interval))), (T_maxDist - T_totalDist));
 

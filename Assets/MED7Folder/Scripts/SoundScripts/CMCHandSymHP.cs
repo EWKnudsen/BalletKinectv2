@@ -102,13 +102,13 @@ public class CMCHandSymHP : MonoBehaviour
                 theMixer.SetFloat("Torso_CutOffFreqHP", (float)Combined_HPfilterVal);
 
 
-                wristScore = (float) ScalingBetween(W_Comb, 0, 100, minDist, maxDist);
-                elbowScore = (float)ScalingBetween(E_Comb, 0, 100, minDist, maxDist);
+                wristScore = (float)LinearScaling(W_Comb, minDist, maxDist, 0, 100);
+                elbowScore = (float)LinearScaling(E_Comb, minDist, maxDist, 0, 100);
                 score = (wristScore + elbowScore) / 2;
             }
         }
     }
-
+    
 
 
     private double highPassFilterVal(double val, double maxVal, double _interval, double _minFreq, double _maxFreq)
@@ -116,16 +116,16 @@ public class CMCHandSymHP : MonoBehaviour
         return _minFreq * Math.Pow((Math.Pow((_maxFreq / _minFreq), (1 / _interval))), (maxVal - val));
     }
 
-    protected double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
+
+    //Scales a limited value into another limited range
+    protected double LinearScaling(double unscaledVal, double minOld, double maxOld, double minNew, double maxNew)
     {
-        double val = (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
+        if (unscaledVal <= minOld)
+            unscaledVal = minOld;
+        if (unscaledVal > maxOld)
+            unscaledVal = maxOld;
 
-        if (val < minNew)
-            val = minNew;
-        else if (val > maxNew)
-            val = maxNew;
-
-        return val;
+        return (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
     }
 
 

@@ -45,6 +45,7 @@ public class Calibration : MonoBehaviour
 
     void Update()
     {
+        //Adds the user's relevant joint-positions and rotaions into an arraylist as long as 'isCalibratingJoints' is true (about 5 seconds)
         if (caliTimer != null)
         {
             if (caliTimer.isCalibratingJoints)
@@ -53,6 +54,7 @@ public class Calibration : MonoBehaviour
                 Vec_ArrListNeck.Add(cubeman.neckVec);
                 Vec_ArrListHip.Add(cubeman.hipCenVec);
 
+                //discards rotations that are all zero
                 if (cubeman.hipCenRot.x != 0 && cubeman.hipCenRot.y != 0 && cubeman.hipCenRot.z != 0)
                     Qua_ArrListHip.Add(cubeman.hipCenRot);
             }
@@ -78,12 +80,11 @@ public class Calibration : MonoBehaviour
             Qua_ArrHip = Qua_ConvertToArray(Qua_ArrListHip);
 
             Qua_calibraHip = Qua_CalCustomAverage(Qua_ArrHip);
-
             
             finishedCali = false;
             hasCalibrated = true;
 
-            /* just for testing. showing that we have to use Lerp and just cant take the mean.
+            /* just for testing. Showing that we have to use Lerp and cant just take the mean of a each axis of a Quaternion.
             float meanZ = 0, meanY = 0, meanX = 0;
 
             for (int index = 0; index < Qua_ArrHip.Length; index++)
@@ -177,7 +178,7 @@ public class Calibration : MonoBehaviour
     }
 
 
-    //Calculates the average of vector3's
+    //Calculates the average of vector3's (Not Used, but an alternative way to decide the reference position)
     Vector3 Vec_CalAverage(Vector3[] arr)
     {
         Vector3 average = Vector3.zero;
@@ -189,14 +190,14 @@ public class Calibration : MonoBehaviour
     }
 
 
-    //Calculates the median of vector3's
+    //Calculates the median of vector3's (Not Used, but an alternative way to decide the reference position)
     Vector3 Vec_CalMedian(Vector3[] arr)
     {
         return arr[arr.Length / 2];
     }
 
 
-    //Calculates a customized Average of vector3's
+    //Calculates a customized Average of vector3's 
     Vector3 Vec_CalCustomAverage(Vector3[] arr)
     {
         Vector3 average = Vector3.zero;
@@ -229,9 +230,22 @@ public class Calibration : MonoBehaviour
     }
 
 
+    //Calculates the average of an array of Quaternions trough a linear interpolation loop
+    Quaternion Qua_CalCustomAverage(Quaternion[] arr) {
+        Quaternion average = Quaternion.identity;
+
+        average = Quaternion.Lerp(arr[1], arr[2], 0.5f);
+
+        for (int index = 3; index < arr.Length; index++)
+            average = Quaternion.Lerp(average, arr[index], (1 / index));
+
+        return average;
+    }
+
+
     /*
-    //removes zeros from array
-    Quaternion[] Qua_RemoveZeros(Quaternion[] arr) //NOT DONE. AND MAYBE NOT NEEDED
+    //removes zeros from array   NOT DONE. AND MAYBE NOT NEEDED
+    Quaternion[] Qua_RemoveZeros(Quaternion[] arr)
     {
         //not done
 
@@ -257,26 +271,8 @@ public class Calibration : MonoBehaviour
         return arrWithoutZero;
     }
     */  // MAYBE NOT NEEDED
-
-
-    //Calculates the average of an array of Quaternions trough a linear interpolation loop
-    Quaternion Qua_CalCustomAverage(Quaternion[] arr)
-    {
-        Quaternion average = Quaternion.identity;
-        
-        average = Quaternion.Lerp(arr[1], arr[2], 0.5f);
-
-        for (int index = 3; index < arr.Length; index++)
-        {
-            average = Quaternion.Lerp(average, arr[index], (1/index) );
-        }
-        
-        return average;
-    }
-
-
 }
-//*/
+
 
 
 

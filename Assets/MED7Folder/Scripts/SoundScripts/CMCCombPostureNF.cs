@@ -11,7 +11,7 @@ public class CMCCombPostureNF : MonoBehaviour
 
     double T_distHipShoulder, T_distShoulderNeck;
     double T_totalDist, T_totalAtten, T_totalAttenLogScaled;
-    double P_totalRot, P_totalAtten, P_totalAttenLogScaled;
+    double P_totalRot, P_totalAtten; //P_totalAttenLogScaled
     double C_totalAttenLogScaled;
 
     double minAtten = -80;
@@ -31,8 +31,7 @@ public class CMCCombPostureNF : MonoBehaviour
     static double P_minRot = 0.004;
     static double P_maxRot = 0.10;
 
-
-
+    
 
     void Start()
     {
@@ -55,13 +54,12 @@ public class CMCCombPostureNF : MonoBehaviour
                 T_distHipShoulder = CalXZdist(CMCScript.shoulderCenVec, CMCScript.hipCenVec);
                 T_distShoulderNeck = CalXZdist(CMCScript.shoulderCenVec, CMCScript.neckVec);
                 T_totalDist = T_distHipShoulder + T_distShoulderNeck;
-                T_totalAtten = ScalingBetween(T_totalDist, minAtten, maxAtten, T_minDist, T_maxDist);
+                T_totalAtten = LinearScaling(T_totalDist, minAtten, maxAtten, T_minDist, T_maxDist);
                 T_totalAttenLogScaled = LogScaling(T_totalAtten);
                 
 
-                P_totalRot = Math.Abs(CMCScript.hipCenRot.z) + Math.Abs(CMCScript.hipCenRot.x) + Math.Abs(CMCScript.hipCenRot.x);
-                P_totalAtten = ScalingBetween(P_totalRot, minAtten, maxAtten, P_minRot, P_maxRot);
-                P_totalAttenLogScaled = LogScaling(P_totalAtten);
+                P_totalRot = Math.Abs(CMCScript.hipCenRot.z) + Math.Abs(CMCScript.hipCenRot.x);
+                P_totalAtten = LinearScaling(P_totalRot, minAtten, maxAtten, P_minRot, P_maxRot);
                 //P_totalAttenLogScaled = LogScaling(P_totalAtten);
 
                 C_totalAttenLogScaled = (T_totalAttenLogScaled + P_totalAtten) / 2; //!
@@ -79,57 +77,66 @@ public class CMCCombPostureNF : MonoBehaviour
                 SettingEqFilterVals(C_axisZ, (P_minRot + T_minAxis), (P_maxRot + T_maxAxis), "Torso_EqFreqGain_00", "Torso_EqFreqGain_01");
                 SettingEqFilterVals(C_axisX, (P_minRot + T_minAxis), (P_maxRot + T_maxAxis), "Torso_EqFreqGain_02", "Torso_EqFreqGain_03");
 
-                
-                //Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAtten + "        CLog: " + C_totalAttenLogScaled);
-
-                //Debug.Log("T: " + T_totalAttenLogScaled + "      P: " + P_totalAttenLogScaled + "        C: " + C_totalAttenLogScaled);
-
-                //Debug.Log("w: " + CMCScript.hipCenterRot.w + "     x: " + CMCScript.hipCenterRot.x + "     y: " + CMCScript.hipCenterRot.y + "     z: " + CMCScript.hipCenterRot.z);
-
-                torso_score = 100 - (float)ScalingBetween(T_totalDist, 0, 100, T_minDist, T_maxDist);
-                pelvis_score = 100 - (float)ScalingBetween(P_totalRot, 0, 100, P_minRot, P_maxRot);
-
-                score = maxScore - (float)ScalingBetween((T_totalAtten + P_totalAtten), minScore, maxScore, minAtten, maxAtten);
+                UpdateScores(T_totalDist, T_minDist, T_maxDist, P_totalRot, P_minRot, P_maxRot);
             }
         }
     }
 
-    void SettingEqFilterVals(double axisVal, double minAxisVal, double maxAxisVal, string filterName1, string filterName2)
-    {
-        if (axisVal < 0)
-        {
-            double negaScaledAxisVal = ScalingBetween(-axisVal, 0.3, 1, minAxisVal, maxAxisVal);
-            theMixer.SetFloat(filterName1, (float)negaScaledAxisVal);
-        }
-        else if (axisVal >= 0)
-        {
-            double posiScaledAxisVal = ScalingBetween(axisVal, 0.3, 1, minAxisVal, maxAxisVal);
-            theMixer.SetFloat(filterName2, (float)posiScaledAxisVal);
-        }
-    }
 
+    //Calculates the distance for the Torso
     private double CalXZdist(Vector3 vecA, Vector3 vecB)
     {
         return Math.Sqrt(Math.Pow((double)vecB.x - vecA.x, 2) + Math.Pow((double)vecB.z - vecA.z, 2));
     }
 
-    private double ScalingBetween(double unscaledVal, double minNew, double maxNew, double minOld, double maxOld)
+
+    //Scales a limited value into another limited range
+    protected double LinearScaling(double unscaledVal, double minOld, double maxOld, double minNew, double maxNew)
     {
-        double val = (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
+        if (unscaledVal <= minOld)
+            unscaledVal = minOld;
+        if (unscaledVal > maxOld)
+            unscaledVal = maxOld;
 
-        if (val < minNew)
-            val = minNew;
-        else if (val > maxNew)
-            val = maxNew;
-
-        return val;
+        return (maxNew - minNew) * (unscaledVal - minOld) / (maxOld - minOld) + minNew;
     }
 
+
+    //Sets and scales the value for two notchfilters, for a single axis in positive and negative direction/rotation.
+    void SettingEqFilterVals(double axisVal, double minAxisVal, double maxAxisVal, string filterName1, string filterName2)
+    {
+        if (axisVal < 0)
+        {
+            double negaScaledAxisVal = LinearScaling(-axisVal, 0.3, 1, minAxisVal, maxAxisVal);
+            theMixer.SetFloat(filterName1, (float)negaScaledAxisVal);
+        }
+        else if (axisVal >= 0)
+        {
+            double posiScaledAxisVal = LinearScaling(axisVal, 0.3, 1, minAxisVal, maxAxisVal);
+            theMixer.SetFloat(filterName2, (float)posiScaledAxisVal);
+        }
+    }
+
+
+    //Scales a value into a specific logarithmic value.
+    //The Log Equtation has been set to fit the sensitivity of percieveing a sounds volume gradually going up and down. 
     private double LogScaling(double unscaledVal)
     {
-        double hepson = (70 * Math.Log10((unscaledVal / 2) + 42)) - 80;
-        return hepson; //+ 15
+        double LogScale = (70 * Math.Log10((unscaledVal / 2) + 42)) - 80;
+        return LogScale; //+ 15
     }
 
+
+    //Updates each score
+    void UpdateScores(double T_val, double T_min, double T_max, double P_val, double P_min, double P_max)
+    {
+        torso_score = 100 - (float)LinearScaling(T_val, T_min, T_max, 0, 100);
+        pelvis_score = 100 - (float)LinearScaling(P_val, P_min, P_max, 0, 100);
+
+        if (torso_score <= pelvis_score)
+            score = torso_score;
+        if (torso_score > pelvis_score)
+            score = pelvis_score;
+    }
 
 }

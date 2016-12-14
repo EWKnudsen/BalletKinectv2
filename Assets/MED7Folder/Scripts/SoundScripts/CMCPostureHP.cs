@@ -38,7 +38,10 @@ public class CMCPostureHP : MonoBehaviour
 
     void Start()
     {
-        CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
+        if (GameObject.Find("Cubeman") != null)
+            CMCScript = GameObject.Find("Cubeman").GetComponent<CubemanController>();
+        else
+            Debug.Log("MED7 Warning: GameObject.Find(Cubeman) is null");
 
         if (GameObject.Find("CalibrationData") != null)
         {
@@ -60,8 +63,6 @@ public class CMCPostureHP : MonoBehaviour
             calibraNeckVec = Vector3.zero;
             calibraHipRot = Quaternion.identity;
         }
-        
-		//caliTimer = GameObject.Find("UIManager").GetComponent<CalibrationTimer>();
 
         video = GameObject.Find("Video").GetComponent<PlayVideo>();
         writer = new StreamWriter("Assets/MED7Folder/Txtfiles/MPCTest.txt", true);
@@ -97,9 +98,7 @@ public class CMCPostureHP : MonoBehaviour
                     
                 }
                 else
-                {
                     Debug.Log("The calibration scene has not been run. Run the calibration scene before continuing");
-                }
             }
         }
     }
@@ -145,10 +144,9 @@ public class CMCPostureHP : MonoBehaviour
     //Updates the Highpass filter value. Picks either the pelvis or the torso depending on which is highest 
     void UpdateHPfilterValue(double Torso, double Pelvis)
     {
-        double T_HPfilterVal = HighPassScaling(T_totalDist, T_minDist, T_maxDist, minFreq, maxFreq);
-        double P_HPfilterVal = HighPassScaling(P_totalRot, P_minRot, P_maxRot, minFreq, maxFreq);
+        double T_HPfilterVal = HighPassScaling(Torso, T_minDist, T_maxDist, minFreq, maxFreq);
+        double P_HPfilterVal = HighPassScaling(Pelvis, P_minRot, P_maxRot, minFreq, maxFreq);
         
-
         double C_HPfilterVal = 0;
 
         if (T_HPfilterVal <= P_HPfilterVal)
